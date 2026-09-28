@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOVEX SCORE MANAGER</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:
+radial-gradient(circle at top,#32105c,#090014 45%,#030005);
+color:white;
+min-height:100vh;
+}
+
+header{
+text-align:center;
+padding:35px 15px 25px;
+border-bottom:1px solid #632a88;
+}
+
+.logo{
+font-size:48px;
+font-weight:1000;
+letter-spacing:7px;
+animation:pulse 2s infinite;
+}
+
+.logo span{
+color:#b94cff;
+}
+
+@keyframes pulse{
+
+0%,100%{
+text-shadow:0 0 10px #8d2cff;
+}
+
+50%{
+text-shadow:
+0 0 15px #b94cff,
+0 0 35px #8d2cff;
+}
+
+}
+
+.subtitle{
+color:#cfa7ff;
+font-weight:bold;
+margin-top:8px;
+}
+
+.container{
+width:min(1100px,94%);
+margin:auto;
+}
+
+.card{
+background:rgba(17,5,30,.92);
+border:1px solid rgba(183,74,255,.3);
+border-radius:18px;
+padding:22px;
+margin:25px 0;
+box-shadow:0 0 30px rgba(130,30,255,.12);
+}
+
+h2{
+color:#d28aff;
+margin-top:0;
+}
+
+.rules{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:15px;
+}
+
+.rule{
+background:#ffffff08;
+border:1px solid #b44cff22;
+border-radius:12px;
+padding:15px;
+text-align:center;
+font-weight:bold;
+}
+
+input,select{
+width:100%;
+padding:12px;
+border-radius:9px;
+border:1px solid #66309a;
+background:#0d0614;
+color:white;
+outline:none;
+}
+
+input:focus,select:focus{
+border-color:#b94cff;
+box-shadow:0 0 10px #8d2cff55;
+}
+
+button{
+width:100%;
+margin-top:15px;
+padding:14px;
+border:0;
+border-radius:11px;
+background:linear-gradient(90deg,#7227c9,#b94cff);
+color:white;
+font-size:15px;
+font-weight:900;
+cursor:pointer;
+}
+
+button:hover{
+filter:brightness(1.15);
+}
+
+.secondary{
+background:#333;
+}
+
+.danger{
+background:#8b183e;
+}
+
+.login{
+max-width:600px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.login-status{
+display:none;
+margin-top:12px;
+padding:12px;
+border-radius:10px;
+text-align:center;
+}
+
+#manager{
+display:none;
+}
+
+.team-row{
+display:grid;
+grid-template-columns:
+45px
+minmax(130px,1fr)
+110px
+160px;
+
+gap:10px;
+
+align-items:center;
+
+padding:12px;
+
+margin-bottom:8px;
+
+background:#ffffff08;
+
+border:1px solid #b44cff22;
+
+border-radius:12px;
+}
+
+.slot-number{
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:#5d2096;
+
+border-radius:9px;
+
+font-weight:1000;
+}
+
+.results{
+margin-top:25px;
+}
+
+.result-row{
+display:flex;
+align-items:center;
+gap:12px;
+
+padding:14px;
+
+margin-bottom:8px;
+
+border-radius:12px;
+
+background:#ffffff08;
+
+border:1px solid #b44cff22;
+}
+
+.rank{
+width:44px;
+height:44px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:#5d2096;
+
+border-radius:10px;
+
+font-size:18px;
+font-weight:1000;
+
+flex-shrink:0;
+}
+
+.result-info{
+flex:1;
+min-width:0;
+}
+
+.result-name{
+font-size:17px;
+font-weight:1000;
+
+word-break:break-word;
+}
+
+.result-details{
+font-size:12px;
+color:#bba3c9;
+
+margin-top:5px;
+}
+
+.result-breakdown{
+font-size:12px;
+color:#9076a4;
+
+margin-top:3px;
+}
+
+.total{
+font-size:23px;
+font-weight:1000;
+
+color:#b94cff;
+
+white-space:nowrap;
+
+text-shadow:0 0 12px #8d2cff;
+}
+
+.empty{
+text-align:center;
+padding:25px;
+color:#806a91;
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#806a91;
+font-size:13px;
+}
+
+@media(max-width:700px){
+
+.logo{
+font-size:36px;
+letter-spacing:5px;
+}
+
+.rules{
+grid-template-columns:1fr;
+}
+
+.team-row{
+grid-template-columns:
+38px
+1fr
+80px;
+
+}
+
+.team-row select{
+grid-column:2 / 4;
+}
+
+.result-row{
+padding:11px;
+}
+
+.total{
+font-size:19px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+N<span>Ø</span>VEX
+</div>
+
+<div class="subtitle">
+SCORE MANAGER • ONE SQUAD, ONE FATE
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- LOGIN -->
+
+<section class="card login">
+
+<h2>🔐 NOVEX ADMIN</h2>
+
+<p style="color:#bba3c9">
+Only the NOVEX administrator can use the Score Manager.
+</p>
+
+<form id="loginForm">
+
+<label>Admin Email</label>
+
+<input
+id="email"
+type="email"
+required
+placeholder="Admin email"
+>
+
+<label style="display:block;margin-top:13px;margin-bottom:6px;color:#d9b9ff;font-weight:bold;">
+Admin Password
+</label>
+
+<input
+id="password"
+type="password"
+required
+placeholder="Admin password"
+>
+
+<button type="submit">
+ADMIN LOGIN
+</button>
+
+</form>
+
+<div
+id="loginStatus"
+class="login-status">
+</div>
+
+</section>
+
+
+<!-- SCORE MANAGER -->
+
+<section id="manager" class="card">
+
+<h2>🧮 NOVEX SCORE MANAGER</h2>
+
+<p style="color:#bba3c9">
+Enter the kills and placement for each team.
+The website will calculate and sort the results automatically.
+</p>
+
+
+<div class="rules">
+
+<div class="rule">
+🔥 1 KILL<br>
+<span style="color:#b94cff">
+5 POINTS
+</span>
+</div>
+
+<div class="rule">
+🥇 TOP 1<br>
+<span style="color:#b94cff">
++20 POINTS
+</span>
+</div>
+
+<div class="rule">
+🥈 TOP 2<br>
+<span style="color:#b94cff">
++15 POINTS
+</span>
+</div>
+
+<div class="rule">
+🥉 TOP 3<br>
+<span style="color:#b94cff">
++5 POINTS
+</span>
+</div>
+
+</div>
+
+
+<h2 style="margin-top:30px">
+📋 ENTER TEAM SCORES
+</h2>
+
+<div id="teamInputs"></div>
+
+
+<button id="calculate">
+⚡ CALCULATE & SORT
+</button>
+
+<button
+id="reset"
+class="secondary">
+RESET ALL
+</button>
+
+
+<div class="results">
+
+<h2>
+🏆 SCOREBOARD
+</h2>
+
+<div id="results">
+
+<div class="empty">
+Enter team scores and press CALCULATE & SORT.
+</div>
+
+</div>
+
+</div>
+
+
+<button
+id="logout"
+class="secondary">
+LOG OUT
+</button>
+
+</section>
+
+
+</main>
+
+
+<footer>
+NOVEX ESPORTS • CODM SCRIMMAGE
+</footer>
+
+
+<script type="module">
+
+
+/* =========================
+FIREBASE
+========================= */
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+/* =========================
+FIREBASE CONFIG
+========================= */
+
+const firebaseConfig={
+
+apiKey:
+"AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
+
+authDomain:
+"novex-codm.firebaseapp.com",
+
+databaseURL:
+"https://novex-codm-default-rtdb.firebaseio.com",
+
+projectId:
+"novex-codm",
+
+storageBucket:
+"novex-codm.firebasestorage.app",
+
+messagingSenderId:
+"422875706154",
+
+appId:
+"1:422875706154:web:3f21e037173f8b51ba2453",
+
+measurementId:
+"G-9Z50JE2GFW"
+
+};
+
+
+/* =========================
+INITIALIZE FIREBASE
+========================= */
+
+const app=
+initializeApp(firebaseConfig);
+
+const auth=
+getAuth(app);
+
+
+/* =========================
+NOVEX ADMIN UID
+========================= */
+
+const ADMIN_UID=
+"MGHp1mPC8LUAtqM73gw9GBXseyE2";
+
+
+let currentUser=null;
+
+
+/* =========================
+ELEMENTS
+========================= */
+
+const loginForm=
+document.getElementById("loginForm");
+
+const loginStatus=
+document.getElementById("loginStatus");
+
+const manager=
+document.getElementById("manager");
+
+const teamInputs=
+document.getElementById("teamInputs");
+
+const results=
+document.getElementById("results");
+
+
+/* =========================
+CREATE 25 TEAMS
+========================= */
+
+function createTeamInputs(){
+
+teamInputs.innerHTML="";
+
+
+for(let i=1;i<=25;i++){
+
+const row=
+document.createElement("div");
+
+row.className="team-row";
+
+
+row.innerHTML=`
+
+<div class="slot-number">
+${i}
+</div>
+
+<input
+id="team${i}"
+placeholder="Team ${i}"
+maxlength="40"
+>
+
+<input
+id="kills${i}"
+type="number"
+min="0"
+step="1"
+value="0"
+placeholder="Kills"
+>
+
+<select id="placement${i}">
+
+<option value="0">
+No Placement
+</option>
+
+<option value="1">
+Top 1 (+20)
+</option>
+
+<option value="2">
+Top 2 (+15)
+</option>
+
+<option value="3">
+Top 3 (+5)
+</option>
+
+</select>
+
+`;
+
+teamInputs.appendChild(row);
+
+}
+
+}
+
+
+/* =========================
+AUTH STATE
+========================= */
+
+onAuthStateChanged(
+auth,
+user=>{
+
+currentUser=user;
+
+const isAdmin=
+user &&
+user.uid===ADMIN_UID;
+
+
+if(isAdmin){
+
+manager.style.display="block";
+
+createTeamInputs();
+
+}else{
+
+manager.style.display="none";
+
+}
+
+}
+);
+
+
+/* =========================
+ADMIN LOGIN
+========================= */
+
+loginForm.addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+
+const email=
+document
+.getElementById("email")
+.value
+.trim();
+
+
+const password=
+document
+.getElementById("password")
+.value;
+
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+showLoginStatus(
+"Admin login successful!",
+false
+);
+
+
+loginForm.reset();
+
+
+}catch(error){
+
+console.error(error);
+
+
+showLoginStatus(
+"Login failed. Check your email and password.",
+true
+);
+
+}
+
+}
+);
+
+
+/* =========================
+CALCULATE
+========================= */
+
+document
+.getElementById("calculate")
+.addEventListener(
+"click",
+calculateScores
+);
+
+
+function calculateScores(){
+
+if(
+!currentUser ||
+currentUser.uid!==ADMIN_UID
+){
+
+return;
+
+}
+
+
+const data=[];
+
+
+for(let i=1;i<=25;i++){
+
+const name=
+document
+.getElementById(`team${i}`)
+.value
+.trim();
+
+
+let kills=
+parseInt(
+document
+.getElementById(`kills${i}`)
+.value,
+10
+);
+
+
+const placement=
+document
+.getElementById(`placement${i}`)
+.value;
+
+
+if(!name){
+continue;
+}
+
+
+if(
+isNaN(kills) ||
+kills<0
+){
+
+kills=0;
+
+}
+
+
+/* KILL POINTS */
+
+const killPoints=
+kills*5;
+
+
+/* PLACEMENT POINTS */
+
+let placementPoints=0;
+
+
+if(placement==="1"){
+
+placementPoints=20;
+
+}
+
+else if(placement==="2"){
+
+placementPoints=15;
+
+}
+
+else if(placement==="3"){
+
+placementPoints=5;
+
+}
+
+
+/* TOTAL SCORE */
+
+const total=
+killPoints+
+placementPoints;
+
+
+data.push({
+
+slot:i,
+
+name:name,
+
+kills:kills,
+
+killPoints:killPoints,
+
+placement:placement,
+
+placementPoints:placementPoints,
+
+total:total
+
+});
+
+}
+
+
+/* =========================
+SORT
+========================= */
+
+data.sort(
+(a,b)=>{
+
+/*
+Highest total first.
+If tied, highest kills first.
+If still tied, lower slot number first.
+*/
+
+if(b.total!==a.total){
+
+return b.total-a.total;
+
+}
+
+
+if(b.kills!==a.kills){
+
+return b.kills-a.kills;
+
+}
+
+
+return a.slot-b.slot;
+
+}
+);
+
+
+/* =========================
+DISPLAY
+========================= */
+
+results.innerHTML="";
+
+
+if(data.length===0){
+
+results.innerHTML=`
+
+<div class="empty">
+No teams entered yet.
+</div>
+
+`;
+
+return;
+
+}
+
+
+data.forEach(
+(team,index)=>{
+
+const row=
+document.createElement("div");
+
+row.className="result-row";
+
+
+let placementText=
+"No Placement";
+
+
+if(team.placement==="1"){
+
+placementText="TOP 1";
+
+}
+
+else if(team.placement==="2"){
+
+placementText="TOP 2";
+
+}
+
+else if(team.placement==="3"){
+
+placementText="TOP 3";
+
+}
+
+
+row.innerHTML=`
+
+<div class="rank">
+${index+1}
+</div>
+
+<div class="result-info">
+
+<div class="result-name">
+${escapeHTML(team.name)}
+</div>
+
+<div class="result-details">
+SLOT ${team.slot}
+•
+${team.kills} KILLS
+•
+${placementText}
+</div>
+
+<div class="result-breakdown">
+${team.kills} × 5 = ${team.killPoints} pts
++
+Placement = ${team.placementPoints} pts
+</div>
+
+</div>
+
+<div class="total">
+${team.total}
+</div>
+
+`;
+
+results.appendChild(row);
+
+});
+
+}
+
+
+/* =========================
+RESET
+========================= */
+
+document
+.getElementById("reset")
+.addEventListener(
+"click",
+()=>{
+
+if(
+!currentUser ||
+currentUser.uid!==ADMIN_UID
+){
+
+return;
+
+}
+
+
+if(
+!confirm(
+"Reset all 25 team scores?"
+)
+){
+
+return;
+
+}
+
+
+for(let i=1;i<=25;i++){
+
+document
+.getElementById(`team${i}`)
+.value="";
+
+
+document
+.getElementById(`kills${i}`)
+.value="0";
+
+
+document
+.getElementById(`placement${i}`)
+.value="0";
+
+}
+
+
+results.innerHTML=`
+
+<div class="empty">
+Scores reset.
+</div>
+
+`;
+
+}
+);
+
+
+/* =========================
+LOG OUT
+========================= */
+
+document
+.getElementById("logout")
+.addEventListener(
+"click",
+async()=>{
+
+try{
+
+await signOut(auth);
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+);
+
+
+/* =========================
+STATUS
+========================= */
+
+function showLoginStatus(
+message,
+error
+){
+
+loginStatus.textContent=
+message;
+
+loginStatus.style.display=
+"block";
+
+loginStatus.style.background=
+error
+?
+"rgba(255,50,50,.15)"
+:
+"rgba(170,70,255,.15)";
+
+}
+
+
+/* =========================
+SECURITY HELPER
+========================= */
+
+function escapeHTML(value){
+
+return String(value)
+
+.replaceAll(
+"&",
+"&amp;"
+)
+
+.replaceAll(
+"<",
+"&lt;"
+)
+
+.replaceAll(
+">",
+"&gt;"
+)
+
+.replaceAll(
+'"',
+"&quot;"
+)
+
+.replaceAll(
+"'",
+"&#039;"
+);
+
+}
+
+</script>
+
+</body>
+</html>
