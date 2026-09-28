@@ -29,17 +29,44 @@ letter-spacing:8px;
 animation:pulse 2s infinite;
 }
 
-.logo span{color:#b94cff}
+.logo span{
+color:#b94cff;
+}
 
 @keyframes pulse{
-0%,100%{text-shadow:0 0 10px #8d2cff}
-50%{text-shadow:0 0 15px #b94cff,0 0 35px #8d2cff}
+0%,100%{
+text-shadow:0 0 10px #8d2cff;
+}
+50%{
+text-shadow:0 0 15px #b94cff,0 0 35px #8d2cff;
+}
 }
 
 .subtitle{
 color:#cfa7ff;
 font-weight:bold;
 margin-top:8px;
+}
+
+.score-manager-link{
+display:block;
+width:min(500px,90%);
+margin:22px auto 0;
+padding:15px;
+text-align:center;
+text-decoration:none;
+border-radius:12px;
+background:linear-gradient(90deg,#7227c9,#b94cff);
+color:white;
+font-size:16px;
+font-weight:900;
+box-shadow:0 0 20px rgba(185,76,255,.3);
+transition:.2s;
+}
+
+.score-manager-link:hover{
+filter:brightness(1.15);
+transform:translateY(-2px);
 }
 
 .container{
@@ -230,9 +257,24 @@ padding:7px 9px;
 <body>
 
 <header>
-<div class="logo">N<span>Ø</span>VEX</div>
-<div class="subtitle">ONE SQUAD, ONE FATE</div>
+
+<div class="logo">
+N<span>Ø</span>VEX
+</div>
+
+<div class="subtitle">
+ONE SQUAD, ONE FATE
+</div>
+
+<a
+href="score-manager.html"
+class="score-manager-link"
+>
+🧮 OPEN NOVEX SCORE MANAGER
+</a>
+
 </header>
+
 
 <main class="container">
 
@@ -269,6 +311,7 @@ ISO • BO • ISO
 <form id="registrationForm">
 
 <label>Team Name</label>
+
 <input
 id="teamName"
 required
@@ -277,6 +320,7 @@ placeholder="Enter team name"
 >
 
 <label>Team Handler</label>
+
 <input
 id="handler"
 required
@@ -285,6 +329,7 @@ placeholder="@handler"
 >
 
 <label>Discord</label>
+
 <input
 id="discord"
 required
@@ -293,6 +338,7 @@ placeholder="Discord username"
 >
 
 <label>Team Logo URL</label>
+
 <input
 id="logo"
 maxlength="500"
@@ -302,7 +348,11 @@ placeholder="https://example.com/logo.png"
 <label>Select Slot</label>
 
 <select id="slotSelect" required>
-<option value="">Loading slots...</option>
+
+<option value="">
+Loading slots...
+</option>
+
 </select>
 
 <button type="submit">
@@ -362,7 +412,10 @@ ADMIN LOGIN
 </section>
 
 
-<section id="adminPanel" class="card admin">
+<section
+id="adminPanel"
+class="card admin"
+>
 
 <h2>🛠️ ADMIN PANEL</h2>
 
@@ -374,7 +427,10 @@ Admin access enabled.
 CLEAR ALL 25 SLOTS
 </button>
 
-<button id="logout" class="logout-btn">
+<button
+id="logout"
+class="logout-btn"
+>
 LOG OUT
 </button>
 
@@ -392,7 +448,10 @@ NOVEX ESPORTS • CODM SCRIMMAGE
 
 import {
 initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
 getAuth,
@@ -400,7 +459,10 @@ signInAnonymously,
 signInWithEmailAndPassword,
 signOut,
 onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
 getDatabase,
@@ -408,46 +470,60 @@ ref,
 onValue,
 set,
 remove
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
 /* =========================
 FIREBASE CONFIG
 ========================= */
 
-const firebaseConfig = {
+const firebaseConfig={
 
-apiKey:"AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
+apiKey:
+"AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
 
-authDomain:"novex-codm.firebaseapp.com",
+authDomain:
+"novex-codm.firebaseapp.com",
 
-databaseURL:"https://novex-codm-default-rtdb.firebaseio.com",
+databaseURL:
+"https://novex-codm-default-rtdb.firebaseio.com",
 
-projectId:"novex-codm",
+projectId:
+"novex-codm",
 
-storageBucket:"novex-codm.firebasestorage.app",
+storageBucket:
+"novex-codm.firebasestorage.app",
 
-messagingSenderId:"422875706154",
+messagingSenderId:
+"422875706154",
 
-appId:"1:422875706154:web:3f21e037173f8b51ba2453",
+appId:
+"1:422875706154:web:3f21e037173f8b51ba2453",
 
-measurementId:"G-9Z50JE2GFW"
+measurementId:
+"G-9Z50JE2GFW"
 
 };
 
 
-const app=initializeApp(firebaseConfig);
+const app=
+initializeApp(firebaseConfig);
 
-const auth=getAuth(app);
+const auth=
+getAuth(app);
 
-const db=getDatabase(app);
+const db=
+getDatabase(app);
 
 
 /* =========================
 ADMIN UID
 ========================= */
 
-const ADMIN_UID="MGHp1mPC8LUAtqM73gw9GBXseyE2";
+const ADMIN_UID=
+"MGHp1mPC8LUAtqM73gw9GBXseyE2";
 
 
 let currentUser=null;
@@ -456,12 +532,16 @@ let slotsData={};
 
 
 /* =========================
-PUBLIC ANONYMOUS LOGIN
+ANONYMOUS LOGIN
 ========================= */
 
-signInAnonymously(auth).catch(error=>{
+signInAnonymously(auth)
+.catch(error=>{
 
-console.error("Anonymous login error:",error);
+console.error(
+"Anonymous login error:",
+error
+);
 
 });
 
@@ -470,32 +550,45 @@ console.error("Anonymous login error:",error);
 AUTH STATE
 ========================= */
 
-onAuthStateChanged(auth,user=>{
+onAuthStateChanged(
+auth,
+user=>{
 
 currentUser=user;
 
 const isAdmin=
-user && user.uid===ADMIN_UID;
+user &&
+user.uid===ADMIN_UID;
 
-document.getElementById("adminPanel").style.display=
-isAdmin ? "block" : "none";
+
+document
+.getElementById("adminPanel")
+.style.display=
+isAdmin
+?"block"
+:"none";
+
 
 renderSlots();
 
-});
+}
+);
 
 
 /* =========================
 DATABASE
 ========================= */
 
-const slotsRef=ref(db,"novex/slots");
+const slotsRef=
+ref(db,"novex/slots");
+
 
 onValue(
 slotsRef,
 snapshot=>{
 
-slotsData=snapshot.val()||{};
+slotsData=
+snapshot.val()||{};
 
 renderSlots();
 
@@ -504,9 +597,14 @@ updateSelector();
 },
 error=>{
 
-console.error("Database error:",error);
+console.error(
+"Database error:",
+error
+);
 
-document.getElementById("slots").innerHTML=
+document
+.getElementById("slots")
+.innerHTML=
 `
 <div style="padding:15px;color:#ff7777">
 Unable to load slots. Check Firebase rules.
@@ -523,15 +621,24 @@ RENDER SLOTS
 
 function renderSlots(){
 
-const container=document.getElementById("slots");
+const container=
+document.getElementById("slots");
 
 container.innerHTML="";
 
-for(let i=1;i<=25;i++){
 
-const team=slotsData[i];
+for(
+let i=1;
+i<=25;
+i++
+){
 
-const slot=document.createElement("div");
+const team=
+slotsData[i];
+
+
+const slot=
+document.createElement("div");
 
 slot.className="slot";
 
@@ -540,7 +647,9 @@ if(team){
 
 slot.innerHTML=`
 
-<div class="slot-number">${i}</div>
+<div class="slot-number">
+${i}
+</div>
 
 <img
 class="slot-logo"
@@ -572,14 +681,18 @@ currentUser.uid===ADMIN_UID
 const removeButton=
 document.createElement("button");
 
-removeButton.className="remove-btn";
+removeButton.className=
+"remove-btn";
 
-removeButton.textContent="REMOVE";
+removeButton.textContent=
+"REMOVE";
 
 removeButton.onclick=
 ()=>removeTeam(i);
 
-slot.appendChild(removeButton);
+slot.appendChild(
+removeButton
+);
 
 }
 
@@ -588,7 +701,9 @@ slot.appendChild(removeButton);
 
 slot.innerHTML=`
 
-<div class="slot-number">${i}</div>
+<div class="slot-number">
+${i}
+</div>
 
 <div class="slot-info">
 
@@ -615,7 +730,7 @@ container.appendChild(slot);
 
 
 /* =========================
-SELECT OPEN SLOTS
+OPEN SLOT SELECTOR
 ========================= */
 
 function updateSelector(){
@@ -624,10 +739,18 @@ const select=
 document.getElementById("slotSelect");
 
 select.innerHTML=
-`<option value="">Choose an open slot</option>`;
+`
+<option value="">
+Choose an open slot
+</option>
+`;
 
 
-for(let i=1;i<=25;i++){
+for(
+let i=1;
+i<=25;
+i++
+){
 
 if(!slotsData[i]){
 
@@ -639,7 +762,9 @@ option.value=i;
 option.textContent=
 `SLOT ${i} — OPEN`;
 
-select.appendChild(option);
+select.appendChild(
+option
+);
 
 }
 
@@ -656,9 +781,9 @@ document
 .getElementById("registrationForm")
 .addEventListener(
 "submit",
-async e=>{
+async event=>{
 
-e.preventDefault();
+event.preventDefault();
 
 
 if(!currentUser){
@@ -679,11 +804,13 @@ document
 .value
 .trim();
 
+
 const handler=
 document
 .getElementById("handler")
 .value
 .trim();
+
 
 const discord=
 document
@@ -691,11 +818,13 @@ document
 .value
 .trim();
 
+
 const logo=
 document
 .getElementById("logo")
 .value
 .trim();
+
 
 const slot=
 document
@@ -703,7 +832,12 @@ document
 .value;
 
 
-if(!name || !handler || !discord || !slot){
+if(
+!name ||
+!handler ||
+!discord ||
+!slot
+){
 
 showStatus(
 "Please complete all required fields.",
@@ -732,7 +866,10 @@ return;
 try{
 
 await set(
-ref(db,`novex/slots/${slot}`),
+ref(
+db,
+`novex/slots/${slot}`
+),
 {
 
 name:name,
@@ -743,9 +880,11 @@ discord:discord,
 
 logo:logo,
 
-registeredAt:Date.now(),
+registeredAt:
+Date.now(),
 
-registeredBy:currentUser.uid
+registeredBy:
+currentUser.uid
 
 }
 
@@ -758,7 +897,9 @@ showStatus(
 
 
 document
-.getElementById("registrationForm")
+.getElementById(
+"registrationForm"
+)
 .reset();
 
 
@@ -766,8 +907,10 @@ document
 
 console.error(error);
 
+
 showStatus(
-"Registration failed: "+error.message,
+"Registration failed: "+
+error.message,
 true
 );
 
@@ -784,9 +927,9 @@ document
 .getElementById("loginForm")
 .addEventListener(
 "submit",
-async e=>{
+async event=>{
 
-e.preventDefault();
+event.preventDefault();
 
 
 const email=
@@ -794,6 +937,7 @@ document
 .getElementById("adminEmail")
 .value
 .trim();
+
 
 const password=
 document
@@ -824,6 +968,7 @@ document
 
 console.error(error);
 
+
 showLoginStatus(
 "Login failed. Check your email and password.",
 true
@@ -831,7 +976,8 @@ true
 
 }
 
-});
+}
+);
 
 
 /* =========================
@@ -850,9 +996,11 @@ return;
 }
 
 
-if(!confirm(
+if(
+!confirm(
 `Remove team from SLOT ${slot}?`
-)){
+)
+){
 
 return;
 
@@ -862,15 +1010,20 @@ return;
 try{
 
 await remove(
-ref(db,`novex/slots/${slot}`)
+ref(
+db,
+`novex/slots/${slot}`
+)
 );
 
 }catch(error){
 
 console.error(error);
 
+
 alert(
-"Remove failed: "+error.message
+"Remove failed: "+
+error.message
 );
 
 }
@@ -888,7 +1041,6 @@ document
 "click",
 async()=>{
 
-
 if(
 !currentUser ||
 currentUser.uid!==ADMIN_UID
@@ -899,9 +1051,11 @@ return;
 }
 
 
-if(!confirm(
+if(
+!confirm(
 "CLEAR ALL 25 SLOTS?"
-)){
+)
+){
 
 return;
 
@@ -910,35 +1064,38 @@ return;
 
 try{
 
-/*
-Remove each slot individually.
-This works with per-slot Firebase rules.
-*/
-
-for(let i=1;i<=25;i++){
+for(
+let i=1;
+i<=25;
+i++
+){
 
 if(slotsData[i]){
 
 await remove(
-ref(db,`novex/slots/${i}`)
+ref(
+db,
+`novex/slots/${i}`
+)
 );
 
 }
 
 }
-
 
 }catch(error){
 
 console.error(error);
 
 alert(
-"Clear failed: "+error.message
+"Clear failed: "+
+error.message
 );
 
 }
 
-});
+}
+);
 
 
 /* =========================
@@ -963,7 +1120,8 @@ console.error(error);
 
 }
 
-});
+}
+);
 
 
 /* =========================
@@ -974,22 +1132,39 @@ function escapeHTML(value){
 
 return String(value)
 
-.replaceAll("&","&amp;")
+.replaceAll(
+"&",
+"&amp;"
+)
 
-.replaceAll("<","&lt;")
+.replaceAll(
+"<",
+"&lt;"
+)
 
-.replaceAll(">","&gt;")
+.replaceAll(
+">",
+"&gt;"
+)
 
-.replaceAll('"',"&quot;")
+.replaceAll(
+'"',
+"&quot;"
+)
 
-.replaceAll("'","&#039;");
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
 
 
 function safe(value){
 
-return escapeHTML(value||"");
+return escapeHTML(
+value||""
+);
 
 }
 
@@ -1000,16 +1175,22 @@ error=false
 ){
 
 const el=
-document.getElementById("status");
+document.getElementById(
+"status"
+);
 
-el.textContent=message;
+el.textContent=
+message;
 
-el.style.display="block";
+el.style.display=
+"block";
 
 el.style.background=
 error
-?"rgba(255,50,50,.15)"
-:"rgba(170,70,255,.15)";
+?
+"rgba(255,50,50,.15)"
+:
+"rgba(170,70,255,.15)";
 
 }
 
@@ -1020,16 +1201,22 @@ error=false
 ){
 
 const el=
-document.getElementById("loginStatus");
+document.getElementById(
+"loginStatus"
+);
 
-el.textContent=message;
+el.textContent=
+message;
 
-el.style.display="block";
+el.style.display=
+"block";
 
 el.style.background=
 error
-?"rgba(255,50,50,.15)"
-:"rgba(170,70,255,.15)";
+?
+"rgba(255,50,50,.15)"
+:
+"rgba(170,70,255,.15)";
 
 }
 
