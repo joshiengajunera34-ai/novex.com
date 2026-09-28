@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NOVEX CODM SCRIMMAGE</title>
 
 <style>
@@ -12,17 +13,19 @@
 
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:
-    radial-gradient(circle at top,#35105c 0%,#10051a 42%,#030005 100%);
+  font-family:Arial,Helvetica,sans-serif;
   color:#fff;
+  background:
+    radial-gradient(circle at top,#35105c 0%,#10051a 45%,#030005 100%);
   min-height:100vh;
 }
 
+/* HEADER */
+
 header{
   text-align:center;
-  padding:35px 15px 25px;
-  border-bottom:1px solid #632a88;
+  padding:30px 15px 25px;
+  border-bottom:1px solid #642b89;
 }
 
 .logo{
@@ -36,10 +39,17 @@ header{
   color:#b94cff;
 }
 
+.subtitle{
+  color:#cfa7ff;
+  font-weight:bold;
+  margin-top:7px;
+}
+
 @keyframes pulse{
   0%,100%{
     text-shadow:0 0 10px #8d2cff;
   }
+
   50%{
     text-shadow:
       0 0 15px #b94cff,
@@ -47,11 +57,80 @@ header{
   }
 }
 
-.subtitle{
-  color:#cfa7ff;
-  font-weight:bold;
-  margin-top:8px;
+/* MAIN */
+
+.container{
+  width:min(1100px,94%);
+  margin:auto;
 }
+
+/* DASHBOARD */
+
+.dashboard{
+  margin-top:25px;
+  padding:20px;
+  border-radius:18px;
+  background:rgba(17,5,30,.95);
+  border:1px solid #b94cff33;
+  box-shadow:0 0 30px rgba(130,30,255,.15);
+}
+
+.status-box{
+  text-align:center;
+  padding:17px;
+  border-radius:13px;
+  background:#ffffff08;
+  margin-bottom:15px;
+}
+
+.status-title{
+  font-size:12px;
+  color:#a98db9;
+  font-weight:bold;
+}
+
+.status{
+  font-size:22px;
+  font-weight:1000;
+  margin-top:5px;
+}
+
+.status.open{
+  color:#6dff9a;
+}
+
+.status.room{
+  color:#ffd45c;
+}
+
+.status.live{
+  color:#ff6363;
+}
+
+.status.ended{
+  color:#aaa;
+}
+
+.dashboard-info{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.dashboard-info div{
+  text-align:center;
+  padding:15px;
+  background:#ffffff08;
+  border-radius:12px;
+}
+
+.dashboard-info b{
+  display:block;
+  color:#cfa7ff;
+  margin-bottom:5px;
+}
+
+/* SCORE MANAGER */
 
 .score-manager-link{
   display:block;
@@ -63,29 +142,19 @@ header{
   border-radius:12px;
   background:linear-gradient(90deg,#7227c9,#b94cff);
   color:white;
-  font-size:16px;
   font-weight:900;
   box-shadow:0 0 20px rgba(185,76,255,.3);
-  transition:.2s;
 }
 
-.score-manager-link:hover{
-  filter:brightness(1.15);
-  transform:translateY(-2px);
-}
-
-.container{
-  width:min(1100px,94%);
-  margin:auto;
-}
+/* CARDS */
 
 .card{
-  background:rgba(17,5,30,.9);
+  background:rgba(17,5,30,.94);
   border:1px solid rgba(183,74,255,.3);
   border-radius:18px;
   padding:22px;
   margin:25px 0;
-  box-shadow:0 0 30px rgba(130,30,255,.12);
+  box-shadow:0 0 30px rgba(130,30,255,.13);
 }
 
 h2{
@@ -93,18 +162,7 @@ h2{
   margin-top:0;
 }
 
-.info{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.info div{
-  background:#ffffff08;
-  padding:15px;
-  border-radius:12px;
-  text-align:center;
-}
+/* FORM */
 
 label{
   display:block;
@@ -124,18 +182,10 @@ input,select{
   outline:none;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
   border-color:#b94cff;
-  box-shadow:0 0 10px rgba(185,76,255,.25);
-}
-
-select option{
-  background:#0d0614;
-  color:white;
-}
-
-select option:disabled{
-  color:#9c7cae;
+  box-shadow:0 0 10px #b94cff44;
 }
 
 button{
@@ -155,6 +205,8 @@ button:hover{
   filter:brightness(1.15);
 }
 
+/* SLOTS */
+
 .slots{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -169,12 +221,19 @@ button:hover{
   border-radius:12px;
   background:#ffffff08;
   border:1px solid #b44cff22;
-  min-width:0;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.slot:hover{
+  transform:translateY(-2px);
+  border-color:#b94cff77;
+  box-shadow:0 0 15px #b94cff22;
 }
 
 .slot-number{
-  width:38px;
-  height:38px;
+  width:40px;
+  height:40px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -185,9 +244,9 @@ button:hover{
 }
 
 .slot-logo{
-  width:42px;
-  height:42px;
-  border-radius:8px;
+  width:45px;
+  height:45px;
+  border-radius:9px;
   object-fit:cover;
   background:#14091d;
   flex-shrink:0;
@@ -212,12 +271,9 @@ button:hover{
 
 .open{
   color:#b94cff;
-  font-weight:bold;
 }
 
-.taken{
-  color:#fff;
-}
+/* ADMIN */
 
 .admin{
   display:none;
@@ -226,23 +282,120 @@ button:hover{
 .remove-btn{
   width:auto;
   margin:0;
-  padding:8px 12px;
-  font-size:12px;
+  padding:8px 10px;
+  font-size:11px;
   background:#8b183e;
-  flex-shrink:0;
 }
 
 .logout-btn{
   background:#333;
 }
 
-.status{
-  text-align:center;
-  padding:10px;
-  border-radius:10px;
-  margin-top:12px;
-  display:none;
+/* NOTIFICATION */
+
+.notification{
+  position:fixed;
+  top:20px;
+  right:20px;
+  width:min(350px,90%);
+  padding:16px;
+  border-radius:13px;
+  background:#180a24;
+  border:1px solid #b94cff;
+  box-shadow:0 0 25px #8d2cff66;
+  z-index:9999;
+  transform:translateX(120%);
+  transition:.4s;
 }
+
+.notification.show{
+  transform:translateX(0);
+}
+
+.notification-title{
+  color:#b94cff;
+  font-weight:1000;
+  margin-bottom:5px;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#000000bb;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:9998;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(420px,100%);
+  background:#12071c;
+  border:1px solid #b94cff;
+  border-radius:18px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 0 40px #8d2cff55;
+  animation:modalIn .2s ease;
+}
+
+@keyframes modalIn{
+  from{
+    transform:scale(.9);
+    opacity:0;
+  }
+
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.profile-logo{
+  width:100px;
+  height:100px;
+  border-radius:18px;
+  object-fit:cover;
+  background:#08030d;
+  border:2px solid #b94cff;
+  margin-bottom:15px;
+}
+
+.profile-name{
+  font-size:25px;
+  font-weight:1000;
+}
+
+.profile-item{
+  margin-top:12px;
+  padding:12px;
+  background:#ffffff08;
+  border-radius:10px;
+}
+
+.close-btn{
+  background:#333;
+}
+
+/* STATUS MESSAGE */
+
+.message{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  text-align:center;
+  background:#ffffff0b;
+}
+
+/* FOOTER */
 
 footer{
   text-align:center;
@@ -251,6 +404,8 @@ footer{
   font-size:13px;
 }
 
+/* MOBILE */
+
 @media(max-width:700px){
 
   .logo{
@@ -258,7 +413,7 @@ footer{
     letter-spacing:5px;
   }
 
-  .info{
+  .dashboard-info{
     grid-template-columns:1fr;
   }
 
@@ -267,13 +422,15 @@ footer{
   }
 
   .slot{
-    align-items:center;
+    padding:11px;
   }
 
-  .remove-btn{
-    font-size:11px;
-    padding:7px 9px;
+  .notification{
+    top:10px;
+    right:5%;
+    width:90%;
   }
+
 }
 </style>
 </head>
@@ -302,178 +459,255 @@ footer{
 
 <main class="container">
 
-  <section class="card">
+<!-- DASHBOARD -->
 
-    <h2>🔥 NOVEX BR SCRIMMAGE</h2>
+<section class="dashboard">
 
-    <div class="info">
+  <div class="status-box">
 
-      <div>
-        <b>TIME</b><br>
-        8:00 PM
-      </div>
-
-      <div>
-        <b>MAPS</b><br>
-        ISO • BO • ISO
-      </div>
-
-      <div>
-        <b>SLOTS</b><br>
-        25 TEAMS
-      </div>
-
+    <div class="status-title">
+      CURRENT SCRIM STATUS
     </div>
 
-  </section>
-
-
-  <section class="card">
-
-    <h2>📝 TEAM REGISTRATION</h2>
-
-    <form id="registrationForm">
-
-      <label>Team Name</label>
-
-      <input
-        id="teamName"
-        required
-        maxlength="40"
-        placeholder="Enter team name"
-      >
-
-
-      <label>Team Handler</label>
-
-      <input
-        id="handler"
-        required
-        maxlength="40"
-        placeholder="@handler"
-      >
-
-
-      <label>Discord</label>
-
-      <input
-        id="discord"
-        required
-        maxlength="60"
-        placeholder="Discord username"
-      >
-
-
-      <label>Team Logo URL</label>
-
-      <input
-        id="logo"
-        maxlength="500"
-        placeholder="https://example.com/logo.png"
-      >
-
-
-      <label>Select Slot</label>
-
-      <select id="slotSelect" required>
-        <option value="">
-          Loading slots...
-        </option>
-      </select>
-
-
-      <button type="submit">
-        REGISTER TEAM
-      </button>
-
-
-      <div
-        id="status"
-        class="status"
-      ></div>
-
-    </form>
-
-  </section>
-
-
-  <section class="card">
-
-    <h2>🎯 NOVEX SCRIM SLOT LIST</h2>
-
     <div
-      id="slots"
-      class="slots"
+      id="scrimStatus"
+      class="status open"
     >
-      Loading slots...
+      🟢 REGISTRATION OPEN
     </div>
 
-  </section>
+  </div>
 
 
-  <section class="card">
+  <div class="dashboard-info">
 
-    <h2>🔐 NOVEX ADMIN</h2>
+    <div>
+      <b>TEAMS</b>
+      <span id="teamCount">0 / 25</span>
+    </div>
 
-    <form id="loginForm">
+    <div>
+      <b>TIME</b>
+      8:00 PM
+    </div>
 
-      <label>Admin Email</label>
+    <div>
+      <b>MAPS</b>
+      ISO • BO • ISO
+    </div>
 
-      <input
-        id="adminEmail"
-        type="email"
-        required
-        placeholder="Admin email"
-      >
+  </div>
 
-
-      <label>Admin Password</label>
-
-      <input
-        id="adminPassword"
-        type="password"
-        required
-        placeholder="Password"
-      >
+</section>
 
 
-      <button type="submit">
-        ADMIN LOGIN
-      </button>
+<!-- REGISTRATION -->
 
-    </form>
+<section class="card">
+
+  <h2>📝 TEAM REGISTRATION</h2>
+
+  <form id="registrationForm">
+
+    <label>
+      Team Name
+    </label>
+
+    <input
+      id="teamName"
+      maxlength="40"
+      required
+      placeholder="Enter team name"
+    >
+
+
+    <label>
+      Team Handler
+    </label>
+
+    <input
+      id="handler"
+      maxlength="40"
+      required
+      placeholder="@handler"
+    >
+
+
+    <label>
+      Discord / Contact
+    </label>
+
+    <input
+      id="discord"
+      maxlength="60"
+      required
+      placeholder="Discord username"
+    >
+
+
+    <label>
+      Team Logo URL
+    </label>
+
+    <input
+      id="logo"
+      maxlength="500"
+      placeholder="https://example.com/logo.png"
+    >
+
+
+    <label>
+      Select Slot
+    </label>
+
+    <select
+      id="slotSelect"
+      required
+    >
+      <option>
+        Loading slots...
+      </option>
+    </select>
+
+
+    <button type="submit">
+      🔥 REGISTER TEAM
+    </button>
 
     <div
-      id="loginStatus"
-      class="status"
+      id="registerMessage"
+      class="message"
     ></div>
 
-  </section>
+  </form>
+
+</section>
 
 
-  <section
-    id="adminPanel"
-    class="card admin"
+<!-- SLOT LIST -->
+
+<section class="card">
+
+  <h2>
+    🎯 NOVEX SCRIM SLOT LIST
+  </h2>
+
+  <p style="color:#a98db9;font-size:13px;">
+    Tap a registered team to view their profile.
+  </p>
+
+  <div
+    id="slots"
+    class="slots"
   >
+    Loading slots...
+  </div>
 
-    <h2>🛠️ ADMIN PANEL</h2>
+</section>
 
-    <p>
-      Admin access enabled.
-    </p>
 
-    <button id="clearAll">
-      CLEAR ALL 25 SLOTS
-    </button>
+<!-- ADMIN LOGIN -->
 
-    <button
-      id="logout"
-      class="logout-btn"
+<section class="card">
+
+  <h2>
+    🔐 NOVEX ADMIN
+  </h2>
+
+  <form id="loginForm">
+
+    <label>
+      Admin Email
+    </label>
+
+    <input
+      id="adminEmail"
+      type="email"
+      required
+      placeholder="Admin email"
     >
-      LOG OUT
+
+
+    <label>
+      Admin Password
+    </label>
+
+    <input
+      id="adminPassword"
+      type="password"
+      required
+      placeholder="Admin password"
+    >
+
+
+    <button>
+      ADMIN LOGIN
     </button>
 
-  </section>
+  </form>
+
+  <div
+    id="loginMessage"
+    class="message"
+  ></div>
+
+</section>
+
+
+<!-- ADMIN PANEL -->
+
+<section
+  id="adminPanel"
+  class="card admin"
+>
+
+  <h2>
+    🛠️ ADMIN PANEL
+  </h2>
+
+  <label>
+    Change Scrim Status
+  </label>
+
+  <select id="statusSelect">
+
+    <option value="open">
+      🟢 Registration Open
+    </option>
+
+    <option value="room">
+      🟡 Room Open
+    </option>
+
+    <option value="live">
+      🔴 Scrim Live
+    </option>
+
+    <option value="ended">
+      ⚪ Scrim Ended
+    </option>
+
+  </select>
+
+
+  <button id="saveStatus">
+    SAVE SCRIM STATUS
+  </button>
+
+
+  <button id="clearAll">
+    🗑️ CLEAR ALL 25 SLOTS
+  </button>
+
+
+  <button
+    id="logout"
+    class="logout-btn"
+  >
+    LOG OUT
+  </button>
+
+</section>
 
 </main>
 
@@ -483,7 +717,100 @@ footer{
 </footer>
 
 
+<!-- NOTIFICATION -->
+
+<div
+  id="notification"
+  class="notification"
+>
+
+  <div class="notification-title">
+    ⚡ NOVEX LIVE UPDATE
+  </div>
+
+  <div id="notificationText">
+  </div>
+
+</div>
+
+
+<!-- TEAM PROFILE MODAL -->
+
+<div
+  id="profileModal"
+  class="modal"
+>
+
+  <div class="modal-box">
+
+    <img
+      id="profileLogo"
+      class="profile-logo"
+      alt="Team Logo"
+    >
+
+    <div
+      id="profileName"
+      class="profile-name"
+    >
+    </div>
+
+
+    <div class="profile-item">
+
+      <b>SLOT</b>
+
+      <div id="profileSlot">
+      </div>
+
+    </div>
+
+
+    <div class="profile-item">
+
+      <b>HANDLER</b>
+
+      <div id="profileHandler">
+      </div>
+
+    </div>
+
+
+    <div class="profile-item">
+
+      <b>DISCORD / CONTACT</b>
+
+      <div id="profileDiscord">
+      </div>
+
+    </div>
+
+
+    <div class="profile-item">
+
+      <b>REGISTERED</b>
+
+      <div id="profileTime">
+      </div>
+
+    </div>
+
+
+    <button
+      class="close-btn"
+      onclick="closeProfile()"
+    >
+      CLOSE
+    </button>
+
+  </div>
+
+</div>
+
+
 <script type="module">
+
+/* FIREBASE */
 
 import {
   initializeApp
@@ -514,9 +841,7 @@ from
 "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -543,6 +868,7 @@ const firebaseConfig = {
 
   measurementId:
     "G-9Z50JE2GFW"
+
 };
 
 
@@ -556,37 +882,25 @@ const db =
   getDatabase(app);
 
 
-/* =========================
-   ADMIN UID
-========================= */
-
 const ADMIN_UID =
   "MGHp1mPC8LUAtqM73gw9GBXseyE2";
 
 
 let currentUser = null;
-
 let slotsData = {};
+let previousSlots = {};
+let firstLoad = true;
 
 
-/* =========================
-   ANONYMOUS LOGIN
-========================= */
+/* AUTH */
 
 signInAnonymously(auth)
-  .catch(error => {
+.catch(error => {
 
-    console.error(
-      "Anonymous login error:",
-      error
-    );
+  console.error(error);
 
-  });
+});
 
-
-/* =========================
-   AUTH STATE
-========================= */
 
 onAuthStateChanged(
   auth,
@@ -602,8 +916,8 @@ onAuthStateChanged(
       .getElementById("adminPanel")
       .style.display =
         isAdmin
-          ? "block"
-          : "none";
+        ? "block"
+        : "none";
 
     renderSlots();
     updateSelector();
@@ -612,9 +926,7 @@ onAuthStateChanged(
 );
 
 
-/* =========================
-   DATABASE
-========================= */
+/* DATABASE */
 
 const slotsRef =
   ref(
@@ -623,50 +935,110 @@ const slotsRef =
   );
 
 
+const statusRef =
+  ref(
+    db,
+    "novex/settings/status"
+  );
+
+
+/* LIVE SLOTS */
+
 onValue(
   slotsRef,
   snapshot => {
 
-    slotsData =
+    const newData =
       snapshot.val() || {};
 
-    renderSlots();
 
+    if(!firstLoad){
+
+      for(
+        let i = 1;
+        i <= 25;
+        i++
+      ){
+
+        const oldTeam =
+          previousSlots[i];
+
+        const newTeam =
+          newData[i];
+
+
+        if(
+          !oldTeam &&
+          newTeam
+        ){
+
+          showNotification(
+            `⚡ ${newTeam.name} claimed SLOT ${i}!`
+          );
+
+        }
+
+      }
+
+    }
+
+
+    previousSlots =
+      JSON.parse(
+        JSON.stringify(newData)
+      );
+
+    slotsData =
+      newData;
+
+    firstLoad = false;
+
+
+    renderSlots();
     updateSelector();
+    updateTeamCount();
 
   },
   error => {
 
-    console.error(
-      "Database error:",
-      error
-    );
-
-    document
-      .getElementById("slots")
-      .innerHTML =
-      `
-      <div style="
-        padding:15px;
-        color:#ff7777;
-      ">
-        Unable to load slots.
-        Check Firebase rules.
-      </div>
-      `;
+    console.error(error);
 
   }
 );
 
 
-/* =========================
-   RENDER 25 SLOTS
-========================= */
+/* LIVE STATUS */
+
+onValue(
+  statusRef,
+  snapshot => {
+
+    const status =
+      snapshot.val() || "open";
+
+    updateStatus(status);
+
+    const select =
+      document.getElementById(
+        "statusSelect"
+      );
+
+    if(select){
+      select.value = status;
+    }
+
+  }
+);
+
+
+/* RENDER */
 
 function renderSlots(){
 
   const container =
-    document.getElementById("slots");
+    document.getElementById(
+      "slots"
+    );
 
   container.innerHTML = "";
 
@@ -691,8 +1063,7 @@ function renderSlots(){
     if(team){
 
       const logo =
-        team.logo ||
-        "";
+        team.logo || "";
 
 
       slot.innerHTML = `
@@ -704,21 +1075,18 @@ function renderSlots(){
         ${
           logo
           ?
-          `
-          <img
+          `<img
             class="slot-logo"
-            src="${safe(logo)}"
+            src="${escapeHTML(logo)}"
             onerror="this.style.display='none'"
-            alt="Team logo"
-          >
-          `
+          >`
           :
-          ""
+          `<div class="slot-logo"></div>`
         }
 
         <div class="slot-info">
 
-          <div class="slot-name taken">
+          <div class="slot-name">
             ${escapeHTML(team.name)}
           </div>
 
@@ -731,13 +1099,25 @@ function renderSlots(){
       `;
 
 
+      slot.onclick = () => {
+
+        openProfile(
+          i,
+          team
+        );
+
+      };
+
+
       if(
         currentUser &&
         currentUser.uid === ADMIN_UID
       ){
 
         const removeButton =
-          document.createElement("button");
+          document.createElement(
+            "button"
+          );
 
         removeButton.className =
           "remove-btn";
@@ -745,15 +1125,22 @@ function renderSlots(){
         removeButton.textContent =
           "REMOVE";
 
+
         removeButton.onclick =
-          () => removeTeam(i);
+          async event => {
+
+            event.stopPropagation();
+
+            await removeTeam(i);
+
+          };
+
 
         slot.appendChild(
           removeButton
         );
 
       }
-
 
     }else{
 
@@ -770,7 +1157,7 @@ function renderSlots(){
           </div>
 
           <div class="slot-handler">
-            Available for registration
+            Available
           </div>
 
         </div>
@@ -787,10 +1174,7 @@ function renderSlots(){
 }
 
 
-/* =========================
-   SLOT SELECTOR
-   SHOW TEAM NAME WHEN TAKEN
-========================= */
+/* SELECT */
 
 function updateSelector(){
 
@@ -798,6 +1182,9 @@ function updateSelector(){
     document.getElementById(
       "slotSelect"
     );
+
+
+  if(!select) return;
 
 
   select.innerHTML = `
@@ -827,10 +1214,6 @@ function updateSelector(){
       option.textContent =
         `SLOT ${i} — ${slotsData[i].name}`;
 
-      /*
-       * Occupied slots cannot
-       * be selected again.
-       */
       option.disabled = true;
 
     }else{
@@ -841,18 +1224,34 @@ function updateSelector(){
     }
 
 
-    select.appendChild(
-      option
-    );
+    select.appendChild(option);
 
   }
 
 }
 
 
-/* =========================
-   REGISTER TEAM
-========================= */
+/* TEAM COUNT */
+
+function updateTeamCount(){
+
+  const count =
+    Object.keys(
+      slotsData
+    ).length;
+
+
+  document
+    .getElementById(
+      "teamCount"
+    )
+    .textContent =
+      `${count} / 25`;
+
+}
+
+
+/* REGISTER */
 
 document
   .getElementById(
@@ -867,9 +1266,9 @@ document
 
       if(!currentUser){
 
-        showStatus(
-          "Connecting to Firebase...",
-          true
+        showMessage(
+          "registerMessage",
+          "Connecting to Firebase..."
         );
 
         return;
@@ -879,35 +1278,45 @@ document
 
       const name =
         document
-          .getElementById("teamName")
+          .getElementById(
+            "teamName"
+          )
           .value
           .trim();
 
 
       const handler =
         document
-          .getElementById("handler")
+          .getElementById(
+            "handler"
+          )
           .value
           .trim();
 
 
       const discord =
         document
-          .getElementById("discord")
+          .getElementById(
+            "discord"
+          )
           .value
           .trim();
 
 
       const logo =
         document
-          .getElementById("logo")
+          .getElementById(
+            "logo"
+          )
           .value
           .trim();
 
 
       const slot =
         document
-          .getElementById("slotSelect")
+          .getElementById(
+            "slotSelect"
+          )
           .value;
 
 
@@ -918,9 +1327,9 @@ document
         !slot
       ){
 
-        showStatus(
-          "Please complete all required fields.",
-          true
+        showMessage(
+          "registerMessage",
+          "Please complete all required fields."
         );
 
         return;
@@ -928,15 +1337,11 @@ document
       }
 
 
-      /*
-       * Double-check Firebase data
-       * before registering.
-       */
       if(slotsData[slot]){
 
-        showStatus(
-          `SLOT ${slot} is already taken by ${slotsData[slot].name}.`,
-          true
+        showMessage(
+          "registerMessage",
+          `SLOT ${slot} is already taken.`
         );
 
         updateSelector();
@@ -977,8 +1382,9 @@ document
         );
 
 
-        showStatus(
-          `SUCCESS! ${name} registered in SLOT ${slot}.`
+        showMessage(
+          "registerMessage",
+          `🔥 ${name} successfully registered in SLOT ${slot}!`
         );
 
 
@@ -991,15 +1397,12 @@ document
 
       }catch(error){
 
-        console.error(
-          error
-        );
+        console.error(error);
 
-
-        showStatus(
+        showMessage(
+          "registerMessage",
           "Registration failed: " +
-          error.message,
-          true
+          error.message
         );
 
       }
@@ -1008,9 +1411,7 @@ document
   );
 
 
-/* =========================
-   ADMIN LOGIN
-========================= */
+/* ADMIN LOGIN */
 
 document
   .getElementById(
@@ -1049,8 +1450,9 @@ document
         );
 
 
-        showLoginStatus(
-          "Admin login successful!"
+        showMessage(
+          "loginMessage",
+          "✅ Admin login successful!"
         );
 
 
@@ -1063,14 +1465,11 @@ document
 
       }catch(error){
 
-        console.error(
-          error
-        );
+        console.error(error);
 
-
-        showLoginStatus(
-          "Login failed. Check your email and password.",
-          true
+        showMessage(
+          "loginMessage",
+          "❌ Login failed. Check your email and password."
         );
 
       }
@@ -1079,9 +1478,103 @@ document
   );
 
 
-/* =========================
-   REMOVE TEAM
-========================= */
+/* SAVE STATUS */
+
+document
+  .getElementById(
+    "saveStatus"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+      ){
+
+        return;
+
+      }
+
+
+      const status =
+        document
+          .getElementById(
+            "statusSelect"
+          )
+          .value;
+
+
+      try{
+
+        await set(
+          statusRef,
+          status
+        );
+
+
+        showMessage(
+          "loginMessage",
+          "✅ Scrim status updated!"
+        );
+
+      }catch(error){
+
+        console.error(error);
+
+      }
+
+    }
+  );
+
+
+/* UPDATE STATUS */
+
+function updateStatus(status){
+
+  const el =
+    document.getElementById(
+      "scrimStatus"
+    );
+
+
+  el.className =
+    "status " + status;
+
+
+  if(status === "open"){
+
+    el.textContent =
+      "🟢 REGISTRATION OPEN";
+
+  }
+
+  else if(status === "room"){
+
+    el.textContent =
+      "🟡 ROOM OPEN";
+
+  }
+
+  else if(status === "live"){
+
+    el.textContent =
+      "🔴 SCRIM LIVE";
+
+  }
+
+  else{
+
+    el.textContent =
+      "⚪ SCRIM ENDED";
+
+  }
+
+}
+
+
+/* REMOVE TEAM */
 
 async function removeTeam(slot){
 
@@ -1097,7 +1590,7 @@ async function removeTeam(slot){
 
   if(
     !confirm(
-      `Remove team from SLOT ${slot}?`
+      `Remove ${slotsData[slot]?.name || "team"} from SLOT ${slot}?`
     )
   ){
 
@@ -1117,10 +1610,6 @@ async function removeTeam(slot){
 
   }catch(error){
 
-    console.error(
-      error
-    );
-
     alert(
       "Remove failed: " +
       error.message
@@ -1131,9 +1620,7 @@ async function removeTeam(slot){
 }
 
 
-/* =========================
-   CLEAR ALL 25 SLOTS
-========================= */
+/* CLEAR ALL */
 
 document
   .getElementById(
@@ -1155,7 +1642,7 @@ document
 
       if(
         !confirm(
-          "CLEAR ALL 25 SLOTS?"
+          "⚠️ CLEAR ALL 25 SLOTS?"
         )
       ){
 
@@ -1187,12 +1674,7 @@ document
 
       }catch(error){
 
-        console.error(
-          error
-        );
-
         alert(
-          "Clear failed: " +
           error.message
         );
 
@@ -1202,9 +1684,7 @@ document
   );
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* LOGOUT */
 
 document
   .getElementById(
@@ -1214,106 +1694,192 @@ document
     "click",
     async () => {
 
-      try{
+      await signOut(auth);
 
-        await signOut(auth);
-
-        location.reload();
-
-      }catch(error){
-
-        console.error(
-          error
-        );
-
-      }
+      location.reload();
 
     }
   );
 
 
-/* =========================
-   HELPERS
-========================= */
+/* NOTIFICATION */
 
-function escapeHTML(value){
+function showNotification(message){
 
-  return String(value)
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
+  const box =
+    document.getElementById(
+      "notification"
     );
 
-}
+  const text =
+    document.getElementById(
+      "notificationText"
+    );
 
 
-function safe(value){
+  text.textContent =
+    message;
 
-  return escapeHTML(
-    value || ""
+
+  box.classList.add("show");
+
+
+  setTimeout(
+    () => {
+
+      box.classList.remove(
+        "show"
+      );
+
+    },
+    4500
   );
 
 }
 
 
-function showStatus(
-  message,
-  error = false
+/* PROFILE */
+
+function openProfile(
+  slot,
+  team
 ){
 
-  const el =
+  document
+    .getElementById(
+      "profileModal"
+    )
+    .classList.add("show");
+
+
+  document
+    .getElementById(
+      "profileName"
+    )
+    .textContent =
+      team.name;
+
+
+  document
+    .getElementById(
+      "profileSlot"
+    )
+    .textContent =
+      `SLOT ${slot}`;
+
+
+  document
+    .getElementById(
+      "profileHandler"
+    )
+    .textContent =
+      team.handler;
+
+
+  document
+    .getElementById(
+      "profileDiscord"
+    )
+    .textContent =
+      team.discord;
+
+
+  document
+    .getElementById(
+      "profileTime"
+    )
+    .textContent =
+      team.registeredAt
+      ?
+      new Date(
+        team.registeredAt
+      ).toLocaleString()
+      :
+      "Unknown";
+
+
+  const img =
     document.getElementById(
-      "status"
+      "profileLogo"
     );
 
 
-  el.textContent =
-    message;
+  if(team.logo){
 
+    img.src =
+      team.logo;
 
-  el.style.display =
-    "block";
+    img.style.display =
+      "inline-block";
 
+  }else{
 
-  el.style.background =
-    error
-      ?
-      "rgba(255,50,50,.15)"
-      :
-      "rgba(170,70,255,.15)";
+    img.style.display =
+      "none";
+
+  }
 
 }
 
 
-function showLoginStatus(
-  message,
-  error = false
+window.closeProfile =
+  function(){
+
+    document
+      .getElementById(
+        "profileModal"
+      )
+      .classList.remove(
+        "show"
+      );
+
+  };
+
+
+/* HELPERS */
+
+function escapeHTML(value){
+
+  return String(
+    value || ""
+  )
+
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
+
+}
+
+
+function showMessage(
+  id,
+  message
 ){
 
   const el =
     document.getElementById(
-      "loginStatus"
+      id
     );
 
 
@@ -1325,16 +1891,19 @@ function showLoginStatus(
     "block";
 
 
-  el.style.background =
-    error
-      ?
-      "rgba(255,50,50,.15)"
-      :
-      "rgba(170,70,255,.15)";
+  setTimeout(
+    () => {
+
+      el.style.display =
+        "none";
+
+    },
+    5000
+  );
 
 }
 
 </script>
 
 </body>
-</html>
+        </html>
