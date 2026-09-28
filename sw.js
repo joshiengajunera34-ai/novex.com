@@ -1,23 +1,17 @@
-const CACHE_NAME = "novex-v1";
-
-const FILES = [
-  "./",
-  "./index.html",
-  "./manifest.json"
-];
+const CACHE_NAME = "novex-v2";
 
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(FILES);
-    })
-  );
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      return cached || fetch(event.request);
-    })
+    fetch(event.request).catch(() =>
+      caches.match(event.request)
+    )
   );
 });
