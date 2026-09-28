@@ -6,218 +6,223 @@
 <title>NOVEX CODM SCRIM</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:radial-gradient(circle at top,#32105c,#090014 45%,#030005);
+color:white;
+min-height:100vh;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at top, #32105c 0%, #090014 42%, #030005 100%);
-  color: white;
-  min-height: 100vh;
+header{
+text-align:center;
+padding:35px 15px 25px;
+border-bottom:1px solid #632a88;
 }
 
-header {
-  text-align: center;
-  padding: 35px 15px 25px;
-  border-bottom: 1px solid rgba(190, 90, 255, .25);
+.logo{
+font-size:55px;
+font-weight:1000;
+letter-spacing:8px;
+animation:pulse 2s infinite;
 }
 
-.logo {
-  font-size: 55px;
-  font-weight: 1000;
-  letter-spacing: 8px;
-  animation: pulse 2s infinite;
+.logo span{color:#b94cff}
+
+@keyframes pulse{
+0%,100%{text-shadow:0 0 10px #8d2cff}
+50%{text-shadow:0 0 15px #b94cff,0 0 35px #8d2cff}
 }
 
-.logo span {
-  color: #b94cff;
+.subtitle{
+color:#cfa7ff;
+font-weight:bold;
+margin-top:8px;
 }
 
-@keyframes pulse {
-  0%,100% {
-    text-shadow: 0 0 10px #8d2cff;
-    transform: scale(1);
-  }
-  50% {
-    text-shadow:
-      0 0 15px #b94cff,
-      0 0 35px #8d2cff;
-    transform: scale(1.04);
-  }
+.container{
+width:min(1100px,94%);
+margin:auto;
 }
 
-.subtitle {
-  color: #cfa7ff;
-  margin-top: 8px;
-  font-weight: bold;
+.card{
+background:rgba(17,5,30,.9);
+border:1px solid rgba(183,74,255,.3);
+border-radius:18px;
+padding:22px;
+margin:25px 0;
+box-shadow:0 0 30px rgba(130,30,255,.12);
 }
 
-.container {
-  width: min(1100px, 94%);
-  margin: auto;
+h2{
+color:#d28aff;
+margin-top:0;
 }
 
-.card {
-  background: rgba(17, 5, 30, .88);
-  border: 1px solid rgba(183, 74, 255, .3);
-  border-radius: 18px;
-  padding: 22px;
-  margin: 25px 0;
-  box-shadow: 0 0 30px rgba(130, 30, 255, .12);
+.info{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
 }
 
-h2 {
-  margin-top: 0;
-  color: #d28aff;
+.info div{
+background:#ffffff08;
+padding:15px;
+border-radius:12px;
+text-align:center;
 }
 
-.info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+label{
+display:block;
+margin-top:13px;
+margin-bottom:6px;
+color:#d9b9ff;
+font-weight:bold;
 }
 
-.info div {
-  background: rgba(255,255,255,.04);
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
+input,select{
+width:100%;
+padding:13px;
+border-radius:10px;
+border:1px solid #66309a;
+background:#0d0614;
+color:white;
+outline:none;
 }
 
-label {
-  display: block;
-  margin-top: 13px;
-  margin-bottom: 6px;
-  color: #d9b9ff;
-  font-weight: bold;
+button{
+width:100%;
+margin-top:18px;
+padding:14px;
+border:0;
+border-radius:11px;
+background:linear-gradient(90deg,#7227c9,#b94cff);
+color:white;
+font-size:16px;
+font-weight:900;
+cursor:pointer;
 }
 
-input, select {
-  width: 100%;
-  padding: 13px;
-  border-radius: 10px;
-  border: 1px solid #66309a;
-  background: #0d0614;
-  color: white;
-  outline: none;
+button:hover{
+filter:brightness(1.15);
 }
 
-input:focus, select:focus {
-  border-color: #b94cff;
-  box-shadow: 0 0 10px rgba(185,76,255,.25);
+.slots{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
 }
 
-button {
-  width: 100%;
-  margin-top: 18px;
-  padding: 14px;
-  border: none;
-  border-radius: 11px;
-  background: linear-gradient(90deg, #7227c9, #b94cff);
-  color: white;
-  font-size: 16px;
-  font-weight: 900;
-  cursor: pointer;
+.slot{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px;
+border-radius:12px;
+background:#ffffff08;
+border:1px solid #b44cff22;
 }
 
-button:hover {
-  filter: brightness(1.15);
+.slot-number{
+width:38px;
+height:38px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#5d2096;
+border-radius:9px;
+font-weight:900;
+flex-shrink:0;
 }
 
-button:disabled {
-  opacity: .5;
-  cursor: not-allowed;
+.slot-logo{
+width:42px;
+height:42px;
+border-radius:8px;
+object-fit:cover;
+background:#14091d;
 }
 
-.slots {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+.slot-info{
+flex:1;
+min-width:0;
 }
 
-.slot {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px;
-  border-radius: 12px;
-  background: rgba(255,255,255,.035);
-  border: 1px solid rgba(180,80,255,.18);
+.slot-name{
+font-weight:900;
+word-break:break-word;
 }
 
-.slot-number {
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #5d2096;
-  border-radius: 9px;
-  font-weight: 900;
+.slot-handler{
+font-size:12px;
+color:#bba3c9;
+margin-top:3px;
+word-break:break-word;
 }
 
-.slot-logo {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-  object-fit: cover;
-  background: #14091d;
+.open{
+color:#b94cff;
+font-weight:bold;
 }
 
-.slot-info {
-  flex: 1;
+.admin{
+display:none;
 }
 
-.slot-name {
-  font-weight: 900;
+.remove-btn{
+width:auto;
+margin:0;
+padding:8px 12px;
+font-size:12px;
+background:#8b183e;
+flex-shrink:0;
 }
 
-.slot-handler {
-  font-size: 12px;
-  color: #bba3c9;
-  margin-top: 3px;
+.logout-btn{
+background:#333;
 }
 
-.open {
-  color: #b94cff;
-  font-weight: bold;
+.status{
+text-align:center;
+padding:10px;
+border-radius:10px;
+margin-top:12px;
+display:none;
 }
 
-.admin {
-  display: none;
+footer{
+text-align:center;
+padding:30px;
+color:#806a91;
+font-size:13px;
 }
 
-.status {
-  text-align: center;
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 12px;
-  display: none;
+@media(max-width:700px){
+
+.logo{
+font-size:38px;
+letter-spacing:5px;
 }
 
-footer {
-  text-align: center;
-  padding: 30px;
-  color: #806a91;
-  font-size: 13px;
+.info{
+grid-template-columns:1fr;
 }
 
-@media(max-width:700px) {
-  .logo {
-    font-size: 38px;
-    letter-spacing: 5px;
-  }
+.slots{
+grid-template-columns:1fr;
+}
 
-  .info {
-    grid-template-columns: 1fr;
-  }
+.slot{
+align-items:center;
+}
 
-  .slots {
-    grid-template-columns: 1fr;
-  }
+.remove-btn{
+font-size:11px;
+padding:7px 9px;
+}
+
 }
 </style>
 </head>
@@ -225,540 +230,808 @@ footer {
 <body>
 
 <header>
-  <div class="logo">N<span>Ø</span>VEX</div>
-  <div class="subtitle">ONE SQUAD, ONE FATE</div>
+<div class="logo">N<span>Ø</span>VEX</div>
+<div class="subtitle">ONE SQUAD, ONE FATE</div>
 </header>
 
 <main class="container">
 
-  <section class="card">
-    <h2>🔥 NOVEX BR SCRIMMAGE</h2>
+<section class="card">
 
-    <div class="info">
-      <div>
-        <b>TIME</b><br>
-        8:00 PM
-      </div>
+<h2>🔥 NOVEX BR SCRIMMAGE</h2>
 
-      <div>
-        <b>MAPS</b><br>
-        ISO • BO • ISO
-      </div>
+<div class="info">
 
-      <div>
-        <b>SLOTS</b><br>
-        25 TEAMS
-      </div>
-    </div>
-  </section>
+<div>
+<b>TIME</b><br>
+8:00 PM
+</div>
 
-  <section class="card">
-    <h2>📝 TEAM REGISTRATION</h2>
+<div>
+<b>MAPS</b><br>
+ISO • BO • ISO
+</div>
 
-    <form id="registrationForm">
+<div>
+<b>SLOTS</b><br>
+25 TEAMS
+</div>
 
-      <label>Team Name</label>
-      <input
-        id="teamName"
-        type="text"
-        placeholder="Enter team name"
-        required
-      >
+</div>
 
-      <label>Team Handler</label>
-      <input
-        id="handler"
-        type="text"
-        placeholder="@handler"
-        required
-      >
+</section>
 
-      <label>Discord</label>
-      <input
-        id="discord"
-        type="text"
-        placeholder="Discord username"
-        required
-      >
 
-      <label>Team Logo URL</label>
-      <input
-        id="logo"
-        type="url"
-        placeholder="https://example.com/logo.png"
-      >
+<section class="card">
 
-      <label>Select Slot</label>
-      <select id="slotSelect" required>
-        <option value="">Loading slots...</option>
-      </select>
+<h2>📝 TEAM REGISTRATION</h2>
 
-      <button id="registerButton" type="submit">
-        REGISTER TEAM
-      </button>
+<form id="registrationForm">
 
-      <div id="status" class="status"></div>
+<label>Team Name</label>
+<input
+id="teamName"
+required
+maxlength="40"
+placeholder="Enter team name"
+>
 
-    </form>
-  </section>
+<label>Team Handler</label>
+<input
+id="handler"
+required
+maxlength="40"
+placeholder="@handler"
+>
 
-  <section class="card">
-    <h2>🎯 SCRIM SLOT LIST</h2>
+<label>Discord</label>
+<input
+id="discord"
+required
+maxlength="60"
+placeholder="Discord username"
+>
 
-    <div id="slots" class="slots">
-      Loading slots...
-    </div>
-  </section>
+<label>Team Logo URL</label>
+<input
+id="logo"
+maxlength="500"
+placeholder="https://example.com/logo.png"
+>
 
-  <section id="adminPanel" class="card admin">
-    <h2>🛠️ ADMIN PANEL</h2>
+<label>Select Slot</label>
 
-    <p>
-      You are logged in as the NOVEX administrator.
-    </p>
+<select id="slotSelect" required>
+<option value="">Loading slots...</option>
+</select>
 
-    <button id="clearAll">
-      CLEAR ALL SLOTS
-    </button>
-  </section>
+<button type="submit">
+REGISTER TEAM
+</button>
+
+<div id="status" class="status"></div>
+
+</form>
+
+</section>
+
+
+<section class="card">
+
+<h2>🎯 SCRIM SLOT LIST</h2>
+
+<div id="slots" class="slots">
+Loading slots...
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h2>🔐 NOVEX ADMIN</h2>
+
+<form id="loginForm">
+
+<label>Admin Email</label>
+
+<input
+id="adminEmail"
+type="email"
+required
+placeholder="Admin email"
+>
+
+<label>Admin Password</label>
+
+<input
+id="adminPassword"
+type="password"
+required
+placeholder="Password"
+>
+
+<button type="submit">
+ADMIN LOGIN
+</button>
+
+</form>
+
+<div id="loginStatus" class="status"></div>
+
+</section>
+
+
+<section id="adminPanel" class="card admin">
+
+<h2>🛠️ ADMIN PANEL</h2>
+
+<p>
+Admin access enabled.
+</p>
+
+<button id="clearAll">
+CLEAR ALL 25 SLOTS
+</button>
+
+<button id="logout" class="logout-btn">
+LOG OUT
+</button>
+
+</section>
 
 </main>
 
+
 <footer>
-  NOVEX ESPORTS • CODM SCRIMMAGE
+NOVEX ESPORTS • CODM SCRIMMAGE
 </footer>
 
 
 <script type="module">
 
 import {
-  initializeApp
+initializeApp
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
-  getAuth,
-  signInAnonymously,
-  onAuthStateChanged
+getAuth,
+signInAnonymously,
+signInWithEmailAndPassword,
+signOut,
+onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
-  getDatabase,
-  ref,
-  onValue,
-  set,
-  remove
+getDatabase,
+ref,
+onValue,
+set,
+remove
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
 /* =========================
-   FIREBASE CONFIG
+FIREBASE CONFIG
 ========================= */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
-  authDomain: "novex-codm.firebaseapp.com",
-  databaseURL: "https://novex-codm-default-rtdb.firebaseio.com",
-  projectId: "novex-codm",
-  storageBucket: "novex-codm.firebasestorage.app",
-  messagingSenderId: "422875706154",
-  appId: "1:422875706154:web:3f21e037173f8b51ba2453",
-  measurementId: "G-9Z50JE2GFW"
+
+apiKey:"AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
+
+authDomain:"novex-codm.firebaseapp.com",
+
+databaseURL:"https://novex-codm-default-rtdb.firebaseio.com",
+
+projectId:"novex-codm",
+
+storageBucket:"novex-codm.firebasestorage.app",
+
+messagingSenderId:"422875706154",
+
+appId:"1:422875706154:web:3f21e037173f8b51ba2453",
+
+measurementId:"G-9Z50JE2GFW"
+
 };
 
 
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+const db=getDatabase(app);
+
+
 /* =========================
-   FIREBASE START
+ADMIN UID
 ========================= */
 
-const app = initializeApp(firebaseConfig);
+const ADMIN_UID="MGHp1mPC8LUAtqM73gw9GBXseyE2";
 
-const auth = getAuth(app);
 
-const db = getDatabase(app);
+let currentUser=null;
 
+let slotsData={};
+
+
+/* =========================
+PUBLIC ANONYMOUS LOGIN
+========================= */
+
+signInAnonymously(auth).catch(error=>{
+
+console.error("Anonymous login error:",error);
+
+});
+
+
+/* =========================
+AUTH STATE
+========================= */
+
+onAuthStateChanged(auth,user=>{
+
+currentUser=user;
+
+const isAdmin=
+user && user.uid===ADMIN_UID;
+
+document.getElementById("adminPanel").style.display=
+isAdmin ? "block" : "none";
+
+renderSlots();
+
+});
+
+
+/* =========================
+DATABASE
+========================= */
+
+const slotsRef=ref(db,"novex/slots");
+
+onValue(
+slotsRef,
+snapshot=>{
+
+slotsData=snapshot.val()||{};
+
+renderSlots();
+
+updateSelector();
+
+},
+error=>{
+
+console.error("Database error:",error);
+
+document.getElementById("slots").innerHTML=
+`
+<div style="padding:15px;color:#ff7777">
+Unable to load slots. Check Firebase rules.
+</div>
+`;
+
+}
+);
+
+
+/* =========================
+RENDER SLOTS
+========================= */
+
+function renderSlots(){
+
+const container=document.getElementById("slots");
+
+container.innerHTML="";
+
+for(let i=1;i<=25;i++){
+
+const team=slotsData[i];
+
+const slot=document.createElement("div");
+
+slot.className="slot";
+
+
+if(team){
+
+slot.innerHTML=`
+
+<div class="slot-number">${i}</div>
+
+<img
+class="slot-logo"
+src="${safe(team.logo)}"
+onerror="this.style.display='none'"
+alt="Team logo"
+>
+
+<div class="slot-info">
+
+<div class="slot-name">
+${escapeHTML(team.name)}
+</div>
+
+<div class="slot-handler">
+${escapeHTML(team.handler)}
+</div>
+
+</div>
+
+`;
+
+
+if(
+currentUser &&
+currentUser.uid===ADMIN_UID
+){
+
+const removeButton=
+document.createElement("button");
+
+removeButton.className="remove-btn";
+
+removeButton.textContent="REMOVE";
+
+removeButton.onclick=
+()=>removeTeam(i);
+
+slot.appendChild(removeButton);
+
+}
+
+
+}else{
+
+slot.innerHTML=`
+
+<div class="slot-number">${i}</div>
+
+<div class="slot-info">
+
+<div class="slot-name open">
+OPEN SLOT
+</div>
+
+<div class="slot-handler">
+Available for registration
+</div>
+
+</div>
+
+`;
+
+}
+
+
+container.appendChild(slot);
+
+}
+
+}
+
+
+/* =========================
+SELECT OPEN SLOTS
+========================= */
+
+function updateSelector(){
+
+const select=
+document.getElementById("slotSelect");
+
+select.innerHTML=
+`<option value="">Choose an open slot</option>`;
+
+
+for(let i=1;i<=25;i++){
+
+if(!slotsData[i]){
+
+const option=
+document.createElement("option");
+
+option.value=i;
+
+option.textContent=
+`SLOT ${i} — OPEN`;
+
+select.appendChild(option);
+
+}
+
+}
+
+}
+
+
+/* =========================
+REGISTER TEAM
+========================= */
+
+document
+.getElementById("registrationForm")
+.addEventListener(
+"submit",
+async e=>{
+
+e.preventDefault();
+
+
+if(!currentUser){
+
+showStatus(
+"Connecting to Firebase...",
+true
+);
+
+return;
+
+}
+
+
+const name=
+document
+.getElementById("teamName")
+.value
+.trim();
+
+const handler=
+document
+.getElementById("handler")
+.value
+.trim();
+
+const discord=
+document
+.getElementById("discord")
+.value
+.trim();
+
+const logo=
+document
+.getElementById("logo")
+.value
+.trim();
+
+const slot=
+document
+.getElementById("slotSelect")
+.value;
+
+
+if(!name || !handler || !discord || !slot){
+
+showStatus(
+"Please complete all required fields.",
+true
+);
+
+return;
+
+}
+
+
+if(slotsData[slot]){
+
+showStatus(
+"That slot is already taken.",
+true
+);
+
+updateSelector();
+
+return;
+
+}
+
+
+try{
+
+await set(
+ref(db,`novex/slots/${slot}`),
+{
+
+name:name,
+
+handler:handler,
+
+discord:discord,
+
+logo:logo,
+
+registeredAt:Date.now(),
+
+registeredBy:currentUser.uid
+
+}
+
+);
+
+
+showStatus(
+`SUCCESS! ${name} registered in SLOT ${slot}.`
+);
+
+
+document
+.getElementById("registrationForm")
+.reset();
+
+
+}catch(error){
+
+console.error(error);
+
+showStatus(
+"Registration failed: "+error.message,
+true
+);
+
+}
+
+});
+
+
+/* =========================
+ADMIN LOGIN
+========================= */
+
+document
+.getElementById("loginForm")
+.addEventListener(
+"submit",
+async e=>{
+
+e.preventDefault();
+
+
+const email=
+document
+.getElementById("adminEmail")
+.value
+.trim();
+
+const password=
+document
+.getElementById("adminPassword")
+.value;
+
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+showLoginStatus(
+"Admin login successful!"
+);
+
+
+document
+.getElementById("loginForm")
+.reset();
+
+
+}catch(error){
+
+console.error(error);
+
+showLoginStatus(
+"Login failed. Check your email and password.",
+true
+);
+
+}
+
+});
+
+
+/* =========================
+REMOVE TEAM
+========================= */
+
+async function removeTeam(slot){
+
+if(
+!currentUser ||
+currentUser.uid!==ADMIN_UID
+){
+
+return;
+
+}
+
+
+if(!confirm(
+`Remove team from SLOT ${slot}?`
+)){
+
+return;
+
+}
+
+
+try{
+
+await remove(
+ref(db,`novex/slots/${slot}`)
+);
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Remove failed: "+error.message
+);
+
+}
+
+}
+
+
+/* =========================
+CLEAR ALL
+========================= */
+
+document
+.getElementById("clearAll")
+.addEventListener(
+"click",
+async()=>{
+
+
+if(
+!currentUser ||
+currentUser.uid!==ADMIN_UID
+){
+
+return;
+
+}
+
+
+if(!confirm(
+"CLEAR ALL 25 SLOTS?"
+)){
+
+return;
+
+}
+
+
+try{
 
 /*
- IMPORTANT:
- Replace this with your own Firebase
- administrator UID later.
+Remove each slot individually.
+This works with per-slot Firebase rules.
 */
 
-const ADMIN_UID = "Lg3K5vaAyfSw91qGDuDNmJ9rBD33";
+for(let i=1;i<=25;i++){
+
+if(slotsData[i]){
+
+await remove(
+ref(db,`novex/slots/${i}`)
+);
+
+}
+
+}
 
 
-let currentUser = null;
+}catch(error){
 
-let slotsData = {};
+console.error(error);
 
+alert(
+"Clear failed: "+error.message
+);
 
-/* =========================
-   LOGIN
-========================= */
-
-signInAnonymously(auth).catch(error => {
-
-  console.error(error);
-
-  showStatus(
-    "Firebase login failed: " + error.message,
-    true
-  );
-
-});
-
-
-onAuthStateChanged(auth, user => {
-
-  if (!user) return;
-
-  currentUser = user;
-
-  console.log("Firebase UID:", user.uid);
-
-  if (user.uid === ADMIN_UID) {
-
-    document.getElementById("adminPanel").style.display = "block";
-
-  }
+}
 
 });
 
 
 /* =========================
-   STATUS
-========================= */
-
-function showStatus(message, error = false) {
-
-  const status = document.getElementById("status");
-
-  status.textContent = message;
-
-  status.style.display = "block";
-
-  status.style.background = error
-    ? "rgba(255,50,50,.15)"
-    : "rgba(170,70,255,.15)";
-
-}
-
-
-/* =========================
-   LOAD 25 SLOTS
-========================= */
-
-const slotsRef = ref(db, "novex/slots");
-
-
-onValue(slotsRef, snapshot => {
-
-  slotsData = snapshot.val() || {};
-
-  renderSlots();
-
-  updateSlotSelector();
-
-});
-
-
-/* =========================
-   RENDER SLOTS
-========================= */
-
-function renderSlots() {
-
-  const container = document.getElementById("slots");
-
-  container.innerHTML = "";
-
-  for (let i = 1; i <= 25; i++) {
-
-    const team = slotsData[i];
-
-    const slot = document.createElement("div");
-
-    slot.className = "slot";
-
-    if (team) {
-
-      slot.innerHTML = `
-
-        <div class="slot-number">${i}</div>
-
-        <img
-          class="slot-logo"
-          src="${escapeAttribute(team.logo || "")}"
-          onerror="this.style.display='none'"
-        >
-
-        <div class="slot-info">
-
-          <div class="slot-name">
-            ${escapeHTML(team.name)}
-          </div>
-
-          <div class="slot-handler">
-            ${escapeHTML(team.handler)}
-          </div>
-
-        </div>
-
-      `;
-
-      if (currentUser && currentUser.uid === ADMIN_UID) {
-
-        const removeButton = document.createElement("button");
-
-        removeButton.textContent = "REMOVE";
-
-        removeButton.style.width = "auto";
-
-        removeButton.style.margin = "0";
-
-        removeButton.onclick = () => removeTeam(i);
-
-        slot.appendChild(removeButton);
-
-      }
-
-    } else {
-
-      slot.innerHTML = `
-
-        <div class="slot-number">${i}</div>
-
-        <div class="slot-info">
-
-          <div class="slot-name open">
-            OPEN SLOT
-          </div>
-
-          <div class="slot-handler">
-            Available for registration
-          </div>
-
-        </div>
-
-      `;
-
-    }
-
-    container.appendChild(slot);
-
-  }
-
-}
-
-
-/* =========================
-   SLOT SELECTOR
-========================= */
-
-function updateSlotSelector() {
-
-  const select = document.getElementById("slotSelect");
-
-  select.innerHTML =
-    `<option value="">Choose an open slot</option>`;
-
-  for (let i = 1; i <= 25; i++) {
-
-    if (!slotsData[i]) {
-
-      const option = document.createElement("option");
-
-      option.value = i;
-
-      option.textContent = `SLOT ${i} — OPEN`;
-
-      select.appendChild(option);
-
-    }
-
-  }
-
-}
-
-
-/* =========================
-   REGISTER TEAM
+LOGOUT
 ========================= */
 
 document
-  .getElementById("registrationForm")
-  .addEventListener("submit", async event => {
+.getElementById("logout")
+.addEventListener(
+"click",
+async()=>{
 
-    event.preventDefault();
+try{
 
-    if (!currentUser) {
+await signOut(auth);
 
-      showStatus(
-        "Please wait for Firebase to connect.",
-        true
-      );
+location.reload();
 
-      return;
+}catch(error){
 
-    }
+console.error(error);
 
-    const name =
-      document.getElementById("teamName").value.trim();
+}
 
-    const handler =
-      document.getElementById("handler").value.trim();
-
-    const discord =
-      document.getElementById("discord").value.trim();
-
-    const logo =
-      document.getElementById("logo").value.trim();
-
-    const slot =
-      document.getElementById("slotSelect").value;
-
-
-    if (!slot) {
-
-      showStatus(
-        "Please select an open slot.",
-        true
-      );
-
-      return;
-
-    }
-
-
-    if (slotsData[slot]) {
-
-      showStatus(
-        "That slot has already been taken.",
-        true
-      );
-
-      return;
-
-    }
-
-
-    const teamData = {
-
-      name,
-      handler,
-      discord,
-      logo,
-
-      registeredAt: Date.now(),
-
-      registeredBy: currentUser.uid
-
-    };
-
-
-    try {
-
-      await set(
-        ref(db, `novex/slots/${slot}`),
-        teamData
-      );
-
-
-      showStatus(
-        `SUCCESS! ${name} registered in SLOT ${slot}.`
-      );
-
-
-      document
-        .getElementById("registrationForm")
-        .reset();
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showStatus(
-        "Registration failed: " + error.message,
-        true
-      );
-
-    }
-
-  });
+});
 
 
 /* =========================
-   ADMIN REMOVE
+HELPERS
 ========================= */
 
-async function removeTeam(slot) {
+function escapeHTML(value){
 
-  if (!currentUser || currentUser.uid !== ADMIN_UID) {
+return String(value)
 
-    return;
+.replaceAll("&","&amp;")
 
-  }
+.replaceAll("<","&lt;")
 
-  if (!confirm(`Remove team from SLOT ${slot}?`)) {
+.replaceAll(">","&gt;")
 
-    return;
+.replaceAll('"',"&quot;")
 
-  }
-
-  await remove(
-    ref(db, `novex/slots/${slot}`)
-  );
+.replaceAll("'","&#039;");
 
 }
 
 
-/* =========================
-   ADMIN CLEAR ALL
-========================= */
+function safe(value){
 
-document
-  .getElementById("clearAll")
-  .addEventListener("click", async () => {
-
-    if (!currentUser || currentUser.uid !== ADMIN_UID) {
-
-      return;
-
-    }
-
-    if (!confirm("CLEAR ALL 25 SLOTS?")) {
-
-      return;
-
-    }
-
-    await remove(slotsRef);
-
-  });
-
-
-/* =========================
-   SECURITY HELPERS
-========================= */
-
-function escapeHTML(value) {
-
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+return escapeHTML(value||"");
 
 }
 
 
-function escapeAttribute(value) {
+function showStatus(
+message,
+error=false
+){
 
-  return escapeHTML(value);
+const el=
+document.getElementById("status");
+
+el.textContent=message;
+
+el.style.display="block";
+
+el.style.background=
+error
+?"rgba(255,50,50,.15)"
+:"rgba(170,70,255,.15)";
 
 }
 
+
+function showLoginStatus(
+message,
+error=false
+){
+
+const el=
+document.getElementById("loginStatus");
+
+el.textContent=message;
+
+el.style.display="block";
+
+el.style.background=
+error
+?"rgba(255,50,50,.15)"
+:"rgba(170,70,255,.15)";
+
+}
 
 </script>
 
