@@ -2,536 +2,545 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NOVEX | CODM Esports</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOVEX | CODM Scrimmage</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  scroll-behavior:smooth;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
 }
 
 :root{
-  --bg:#05040a;
-  --panel:#0c0915;
-  --panel2:#110d1d;
-  --purple:#8b3dff;
-  --purple2:#bd7aff;
-  --cyan:#42dfff;
-  --text:#fff;
-  --muted:#8e8999;
-  --line:rgba(157,90,255,.22);
+    --bg:#05030a;
+    --panel:#0d0916;
+    --panel2:#120d1d;
+    --purple:#8d3dff;
+    --purple2:#bd7aff;
+    --cyan:#42ddff;
+    --green:#43e89b;
+    --red:#ff4265;
+    --text:#fff;
+    --muted:#918a9c;
+    --line:rgba(145,65,255,.25);
 }
 
 body{
-  font-family:Orbitron,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
+    background:
+        radial-gradient(circle at 15% 15%,rgba(125,45,255,.20),transparent 30%),
+        radial-gradient(circle at 85% 75%,rgba(0,200,255,.12),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    font-family:'Orbitron',Arial,sans-serif;
+    overflow-x:hidden;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  background:
-    radial-gradient(circle at 15% 20%,rgba(123,45,255,.2),transparent 30%),
-    radial-gradient(circle at 85% 75%,rgba(0,210,255,.13),transparent 28%);
-}
-
-body:after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  opacity:.1;
-  background-image:
-    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
-  background-size:45px 45px;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+    opacity:.08;
+    background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+    background-size:45px 45px;
 }
 
 /* NAV */
 
 nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:72px;
-  z-index:999;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 6%;
-  background:rgba(5,4,10,.82);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:72px;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(5,3,10,.85);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--line);
 }
 
 .logo{
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:5px;
-  animation:logoGlow 2s infinite alternate;
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:5px;
+    animation:logoGlow 2s infinite alternate;
 }
 
 .logo span{
-  color:var(--purple2);
+    color:var(--purple2);
 }
 
 @keyframes logoGlow{
-  from{text-shadow:0 0 5px var(--purple);}
-  to{text-shadow:0 0 12px var(--purple),0 0 35px var(--purple);}
+    from{
+        text-shadow:0 0 5px var(--purple);
+    }
+    to{
+        text-shadow:
+            0 0 12px var(--purple),
+            0 0 35px var(--purple);
+    }
 }
 
 .navlinks{
-  display:flex;
-  gap:25px;
-  list-style:none;
+    display:flex;
+    list-style:none;
+    gap:25px;
 }
 
 .navlinks a{
-  color:#aaa;
-  text-decoration:none;
-  font-size:10px;
-  font-weight:700;
-  transition:.3s;
+    color:#aaa;
+    text-decoration:none;
+    font-size:10px;
+    font-weight:700;
+    transition:.3s;
 }
 
 .navlinks a:hover{
-  color:white;
-  text-shadow:0 0 10px var(--purple);
+    color:white;
+    text-shadow:0 0 10px var(--purple);
 }
 
 .menu{
-  display:none;
-  font-size:25px;
-  cursor:pointer;
+    display:none;
+    font-size:25px;
+    cursor:pointer;
 }
 
 /* HERO */
 
 .hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:110px 20px 70px;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 20px 70px;
 }
 
 .hero-small{
-  color:var(--purple2);
-  letter-spacing:6px;
-  font-size:11px;
-  margin-bottom:18px;
+    color:var(--purple2);
+    font-size:10px;
+    letter-spacing:6px;
+    margin-bottom:20px;
 }
 
 .hero h1{
-  font-size:clamp(65px,15vw,160px);
-  line-height:.85;
-  letter-spacing:12px;
-  font-weight:900;
-  background:linear-gradient(90deg,#fff,#a65cff,#5eeaff,#fff);
-  background-size:300%;
-  -webkit-background-clip:text;
-  color:transparent;
-  animation:gradient 5s linear infinite;
+    font-size:clamp(65px,15vw,160px);
+    line-height:.85;
+    letter-spacing:12px;
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #a65cff,
+            #58eaff,
+            #fff
+        );
+
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+
+    animation:gradient 5s linear infinite;
 }
 
 @keyframes gradient{
-  0%{background-position:0%}
-  100%{background-position:300%}
+    from{
+        background-position:0%;
+    }
+
+    to{
+        background-position:300%;
+    }
 }
 
 .hero p{
-  max-width:650px;
-  margin:30px auto;
-  color:var(--muted);
-  font-size:12px;
-  line-height:2;
+    max-width:650px;
+    margin:30px auto;
+    color:var(--muted);
+    font-size:12px;
+    line-height:2;
 }
 
 .buttons{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
 .btn{
-  border:1px solid var(--purple);
-  background:rgba(139,61,255,.1);
-  color:white;
-  padding:14px 23px;
-  cursor:pointer;
-  font-family:inherit;
-  font-size:10px;
-  font-weight:800;
-  text-decoration:none;
-  transition:.3s;
+    border:1px solid var(--purple);
+    background:rgba(141,61,255,.10);
+    color:white;
+    padding:14px 24px;
+    font-family:inherit;
+    font-size:10px;
+    font-weight:800;
+    cursor:pointer;
+    text-decoration:none;
+    transition:.3s;
 }
 
 .btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 0 25px rgba(139,61,255,.4);
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(141,61,255,.45);
 }
 
 .btn.primary{
-  background:linear-gradient(90deg,#7025ff,#a34cff);
+    background:linear-gradient(90deg,#7025ff,#a64cff);
 }
 
 /* SECTIONS */
 
 section{
-  padding:90px 6%;
+    padding:90px 6%;
 }
 
 .title{
-  text-align:center;
-  margin-bottom:45px;
+    text-align:center;
+    margin-bottom:45px;
 }
 
 .title small{
-  color:var(--purple2);
-  font-size:9px;
-  letter-spacing:4px;
+    color:var(--purple2);
+    font-size:9px;
+    letter-spacing:4px;
 }
 
 .title h2{
-  margin-top:10px;
-  font-size:30px;
-  letter-spacing:3px;
+    margin-top:10px;
+    font-size:30px;
+    letter-spacing:3px;
 }
 
-/* SCRIM INFO */
+/* SCRIM */
 
 .scrim{
-  max-width:1100px;
-  margin:auto;
-  border:1px solid var(--line);
-  background:linear-gradient(135deg,rgba(120,40,255,.1),rgba(0,0,0,.3));
-  padding:30px;
+    max-width:1100px;
+    margin:auto;
+    padding:30px;
+    border:1px solid var(--line);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(125,40,255,.12),
+            rgba(0,0,0,.3)
+        );
 }
 
 .scrim-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  margin-bottom:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:25px;
 }
 
 .scrim-top h3{
-  font-size:20px;
+    font-size:20px;
 }
 
 .status{
-  border:1px solid #45e99b;
-  color:#45e99b;
-  padding:8px 12px;
-  font-size:9px;
+    padding:8px 12px;
+    border:1px solid var(--green);
+    color:var(--green);
+    font-size:9px;
 }
 
 .info-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
 }
 
 .info{
-  padding:18px;
-  background:rgba(0,0,0,.3);
-  border-left:2px solid var(--purple);
+    padding:18px;
+    background:rgba(0,0,0,.3);
+    border-left:2px solid var(--purple);
 }
 
 .info small{
-  display:block;
-  color:#666;
-  font-size:8px;
-  margin-bottom:7px;
+    display:block;
+    color:#666;
+    font-size:8px;
+    margin-bottom:7px;
 }
 
 .info strong{
-  font-size:12px;
+    font-size:12px;
 }
 
 /* SLOTS */
 
 .slots{
-  max-width:1100px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
 }
 
 .slot{
-  min-height:110px;
-  padding:15px;
-  border:1px solid rgba(255,255,255,.07);
-  background:var(--panel);
-  position:relative;
+    min-height:125px;
+    padding:15px;
+    background:var(--panel);
+    border:1px solid rgba(255,255,255,.07);
+    position:relative;
+    transition:.3s;
 }
 
-.slot-number{
-  color:var(--purple2);
-  font-size:9px;
-}
-
-.slot-team{
-  margin-top:12px;
-  font-size:10px;
-  font-weight:800;
-}
-
-.slot-logo{
-  width:35px;
-  height:35px;
-  object-fit:cover;
-  border-radius:50%;
-  margin-top:10px;
-  border:1px solid var(--purple);
+.slot:hover{
+    transform:translateY(-3px);
+    border-color:var(--purple);
 }
 
 .slot.open{
-  border-color:rgba(139,61,255,.35);
+    border-color:rgba(141,61,255,.30);
 }
 
-.open-text{
-  color:#555;
-  margin-top:25px;
-  font-size:9px;
+.slot-number{
+    color:var(--purple2);
+    font-size:9px;
+    font-weight:800;
 }
 
-/* FORM */
+.slot-logo{
+    display:block;
+    width:42px;
+    height:42px;
+    margin-top:12px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid var(--purple);
+}
+
+.slot-team{
+    margin-top:10px;
+    font-size:10px;
+    font-weight:800;
+    word-break:break-word;
+}
+
+.open-slot{
+    margin-top:30px;
+    color:#4f4a58;
+    font-size:9px;
+}
+
+/* REGISTRATION */
 
 .form-box{
-  max-width:700px;
-  margin:auto;
-  padding:30px;
-  background:var(--panel);
-  border:1px solid var(--line);
-}
-
-input,select{
-  width:100%;
-  padding:14px;
-  margin-bottom:14px;
-  background:#08070d;
-  color:white;
-  border:1px solid #282031;
-  outline:none;
-  font-family:inherit;
-  font-size:10px;
-}
-
-input:focus,select:focus{
-  border-color:var(--purple);
+    max-width:700px;
+    margin:auto;
+    padding:30px;
+    background:var(--panel);
+    border:1px solid var(--line);
 }
 
 .form-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-.form-message{
-  margin-top:15px;
-  color:#61ffa8;
-  font-size:10px;
-  display:none;
+input,
+select{
+    width:100%;
+    padding:14px;
+    margin-bottom:14px;
+    background:#07060c;
+    color:white;
+    border:1px solid #2a2235;
+    outline:none;
+    font-family:inherit;
+    font-size:10px;
 }
 
-/* LEADERBOARD */
-
-.leaderboard{
-  max-width:900px;
-  margin:auto;
+input:focus,
+select:focus{
+    border-color:var(--purple);
 }
 
-.lb{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  padding:16px 20px;
-  margin-bottom:8px;
-  background:var(--panel);
-  border:1px solid rgba(255,255,255,.06);
+.notice{
+    color:#777;
+    font-size:9px;
+    line-height:1.8;
+    margin-bottom:18px;
 }
 
-.lb-rank{
-  width:35px;
-  font-size:17px;
-  font-weight:900;
-  color:var(--purple2);
+.success{
+    display:none;
+    color:var(--green);
+    font-size:10px;
+    margin-top:15px;
 }
 
-.lb-logo{
-  width:42px;
-  height:42px;
-  object-fit:cover;
-  border-radius:50%;
-  border:1px solid var(--purple);
-}
-
-.lb-name{
-  flex:1;
-  font-size:11px;
-  font-weight:800;
-}
-
-.lb-points{
-  font-size:18px;
-  color:var(--purple2);
+.error{
+    display:none;
+    color:var(--red);
+    font-size:10px;
+    margin-top:15px;
 }
 
 /* ADMIN */
 
 #admin{
-  display:none;
+    display:none;
 }
 
-.admin-panel{
-  max-width:1100px;
-  margin:auto;
+.admin-box{
+    max-width:1100px;
+    margin:auto;
 }
 
 .admin-card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  padding:25px;
-  margin-bottom:20px;
+    padding:25px;
+    margin-bottom:20px;
+    background:var(--panel);
+    border:1px solid var(--line);
 }
 
 .admin-card h3{
-  font-size:15px;
-  margin-bottom:20px;
+    font-size:14px;
+    margin-bottom:20px;
 }
 
-.admin-team{
-  display:grid;
-  grid-template-columns:50px 1fr 100px 120px 80px;
-  gap:10px;
-  align-items:center;
-  margin-bottom:8px;
+.admin-slot{
+    display:grid;
+    grid-template-columns:60px 1fr 1fr 100px;
+    gap:10px;
+    align-items:center;
+    padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
 }
 
-.admin-team input{
-  margin:0;
+.admin-slot input{
+    margin:0;
 }
 
-.delete{
-  border:1px solid #ff4668;
-  color:#ff4668;
-  background:transparent;
-  padding:10px;
-  cursor:pointer;
+.admin-button{
+    border:1px solid var(--red);
+    background:transparent;
+    color:var(--red);
+    padding:10px;
+    font-family:inherit;
+    font-size:9px;
+    cursor:pointer;
 }
 
-.save{
-  border:1px solid #45e99b;
-  color:#45e99b;
-  background:transparent;
-  padding:10px;
-  cursor:pointer;
-  font-family:inherit;
-  font-size:9px;
+.save-button{
+    border:1px solid var(--green);
+    background:transparent;
+    color:var(--green);
+    padding:12px 20px;
+    font-family:inherit;
+    font-size:9px;
+    cursor:pointer;
 }
 
 /* FOOTER */
 
 footer{
-  text-align:center;
-  padding:60px 20px;
-  border-top:1px solid var(--line);
+    padding:60px 20px;
+    text-align:center;
+    border-top:1px solid var(--line);
 }
 
 .footer-logo{
-  font-size:30px;
-  font-weight:900;
-  letter-spacing:6px;
+    font-size:30px;
+    font-weight:900;
+    letter-spacing:6px;
 }
 
 footer p{
-  color:#555;
-  font-size:9px;
-  margin-top:12px;
+    color:#555;
+    font-size:9px;
+    margin-top:12px;
 }
 
 /* MOBILE */
 
 @media(max-width:800px){
 
-  nav{
-    padding:0 20px;
-  }
+    nav{
+        padding:0 20px;
+    }
 
-  .navlinks{
-    display:none;
-    position:absolute;
-    top:72px;
-    left:0;
-    width:100%;
-    flex-direction:column;
-    background:#08060e;
-    padding:25px;
-    text-align:center;
-  }
+    .navlinks{
+        display:none;
+        position:absolute;
+        top:72px;
+        left:0;
+        width:100%;
+        padding:25px;
+        flex-direction:column;
+        text-align:center;
+        background:#08060e;
+        border-bottom:1px solid var(--line);
+    }
 
-  .navlinks.show{
-    display:flex;
-  }
+    .navlinks.show{
+        display:flex;
+    }
 
-  .menu{
-    display:block;
-  }
+    .menu{
+        display:block;
+    }
 
-  section{
-    padding:70px 18px;
-  }
+    section{
+        padding:70px 18px;
+    }
 
-  .info-grid{
-    grid-template-columns:1fr 1fr;
-  }
+    .info-grid{
+        grid-template-columns:1fr 1fr;
+    }
 
-  .slots{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .slots{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-  .form-row{
-    grid-template-columns:1fr;
-  }
+    .form-row{
+        grid-template-columns:1fr;
+    }
 
-  .admin-team{
-    grid-template-columns:1fr;
-  }
+    .admin-slot{
+        grid-template-columns:1fr;
+    }
 }
 
 @media(max-width:430px){
 
-  .hero h1{
-    font-size:65px;
-    letter-spacing:5px;
-  }
+    .hero h1{
+        font-size:65px;
+        letter-spacing:5px;
+    }
 
-  .info-grid{
-    grid-template-columns:1fr;
-  }
+    .info-grid{
+        grid-template-columns:1fr;
+    }
 
-  .slots{
-    grid-template-columns:1fr 1fr;
-  }
+    .slots{
+        grid-template-columns:1fr 1fr;
+    }
 
-  .scrim{
-    padding:20px;
-  }
+    .scrim{
+        padding:20px;
+    }
 }
 </style>
 </head>
@@ -539,741 +548,1174 @@ footer p{
 <body>
 
 <!-- NAVIGATION -->
+
 <nav>
-  <div class="logo">NOV<span>E</span>X</div>
 
-  <ul class="navlinks" id="navlinks">
-    <li><a href="#home">HOME</a></li>
-    <li><a href="#scrim">SCRIM</a></li>
-    <li><a href="#slots">SLOTS</a></li>
-    <li><a href="#register">REGISTER</a></li>
-    <li><a href="#leaderboard">LEADERBOARD</a></li>
-    <li><a href="#admin">ADMIN</a></li>
-  </ul>
+    <div class="logo">
+        NOV<span>E</span>X
+    </div>
 
-  <div class="menu" onclick="toggleMenu()">☰</div>
+    <ul class="navlinks" id="navlinks">
+
+        <li>
+            <a href="#home">HOME</a>
+        </li>
+
+        <li>
+            <a href="#scrim">SCRIM</a>
+        </li>
+
+        <li>
+            <a href="#slots">SLOTS</a>
+        </li>
+
+        <li>
+            <a href="#register">REGISTER</a>
+        </li>
+
+        <li>
+            <a href="#admin" id="adminLink">ADMIN</a>
+        </li>
+
+    </ul>
+
+    <div class="menu" onclick="toggleMenu()">
+        ☰
+    </div>
+
 </nav>
 
 
 <!-- HERO -->
+
 <section class="hero" id="home">
-  <div>
-    <div class="hero-small">CALL OF DUTY MOBILE • ESPORTS</div>
 
-    <h1>NOVEX</h1>
+    <div>
 
-    <p>
-      ONE SQUAD. ONE FATE.<br>
-      Welcome to NOVEX — competitive CODM scrimmages,
-      rankings and team events.
-    </p>
+        <div class="hero-small">
+            CALL OF DUTY MOBILE • ESPORTS
+        </div>
 
-    <div class="buttons">
-      <a class="btn primary" href="#register">REGISTER TEAM</a>
-      <a class="btn" href="#leaderboard">VIEW RANKINGS</a>
+        <h1>NOVEX</h1>
+
+        <p>
+            ONE SQUAD. ONE FATE.<br>
+            Welcome to NOVEX — a competitive CODM
+            scrimmage community built for teams.
+        </p>
+
+        <div class="buttons">
+
+            <a
+                class="btn primary"
+                href="#register">
+                REGISTER TEAM
+            </a>
+
+            <a
+                class="btn"
+                href="#slots">
+                VIEW SLOTS
+            </a>
+
+        </div>
+
     </div>
-  </div>
+
 </section>
 
 
 <!-- SCRIM -->
+
 <section id="scrim">
 
-  <div class="title">
-    <small>NOVEX COMPETITIVE</small>
-    <h2>UPCOMING SCRIM</h2>
-  </div>
+    <div class="title">
 
-  <div class="scrim">
+        <small>
+            NOVEX COMPETITIVE
+        </small>
 
-    <div class="scrim-top">
-      <h3>NOVEX CORE BR SCRIMMAGE</h3>
-      <div class="status">REGISTRATION OPEN</div>
-    </div>
-
-    <div class="info-grid">
-
-      <div class="info">
-        <small>DATE</small>
-        <strong id="scrimDate">TBA</strong>
-      </div>
-
-      <div class="info">
-        <small>OPEN ROOM</small>
-        <strong>8:00 PM</strong>
-      </div>
-
-      <div class="info">
-        <small>ROOM START</small>
-        <strong>8:20 PM</strong>
-      </div>
-
-      <div class="info">
-        <small>MAPS</small>
-        <strong>ISO • BO • ISO</strong>
-      </div>
+        <h2>
+            UPCOMING SCRIM
+        </h2>
 
     </div>
 
-  </div>
+
+    <div class="scrim">
+
+        <div class="scrim-top">
+
+            <h3>
+                NOVEX CORE BR SCRIMMAGE
+            </h3>
+
+            <div class="status">
+                REGISTRATION OPEN
+            </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info">
+
+                <small>
+                    DATE
+                </small>
+
+                <strong id="scrimDate">
+                    TBA
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <small>
+                    OPEN ROOM
+                </small>
+
+                <strong>
+                    8:00 PM
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <small>
+                    ROOM START
+                </small>
+
+                <strong>
+                    8:20 PM
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <small>
+                    MAPS
+                </small>
+
+                <strong>
+                    ISO • BO • ISO
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
 
-<!-- SLOTS -->
+<!-- 25 SLOTS -->
+
 <section id="slots">
 
-  <div class="title">
-    <small>25 TEAM SYSTEM</small>
-    <h2>SCRIM SLOTS</h2>
-  </div>
+    <div class="title">
 
-  <div class="slots" id="slotContainer"></div>
+        <small>
+            REAL-TIME TEAM SLOTS
+        </small>
+
+        <h2>
+            25 TEAM SLOTS
+        </h2>
+
+    </div>
+
+
+    <div
+        class="slots"
+        id="slotContainer">
+
+    </div>
 
 </section>
 
 
 <!-- REGISTRATION -->
+
 <section id="register">
 
-  <div class="title">
-    <small>TEAM REGISTRATION</small>
-    <h2>REGISTER YOUR TEAM</h2>
-  </div>
+    <div class="title">
 
-  <div class="form-box">
+        <small>
+            TEAM REGISTRATION
+        </small>
 
-    <form id="registrationForm">
+        <h2>
+            REGISTER YOUR TEAM
+        </h2>
 
-      <div class="form-row">
-        <input
-          id="teamName"
-          type="text"
-          placeholder="TEAM NAME"
-          required>
-
-        <input
-          id="handler"
-          type="text"
-          placeholder="TEAM HANDLER / CAPTAIN"
-          required>
-      </div>
-
-      <div class="form-row">
-        <input
-          id="discord"
-          type="text"
-          placeholder="DISCORD / CONTACT"
-          required>
-
-        <select id="requestedSlot">
-          <option value="">AUTO ASSIGN SLOT</option>
-          <option value="1">SLOT 1</option>
-          <option value="2">SLOT 2</option>
-          <option value="3">SLOT 3</option>
-          <option value="4">SLOT 4</option>
-          <option value="5">SLOT 5</option>
-          <option value="6">SLOT 6</option>
-          <option value="7">SLOT 7</option>
-          <option value="8">SLOT 8</option>
-          <option value="9">SLOT 9</option>
-          <option value="10">SLOT 10</option>
-          <option value="11">SLOT 11</option>
-          <option value="12">SLOT 12</option>
-          <option value="13">SLOT 13</option>
-          <option value="14">SLOT 14</option>
-          <option value="15">SLOT 15</option>
-          <option value="16">SLOT 16</option>
-          <option value="17">SLOT 17</option>
-          <option value="18">SLOT 18</option>
-          <option value="19">SLOT 19</option>
-          <option value="20">SLOT 20</option>
-          <option value="21">SLOT 21</option>
-          <option value="22">SLOT 22</option>
-          <option value="23">SLOT 23</option>
-          <option value="24">SLOT 24</option>
-          <option value="25">SLOT 25</option>
-        </select>
-      </div>
-
-      <input
-        id="logo"
-        type="url"
-        placeholder="TEAM LOGO IMAGE URL (OPTIONAL)">
-
-      <button class="btn primary" type="submit">
-        SUBMIT REGISTRATION
-      </button>
-
-      <div class="form-message" id="formMessage">
-        TEAM REGISTERED SUCCESSFULLY.
-      </div>
-
-    </form>
-
-  </div>
-</section>
+    </div>
 
 
-<!-- LEADERBOARD -->
-<section id="leaderboard">
+    <div class="form-box">
 
-  <div class="title">
-    <small>NOVEX RANKINGS</small>
-    <h2>LEADERBOARD</h2>
-  </div>
+        <div class="notice">
 
-  <div class="leaderboard" id="leaderboardContainer"></div>
+            Choose an open slot and enter your team information.
+            Once submitted, the registration is stored in the
+            NOVEX database and the occupied slot can be seen
+            by other visitors.
+
+        </div>
+
+
+        <form id="registrationForm">
+
+            <div class="form-row">
+
+                <input
+                    id="teamName"
+                    type="text"
+                    maxlength="30"
+                    placeholder="TEAM NAME"
+                    required>
+
+                <input
+                    id="handler"
+                    type="text"
+                    maxlength="30"
+                    placeholder="TEAM HANDLER / CAPTAIN"
+                    required>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <input
+                    id="discord"
+                    type="text"
+                    maxlength="50"
+                    placeholder="DISCORD / CONTACT"
+                    required>
+
+                <select
+                    id="requestedSlot"
+                    required>
+
+                    <option value="">
+                        SELECT SLOT
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <input
+                id="logo"
+                type="url"
+                maxlength="500"
+                placeholder="TEAM LOGO IMAGE URL (OPTIONAL)">
+
+
+            <button
+                class="btn primary"
+                type="submit">
+
+                REGISTER TEAM
+
+            </button>
+
+
+            <div
+                class="success"
+                id="successMessage">
+
+                ✓ TEAM REGISTERED SUCCESSFULLY.
+
+            </div>
+
+
+            <div
+                class="error"
+                id="errorMessage">
+
+            </div>
+
+        </form>
+
+    </div>
 
 </section>
 
 
 <!-- ADMIN -->
+
 <section id="admin">
 
-  <div class="title">
-    <small>PRIVATE CONTROL PANEL</small>
-    <h2>ADMIN PANEL</h2>
-  </div>
+    <div class="title">
 
-  <div class="admin-panel">
+        <small>
+            NOVEX CONTROL CENTER
+        </small>
 
-    <div class="admin-card">
-
-      <h3>SCRIM SETTINGS</h3>
-
-      <input
-        id="adminDate"
-        type="text"
-        placeholder="SCRIM DATE">
-
-      <button class="save" onclick="saveSettings()">
-        SAVE SETTINGS
-      </button>
+        <h2>
+            ADMIN PANEL
+        </h2>
 
     </div>
 
 
-    <div class="admin-card">
+    <div class="admin-box">
 
-      <h3>LEADERBOARD MANAGEMENT</h3>
+        <div class="admin-card">
 
-      <div id="adminTeams"></div>
+            <h3>
+                SCRIM DATE
+            </h3>
 
-      <button class="btn primary" onclick="addLeaderboardTeam()">
-        + ADD TEAM
-      </button>
+            <input
+                id="adminDate"
+                type="text"
+                placeholder="Example: September 30, 2026">
 
-      <button class="save" onclick="saveLeaderboard()">
-        SAVE LEADERBOARD
-      </button>
+            <button
+                class="save-button"
+                onclick="saveScrimDate()">
+
+                SAVE DATE
+
+            </button>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>
+                SLOT MANAGEMENT
+            </h3>
+
+            <div id="adminSlots"></div>
+
+        </div>
 
     </div>
-
-  </div>
 
 </section>
 
 
 <footer>
-  <div class="footer-logo">NOVEX</div>
-  <p>CALL OF DUTY MOBILE • ESPORTS COMMUNITY</p>
-  <p>© 2026 NOVEX. ALL RIGHTS RESERVED.</p>
+
+    <div class="footer-logo">
+        NOVEX
+    </div>
+
+    <p>
+        CALL OF DUTY MOBILE • ESPORTS COMMUNITY
+    </p>
+
+    <p>
+        © 2026 NOVEX
+    </p>
+
 </footer>
 
 
-<script>
-
-/* =========================
-   NOVEX DATA
-========================= */
-
-const defaultTeams = [
-  {
-    name:"AERI",
-    points:135,
-    logo:""
-  },
-  {
-    name:"NXS MPZ",
-    points:120,
-    logo:""
-  },
-  {
-    name:"DKH",
-    points:110,
-    logo:""
-  },
-  {
-    name:"DB",
-    points:50,
-    logo:""
-  },
-  {
-    name:"RP",
-    points:35,
-    logo:""
-  }
-];
-
-let teams =
-  JSON.parse(localStorage.getItem("novexTeams"))
-  || defaultTeams;
-
-let slots =
-  JSON.parse(localStorage.getItem("novexSlots"))
-  || Array(25).fill(null);
-
-let settings =
-  JSON.parse(localStorage.getItem("novexSettings"))
-  || {
-    date:"TBA"
-  };
+<!-- FIREBASE -->
 
+<script type="module">
 
-/* =========================
-   NAV
-========================= */
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-function toggleMenu(){
-  document
-    .getElementById("navlinks")
-    .classList.toggle("show");
-}
-
+import {
+    getAuth,
+    signInAnonymously,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-/* =========================
-   SCRIM SETTINGS
-========================= */
+import {
+    getDatabase,
+    ref,
+    onValue,
+    set,
+    update,
+    remove,
+    push
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
-function renderSettings(){
 
-  document.getElementById("scrimDate")
-    .textContent = settings.date;
+/*
+==================================================
+ FIREBASE CONFIGURATION
+==================================================
 
-  document.getElementById("adminDate")
-    .value = settings.date;
-}
+ REPLACE THESE VALUES WITH YOUR FIREBASE CONFIG.
 
+ Firebase Console:
+ Project Settings
+ → Your apps
+ → Web app
+ → SDK setup and configuration
+==================================================
+*/
 
-/* =========================
-   SLOTS
-========================= */
+const firebaseConfig = {
 
-function renderSlots(){
+    apiKey:
+        "YOUR_API_KEY",
 
-  const container =
-    document.getElementById("slotContainer");
+    authDomain:
+        "YOUR_PROJECT.firebaseapp.com",
 
-  container.innerHTML = "";
+    databaseURL:
+        "https://YOUR_DATABASE_URL",
 
-  for(let i=0;i<25;i++){
+    projectId:
+        "YOUR_PROJECT_ID",
 
-    const team = slots[i];
+    storageBucket:
+        "YOUR_PROJECT.firebasestorage.app",
 
-    const div =
-      document.createElement("div");
+    messagingSenderId:
+        "YOUR_MESSAGING_SENDER_ID",
 
-    div.className =
-      "slot " + (team ? "" : "open");
+    appId:
+        "YOUR_APP_ID"
 
-    if(team){
+};
 
-      div.innerHTML = `
-        <div class="slot-number">
-          SLOT ${i+1}
-        </div>
 
-        <img
-          class="slot-logo"
-          src="${team.logo || 'https://placehold.co/100x100/100020/ffffff?text=N'}">
+/* FIREBASE INITIALIZATION */
 
-        <div class="slot-team">
-          ${escapeHTML(team.name)}
-        </div>
-      `;
+const app =
+    initializeApp(firebaseConfig);
 
-    }else{
+const auth =
+    getAuth(app);
 
-      div.innerHTML = `
-        <div class="slot-number">
-          SLOT ${i+1}
-        </div>
+const db =
+    getDatabase(app);
 
-        <div class="open-text">
-          OPEN SLOT
-        </div>
-      `;
-    }
 
-    container.appendChild(div);
-  }
-}
+/*
+==================================================
+ ADMIN UID
 
+ AFTER YOU CREATE YOUR ADMIN ACCOUNT,
+ PUT YOUR FIREBASE AUTH UID HERE.
 
-/* =========================
-   REGISTRATION
-========================= */
+ DO NOT PUT YOUR PASSWORD HERE.
+==================================================
+*/
 
-document
-.getElementById("registrationForm")
-.addEventListener("submit",function(e){
+const ADMIN_UID =
+    "PUT_YOUR_ADMIN_UID_HERE";
 
-  e.preventDefault();
 
-  const name =
-    document.getElementById("teamName")
-    .value.trim();
+let currentUser = null;
 
-  const handler =
-    document.getElementById("handler")
-    .value.trim();
 
-  const discord =
-    document.getElementById("discord")
-    .value.trim();
+/*
+==================================================
+ AUTHENTICATION
+==================================================
+*/
 
-  const logo =
-    document.getElementById("logo")
-    .value.trim();
+signInAnonymously(auth)
+    .catch(error => {
 
-  const requested =
-    document.getElementById("requestedSlot")
-    .value;
+        console.error(error);
 
-  let slotIndex = -1;
+        showError(
+            "Firebase authentication failed. Check your Firebase setup."
+        );
 
-  if(requested){
-
-    const index =
-      Number(requested)-1;
-
-    if(!slots[index]){
-
-      slotIndex=index;
-
-    }else{
-
-      alert("That slot is already occupied.");
-      return;
-    }
-
-  }else{
-
-    slotIndex =
-      slots.findIndex(x => x === null);
-
-    if(slotIndex === -1){
-
-      alert("All 25 slots are full.");
-      return;
-    }
-  }
-
-  const newTeam = {
-    name:name,
-    handler:handler,
-    discord:discord,
-    logo:logo,
-    points:0
-  };
-
-  slots[slotIndex]=newTeam;
-
-  localStorage.setItem(
-    "novexSlots",
-    JSON.stringify(slots)
-  );
-
-  teams.push({
-    name:name,
-    points:0,
-    logo:logo
-  });
-
-  localStorage.setItem(
-    "novexTeams",
-    JSON.stringify(teams)
-  );
-
-  renderSlots();
-  renderLeaderboard();
-  renderAdmin();
-
-  document
-    .getElementById("formMessage")
-    .style.display="block";
-
-  this.reset();
-
-  setTimeout(()=>{
-    document
-      .getElementById("formMessage")
-      .style.display="none";
-  },4000);
-});
-
-
-/* =========================
-   LEADERBOARD
-========================= */
-
-function renderLeaderboard(){
-
-  const container =
-    document.getElementById("leaderboardContainer");
-
-  container.innerHTML="";
-
-  teams.sort(
-    (a,b)=>Number(b.points)-Number(a.points)
-  );
-
-  teams.forEach((team,index)=>{
-
-    const div =
-      document.createElement("div");
-
-    div.className="lb";
-
-    div.innerHTML=`
-
-      <div class="lb-rank">
-        ${String(index+1).padStart(2,"0")}
-      </div>
-
-      <img
-        class="lb-logo"
-        src="${team.logo || 'https://placehold.co/100x100/100020/ffffff?text=N'}">
-
-      <div class="lb-name">
-        ${escapeHTML(team.name)}
-      </div>
-
-      <div class="lb-points">
-        ${Number(team.points)}
-      </div>
-
-    `;
-
-    container.appendChild(div);
-  });
-}
-
-
-/* =========================
-   ADMIN PANEL
-========================= */
-
-function renderAdmin(){
-
-  const container =
-    document.getElementById("adminTeams");
-
-  container.innerHTML="";
-
-  teams.forEach((team,index)=>{
-
-    const row =
-      document.createElement("div");
-
-    row.className="admin-team";
-
-    row.innerHTML=`
-
-      <strong>#${index+1}</strong>
-
-      <input
-        class="admin-name"
-        value="${escapeAttribute(team.name)}"
-        placeholder="TEAM">
-
-      <input
-        class="admin-points"
-        type="number"
-        value="${Number(team.points)}"
-        placeholder="POINTS">
-
-      <input
-        class="admin-logo"
-        value="${escapeAttribute(team.logo || "")}"
-        placeholder="LOGO URL">
-
-      <button
-        class="delete"
-        onclick="deleteTeam(${index})">
-        DELETE
-      </button>
-
-    `;
-
-    container.appendChild(row);
-  });
-}
-
-
-function addLeaderboardTeam(){
-
-  teams.push({
-    name:"NEW TEAM",
-    points:0,
-    logo:""
-  });
-
-  renderAdmin();
-}
-
-
-function deleteTeam(index){
-
-  if(!confirm("Delete this team?")) return;
-
-  teams.splice(index,1);
-
-  localStorage.setItem(
-    "novexTeams",
-    JSON.stringify(teams)
-  );
-
-  renderAdmin();
-  renderLeaderboard();
-}
-
-
-function saveLeaderboard(){
-
-  const rows =
-    document.querySelectorAll(".admin-team");
-
-  const updated=[];
-
-  rows.forEach(row=>{
-
-    const name =
-      row.querySelector(".admin-name").value;
-
-    const points =
-      Number(
-        row.querySelector(".admin-points").value
-      ) || 0;
-
-    const logo =
-      row.querySelector(".admin-logo").value;
-
-    updated.push({
-      name:name,
-      points:points,
-      logo:logo
     });
 
-  });
 
-  teams=updated;
+onAuthStateChanged(
+    auth,
+    user => {
 
-  localStorage.setItem(
-    "novexTeams",
-    JSON.stringify(teams)
-  );
+        currentUser = user;
 
-  renderLeaderboard();
-  renderAdmin();
+        if(user){
 
-  alert("Leaderboard saved.");
+            loadDatabase();
+
+        }
+
+    }
+);
+
+
+/*
+==================================================
+ DATABASE LISTENER
+==================================================
+
+ onValue() listens for database changes.
+
+ When one person registers,
+ every connected visitor receives
+ the new slot data automatically.
+==================================================
+*/
+
+function loadDatabase(){
+
+    const slotsRef =
+        ref(db,"novex/slots");
+
+    onValue(
+        slotsRef,
+        snapshot => {
+
+            const data =
+                snapshot.val() || {};
+
+            renderSlots(data);
+            renderSlotSelector(data);
+            renderAdmin(data);
+
+        },
+        error => {
+
+            console.error(error);
+
+            showError(
+                "Could not read NOVEX slots. Check Firebase Database Rules."
+            );
+
+        }
+    );
+
+
+    const settingsRef =
+        ref(db,"novex/settings");
+
+    onValue(
+        settingsRef,
+        snapshot => {
+
+            const settings =
+                snapshot.val() || {};
+
+            document
+                .getElementById("scrimDate")
+                .textContent =
+                settings.date || "TBA";
+
+            document
+                .getElementById("adminDate")
+                .value =
+                settings.date || "";
+
+        }
+    );
+
 }
 
 
-function saveSettings(){
+/*
+==================================================
+ RENDER 25 SLOTS
+==================================================
+*/
 
-  settings.date =
-    document.getElementById("adminDate").value
-    || "TBA";
+function renderSlots(data){
 
-  localStorage.setItem(
-    "novexSettings",
-    JSON.stringify(settings)
-  );
+    const container =
+        document.getElementById("slotContainer");
 
-  renderSettings();
+    container.innerHTML = "";
 
-  alert("Scrim settings saved.");
+
+    for(let i=1;i<=25;i++){
+
+        const team =
+            data[i];
+
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "slot " + (!team ? "open" : "");
+
+
+        if(team){
+
+            const logo =
+                team.logo ||
+                "https://placehold.co/100x100/100020/ffffff?text=N";
+
+
+            div.innerHTML = `
+
+                <div class="slot-number">
+                    SLOT ${i}
+                </div>
+
+                <img
+                    class="slot-logo"
+                    src="${safeURL(logo)}"
+                    alt="Team logo">
+
+                <div class="slot-team">
+                    ${escapeHTML(team.name)}
+                </div>
+
+            `;
+
+        }else{
+
+            div.innerHTML = `
+
+                <div class="slot-number">
+                    SLOT ${i}
+                </div>
+
+                <div class="open-slot">
+                    OPEN SLOT
+                </div>
+
+            `;
+
+        }
+
+
+        container.appendChild(div);
+
+    }
+
 }
 
 
-/* =========================
-   SIMPLE ADMIN ACCESS
-========================= */
+/*
+==================================================
+ SLOT SELECTOR
+==================================================
+*/
 
-function adminLogin(){
+function renderSlotSelector(data){
 
-  const password =
-    prompt("NOVEX ADMIN PASSWORD:");
+    const select =
+        document.getElementById("requestedSlot");
 
-  /*
-    Change this password.
-    IMPORTANT:
-    This is only a basic client-side lock.
-    Do not use it for sensitive/private data.
-  */
+    const oldValue =
+        select.value;
 
-  if(password === "NOVEX2026"){
+    select.innerHTML = `
+        <option value="">
+            SELECT SLOT
+        </option>
+    `;
 
-    document.getElementById("admin").style.display="block";
 
-    document
-      .getElementById("admin")
-      .scrollIntoView();
+    for(let i=1;i<=25;i++){
 
-  }else{
+        if(!data[i]){
 
-    alert("ACCESS DENIED.");
+            const option =
+                document.createElement("option");
 
-  }
+            option.value = i;
+
+            option.textContent =
+                `SLOT ${i} — OPEN`;
+
+            select.appendChild(option);
+
+        }
+
+    }
+
+
+    if(
+        oldValue &&
+        !data[oldValue]
+    ){
+
+        select.value = oldValue;
+
+    }
+
 }
 
 
-/* =========================
-   ADMIN NAVIGATION
-========================= */
+/*
+==================================================
+ REGISTRATION
+==================================================
+*/
 
 document
-.querySelector('a[href="#admin"]')
-.addEventListener("click",function(e){
+    .getElementById("registrationForm")
+    .addEventListener(
+        "submit",
+        async event => {
 
-  e.preventDefault();
-
-  adminLogin();
-
-});
+            event.preventDefault();
 
 
-/* =========================
-   SECURITY HELPERS
-========================= */
+            if(!currentUser){
+
+                showError(
+                    "Connecting to NOVEX database. Try again in a moment."
+                );
+
+                return;
+
+            }
+
+
+            const teamName =
+                document
+                    .getElementById("teamName")
+                    .value
+                    .trim();
+
+
+            const handler =
+                document
+                    .getElementById("handler")
+                    .value
+                    .trim();
+
+
+            const discord =
+                document
+                    .getElementById("discord")
+                    .value
+                    .trim();
+
+
+            const slot =
+                document
+                    .getElementById("requestedSlot")
+                    .value;
+
+
+            const logo =
+                document
+                    .getElementById("logo")
+                    .value
+                    .trim();
+
+
+            if(!slot){
+
+                showError(
+                    "Please select an open slot."
+                );
+
+                return;
+
+            }
+
+
+            if(!teamName ||
+               !handler ||
+               !discord){
+
+                showError(
+                    "Please complete all required fields."
+                );
+
+                return;
+
+            }
+
+
+            const slotRef =
+                ref(
+                    db,
+                    "novex/slots/" + slot
+                );
+
+
+            try{
+
+                /*
+                 Re-read through a transaction would be
+                 preferable for high-traffic events.
+                 For this simple version, we check the
+                 current selector state and rely on rules.
+                */
+
+                const teamData = {
+
+                    name:teamName,
+
+                    handler:handler,
+
+                    discord:discord,
+
+                    logo:logo,
+
+                    registeredAt:
+                        Date.now(),
+
+                    registeredBy:
+                        currentUser.uid
+
+                };
+
+
+                await set(
+                    slotRef,
+                    teamData
+                );
+
+
+                showSuccess();
+
+                document
+                    .getElementById("registrationForm")
+                    .reset();
+
+
+            }catch(error){
+
+                console.error(error);
+
+                showError(
+                    "Registration failed. The slot may have just been taken."
+                );
+
+            }
+
+        }
+    );
+
+
+/*
+==================================================
+ ADMIN
+==================================================
+*/
+
+document
+    .getElementById("adminLink")
+    .addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+
+            if(
+                !currentUser ||
+                currentUser.uid !== ADMIN_UID
+            ){
+
+                alert(
+                    "NOVEX ADMIN ACCESS DENIED."
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById("admin")
+                .style.display = "block";
+
+
+            document
+                .getElementById("admin")
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+
+        }
+    );
+
+
+/*
+==================================================
+ ADMIN SLOT PANEL
+==================================================
+*/
+
+function renderAdmin(data){
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+    ){
+
+        return;
+
+    }
+
+
+    const container =
+        document.getElementById("adminSlots");
+
+    container.innerHTML = "";
+
+
+    for(let i=1;i<=25;i++){
+
+        const team =
+            data[i];
+
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "admin-slot";
+
+
+        if(team){
+
+            row.innerHTML = `
+
+                <strong>
+                    #${i}
+                </strong>
+
+                <input
+                    id="adminName${i}"
+                    value="${escapeAttribute(team.name || "")}"
+                    placeholder="TEAM NAME">
+
+                <input
+                    id="adminLogo${i}"
+                    value="${escapeAttribute(team.logo || "")}"
+                    placeholder="LOGO URL">
+
+                <button
+                    class="admin-button"
+                    data-slot="${i}">
+
+                    REMOVE
+
+                </button>
+
+            `;
+
+        }else{
+
+            row.innerHTML = `
+
+                <strong>
+                    #${i}
+                </strong>
+
+                <span style="color:#555;font-size:9px">
+                    OPEN SLOT
+                </span>
+
+            `;
+
+        }
+
+
+        container.appendChild(row);
+
+    }
+
+
+    document
+        .querySelectorAll(".admin-button")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const slot =
+                        button.dataset.slot;
+
+                    if(
+                        !confirm(
+                            `Remove team from Slot ${slot}?`
+                        )
+                    ){
+
+                        return;
+
+                    }
+
+
+                    await remove(
+                        ref(
+                            db,
+                            "novex/slots/" + slot
+                        )
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+
+/*
+==================================================
+ ADMIN DATE
+==================================================
+*/
+
+window.saveScrimDate =
+    async function(){
+
+        if(
+            !currentUser ||
+            currentUser.uid !== ADMIN_UID
+        ){
+
+            alert("ADMIN ACCESS DENIED.");
+
+            return;
+
+        }
+
+
+        const date =
+            document
+                .getElementById("adminDate")
+                .value
+                .trim();
+
+
+        await set(
+            ref(db,"novex/settings"),
+            {
+                date:date
+            }
+        );
+
+
+        alert(
+            "NOVEX scrim date updated."
+        );
+
+    };
+
+
+/*
+==================================================
+ SUCCESS / ERROR
+==================================================
+*/
+
+function showSuccess(){
+
+    const success =
+        document.getElementById("successMessage");
+
+    const error =
+        document.getElementById("errorMessage");
+
+
+    error.style.display =
+        "none";
+
+    success.style.display =
+        "block";
+
+
+    setTimeout(
+        () => {
+            success.style.display =
+                "none";
+        },
+        5000
+    );
+
+}
+
+
+function showError(message){
+
+    const error =
+        document.getElementById("errorMessage");
+
+
+    error.textContent =
+        "✕ " + message;
+
+    error.style.display =
+        "block";
+
+}
+
+
+/*
+==================================================
+ MOBILE MENU
+==================================================
+*/
+
+window.toggleMenu =
+    function(){
+
+        document
+            .getElementById("navlinks")
+            .classList.toggle("show");
+
+    };
+
+
+/*
+==================================================
+ SECURITY HELPERS
+==================================================
+*/
 
 function escapeHTML(value){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
 }
+
 
 function escapeAttribute(value){
-  return escapeHTML(value);
+
+    return escapeHTML(value);
+
 }
 
 
-/* =========================
-   START APP
-========================= */
+function safeURL(url){
 
-renderSettings();
-renderSlots();
-renderLeaderboard();
-renderAdmin();
+    const value =
+        String(url || "");
+
+    if(
+        value.startsWith("https://") ||
+        value.startsWith("http://")
+    ){
+
+        return escapeAttribute(value);
+
+    }
+
+    return "https://placehold.co/100x100/100020/ffffff?text=N";
+
+}
 
 </script>
 
 </body>
-            </html>
+  </html>
