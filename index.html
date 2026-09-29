@@ -220,6 +220,7 @@ button:disabled{
   background:#241039;
   color:#c78cff;
   font-weight:900;
+  flex-shrink:0;
 }
 
 .slot-info{
@@ -256,6 +257,7 @@ button:disabled{
   object-fit:cover;
   border-radius:9px;
   border:1px solid #713bb2;
+  flex-shrink:0;
 }
 
 .announcement{
@@ -286,12 +288,6 @@ button:disabled{
 
 .admin{
   display:none;
-}
-
-.admin-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
 }
 
 .admin-section{
@@ -326,6 +322,13 @@ button:disabled{
   background:#241b2a;
 }
 
+.connection{
+  text-align:center;
+  font-size:11px;
+  color:#8dffbd;
+  margin-top:8px;
+}
+
 footer{
   text-align:center;
   color:#634d70;
@@ -334,13 +337,13 @@ footer{
 }
 
 @media(max-width:700px){
+
   .logo{
     font-size:32px;
     letter-spacing:5px;
   }
 
-  .form-grid,
-  .admin-grid{
+  .form-grid{
     grid-template-columns:1fr;
   }
 
@@ -368,15 +371,17 @@ footer{
 
 <div class="container">
 
-<!-- INSTALL -->
 <button id="installBtn" class="install">
   📲 INSTALL NOVEX APP
 </button>
 
+
 <!-- TIMER -->
 <div class="card timer">
 
-  <div class="timer-label">NEXT SCRIMMAGE</div>
+  <div class="timer-label">
+    NEXT SCRIMMAGE
+  </div>
 
   <div id="countdown">
     SET BY ADMIN
@@ -390,15 +395,24 @@ footer{
     REGISTRATION OPEN
   </div>
 
+  <div id="connection" class="connection">
+    ● CONNECTING TO NOVEX
+  </div>
+
 </div>
+
 
 <!-- ANNOUNCEMENT -->
 <div class="card">
+
   <h2>📢 ANNOUNCEMENT</h2>
+
   <div id="announcement" class="announcement">
     No announcement yet.
   </div>
+
 </div>
+
 
 <!-- REGISTRATION -->
 <div class="card">
@@ -432,7 +446,9 @@ footer{
     >
 
     <select id="slot">
-      <option value="">SELECT SLOT</option>
+      <option value="">
+        SELECT SLOT
+      </option>
     </select>
 
   </div>
@@ -441,20 +457,34 @@ footer{
     REGISTER TEAM
   </button>
 
-  <div id="registerMessage"
-       style="text-align:center;margin-top:12px;font-size:13px;">
+  <div
+    id="registerMessage"
+    style="text-align:center;margin-top:12px;font-size:13px;">
   </div>
 
 </div>
+
 
 <!-- SLOTS -->
 <div class="card">
 
   <h2>🎯 SCRIMMAGE SLOTS</h2>
 
-  <div id="slots" class="slots"></div>
+  <div id="slots" class="slots">
+
+    <div style="
+      grid-column:1/-1;
+      text-align:center;
+      padding:20px;
+      color:#927aa5;
+    ">
+      Connecting to live slots...
+    </div>
+
+  </div>
 
 </div>
+
 
 <!-- ACTIVITY -->
 <div class="card">
@@ -467,7 +497,8 @@ footer{
 
 </div>
 
-<!-- ADMIN LOGIN -->
+
+<!-- ADMIN -->
 <div class="card">
 
   <h2>🔐 ADMIN</h2>
@@ -491,15 +522,19 @@ footer{
       ADMIN LOGIN
     </button>
 
-    <div id="loginMessage"
-         style="text-align:center;margin-top:10px;font-size:12px;">
+    <div
+      id="loginMessage"
+      style="text-align:center;margin-top:10px;font-size:12px;">
     </div>
 
   </div>
 
+
   <!-- ADMIN PANEL -->
   <div id="adminPanel" class="admin">
 
+
+    <!-- TIMER CONTROL -->
     <div class="admin-section">
 
       <h3>⏱ SCRIM TIMER</h3>
@@ -523,6 +558,8 @@ footer{
 
     </div>
 
+
+    <!-- MINING -->
     <div class="admin-section">
 
       <h3>⛏ MINING CONTROL</h3>
@@ -539,13 +576,16 @@ footer{
 
       </div>
 
-      <div id="miningState"
-           style="margin-top:10px;font-size:12px;">
+      <div
+        id="miningState"
+        style="margin-top:10px;font-size:12px;">
         Loading...
       </div>
 
     </div>
 
+
+    <!-- STATUS -->
     <div class="admin-section">
 
       <h3>📡 SCRIM STATUS</h3>
@@ -564,7 +604,9 @@ footer{
           SCRIM LIVE
         </button>
 
-        <button onclick="changeStatus('ended')" class="gray">
+        <button
+          onclick="changeStatus('ended')"
+          class="gray">
           SCRIM ENDED
         </button>
 
@@ -572,6 +614,8 @@ footer{
 
     </div>
 
+
+    <!-- ANNOUNCEMENT -->
     <div class="admin-section">
 
       <h3>📢 ANNOUNCEMENT</h3>
@@ -582,36 +626,46 @@ footer{
         maxlength="500"
       >
 
-      <button id="announcementBtn" class="full">
+      <button
+        id="announcementBtn"
+        class="full">
         PUBLISH ANNOUNCEMENT
       </button>
 
     </div>
 
+
+    <!-- SLOT MANAGEMENT -->
     <div class="admin-section">
 
       <h3>🗑 SLOT MANAGEMENT</h3>
 
-      <button id="clearSlotsBtn" class="danger full">
+      <button
+        id="clearSlotsBtn"
+        class="danger full">
         CLEAR ALL SLOTS
       </button>
 
     </div>
 
+
+    <!-- SCORE MANAGER -->
     <div class="admin-section">
 
       <h3>📊 SCORE MANAGER</h3>
 
       <button
         class="full"
-        onclick="location.href='score-manager.html'"
-      >
+        onclick="location.href='score-manager.html'">
         OPEN SCORE MANAGER
       </button>
 
     </div>
 
-    <button id="logoutBtn" class="gray full">
+
+    <button
+      id="logoutBtn"
+      class="gray full">
       LOGOUT
     </button>
 
@@ -620,6 +674,7 @@ footer{
 </div>
 
 </div>
+
 
 <footer>
   NOVEX CODM • ONE SQUAD, ONE FATE
@@ -652,31 +707,56 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
 /* =========================
-   FIREBASE
+   FIREBASE CONFIG
 ========================= */
 
 const firebaseConfig = {
-  apiKey:"AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
-  authDomain:"novex-codm.firebaseapp.com",
-  databaseURL:"https://novex-codm-default-rtdb.firebaseio.com",
-  projectId:"novex-codm",
-  storageBucket:"novex-codm.firebasestorage.app",
-  messagingSenderId:"422875706154",
-  appId:"1:422875706154:web:3f21e037173f8b51ba2453",
-  measurementId:"G-9Z50JE2GFW"
+
+  apiKey:
+    "AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
+
+  authDomain:
+    "novex-codm.firebaseapp.com",
+
+  databaseURL:
+    "https://novex-codm-default-rtdb.firebaseio.com",
+
+  projectId:
+    "novex-codm",
+
+  storageBucket:
+    "novex-codm.firebasestorage.app",
+
+  messagingSenderId:
+    "422875706154",
+
+  appId:
+    "1:422875706154:web:3f21e037173f8b51ba2453",
+
+  measurementId:
+    "G-9Z50JE2GFW"
 };
 
+
 const ADMIN_UID =
-"MGHp1mPC8LUAtqM73gw9GBXseyE2";
+  "MGHp1mPC8LUAtqM73gw9GBXseyE2";
 
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getDatabase(app);
+const TOTAL_SLOTS = 25;
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getDatabase(app);
 
 
 /* =========================
-   DATABASE REFERENCES
+   REFERENCES
 ========================= */
 
 const slotsRef =
@@ -703,58 +783,20 @@ const activityRef =
 ========================= */
 
 let currentUser = null;
+
 let isAdmin = false;
 
 let slotData = {};
+
 let miningUnlocked = false;
+
 let scrimTime = null;
 
-const TOTAL_SLOTS = 25;
+let listenersStarted = false;
 
 
 /* =========================
-   AUTH
-========================= */
-
-onAuthStateChanged(auth,user=>{
-
-  currentUser = user;
-
-  if(user && user.uid === ADMIN_UID){
-
-    isAdmin = true;
-
-    document.getElementById("adminPanel")
-      .style.display="block";
-
-    document.getElementById("loginArea")
-      .style.display="none";
-
-  }else{
-
-    isAdmin = false;
-
-    document.getElementById("adminPanel")
-      .style.display="none";
-
-    document.getElementById("loginArea")
-      .style.display="block";
-
-  }
-
-});
-
-
-/* Anonymous login */
-
-signInAnonymously(auth)
-.catch(error=>{
-  console.error("Anonymous login:",error);
-});
-
-
-/* =========================
-   SLOT LIST
+   ELEMENTS
 ========================= */
 
 const slotsElement =
@@ -763,20 +805,32 @@ const slotsElement =
 const slotSelect =
   document.getElementById("slot");
 
+const connection =
+  document.getElementById("connection");
+
+
+/* =========================
+   CREATE 25 OPTIONS
+========================= */
 
 function createSlotOptions(){
 
   slotSelect.innerHTML =
     `<option value="">SELECT SLOT</option>`;
 
-  for(let i=1;i<=TOTAL_SLOTS;i++){
+  for(
+    let i=1;
+    i<=TOTAL_SLOTS;
+    i++
+  ){
 
     const option =
       document.createElement("option");
 
-    option.value=i;
+    option.value =
+      String(i);
 
-    option.textContent=
+    option.textContent =
       `SLOT ${i}`;
 
     slotSelect.appendChild(option);
@@ -788,35 +842,62 @@ function createSlotOptions(){
 createSlotOptions();
 
 
+/* =========================
+   RENDER ALL 25 SLOTS
+========================= */
+
 function renderSlots(){
 
-  slotsElement.innerHTML="";
+  slotsElement.innerHTML = "";
 
-  for(let i=1;i<=TOTAL_SLOTS;i++){
 
-    const data = slotData[i];
+  for(
+    let i=1;
+    i<=TOTAL_SLOTS;
+    i++
+  ){
+
+    const key =
+      String(i);
+
+    const data =
+      slotData[key];
+
 
     const div =
       document.createElement("div");
 
-    div.className="slot";
+    div.className =
+      "slot";
+
+
+    /* =====================
+       OCCUPIED
+    ===================== */
 
     if(data){
 
-      let logoHTML="";
+      let logoHTML = "";
 
-      if(data.logo){
 
-        logoHTML=
-        `<img
-          class="logo-img"
-          src="${escapeHTML(data.logo)}"
-          onerror="this.style.display='none'"
-        >`;
+      if(
+        typeof data.logo === "string" &&
+        data.logo.trim() !== ""
+      ){
+
+        logoHTML = `
+          <img
+            class="logo-img"
+            src="${escapeHTML(data.logo)}"
+            alt="Team Logo"
+            onerror="this.style.display='none'"
+          >
+        `;
 
       }
 
-      div.innerHTML=`
+
+      div.innerHTML = `
 
         ${logoHTML}
 
@@ -839,11 +920,19 @@ function renderSlots(){
           </div>
 
         </div>
+
       `;
 
-    }else{
+    }
 
-      div.innerHTML=`
+
+    /* =====================
+       OPEN
+    ===================== */
+
+    else{
+
+      div.innerHTML = `
 
         <div class="slot-number">
           ${i}
@@ -860,49 +949,455 @@ function renderSlots(){
           </div>
 
         </div>
+
       `;
 
     }
 
+
     slotsElement.appendChild(div);
+
   }
 
 
-  /* Update dropdown */
+  /* =========================
+     UPDATE DROPDOWN
+  ========================= */
 
-  [...slotSelect.options].forEach(option=>{
+  Array
+    .from(slotSelect.options)
+    .forEach(option=>{
 
-    if(!option.value) return;
+      if(!option.value)
+        return;
 
-    const number=option.value;
 
-    if(slotData[number]){
+      const number =
+        option.value;
 
-      option.disabled=true;
+      const data =
+        slotData[number];
 
-      option.textContent=
-        `SLOT ${number} — ${slotData[number].name}`;
 
-    }else{
+      if(data){
 
-      option.disabled=false;
+        option.disabled =
+          true;
 
-      option.textContent=
-        `SLOT ${number}`;
+        option.textContent =
+          `SLOT ${number} — ${data.name}`;
 
-    }
+      }else{
 
-  });
+        option.disabled =
+          false;
+
+        option.textContent =
+          `SLOT ${number}`;
+
+      }
+
+    });
 
 }
 
 
-onValue(slotsRef,snapshot=>{
+/* =========================
+   DATABASE LISTENERS
+========================= */
 
-  slotData =
-    snapshot.val() || {};
+function startDatabaseListeners(){
 
-  renderSlots();
+  if(listenersStarted)
+    return;
+
+  listenersStarted = true;
+
+
+  /* =========================
+     LIVE SLOTS
+  ========================= */
+
+  onValue(
+    slotsRef,
+
+    snapshot=>{
+
+      const value =
+        snapshot.val();
+
+
+      /*
+        Always convert Firebase
+        object into a fresh object.
+      */
+
+      slotData =
+        value && typeof value === "object"
+        ? value
+        : {};
+
+
+      renderSlots();
+
+
+      connection.textContent =
+        "● LIVE • CONNECTED TO NOVEX";
+
+      connection.style.color =
+        "#8dffbd";
+
+    },
+
+    error=>{
+
+      console.error(
+        "Firebase slots error:",
+        error
+      );
+
+
+      connection.textContent =
+        "● DATABASE CONNECTION ERROR";
+
+      connection.style.color =
+        "#ff8cce";
+
+
+      slotsElement.innerHTML = `
+
+        <div style="
+          grid-column:1/-1;
+          text-align:center;
+          padding:20px;
+          color:#ff8cce;
+        ">
+
+          ❌ Unable to load live slots.
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  /* =========================
+     MINING
+  ========================= */
+
+  onValue(
+    miningRef,
+
+    snapshot=>{
+
+      miningUnlocked =
+        snapshot.val() === true;
+
+
+      const state =
+        document.getElementById(
+          "miningState"
+        );
+
+
+      state.textContent =
+        miningUnlocked
+        ? "🟢 MINING UNLOCKED"
+        : "🔴 MINING LOCKED";
+
+
+      state.style.color =
+        miningUnlocked
+        ? "#8dffbd"
+        : "#ff8cce";
+
+    }
+  );
+
+
+  /* =========================
+     TIMER
+  ========================= */
+
+  onValue(
+    timeRef,
+
+    snapshot=>{
+
+      scrimTime =
+        snapshot.val();
+
+
+      if(
+        isAdmin &&
+        scrimTime
+      ){
+
+        document.getElementById(
+          "scrimTimeInput"
+        ).value =
+          toLocalInput(scrimTime);
+
+      }
+
+
+      updateTimer();
+
+    }
+  );
+
+
+  /* =========================
+     STATUS
+  ========================= */
+
+  onValue(
+    statusRef,
+
+    snapshot=>{
+
+      const status =
+        snapshot.val() || "open";
+
+
+      const badge =
+        document.getElementById(
+          "statusBadge"
+        );
+
+
+      const names = {
+
+        open:
+          "REGISTRATION OPEN",
+
+        room:
+          "ROOM OPEN",
+
+        live:
+          "SCRIM LIVE",
+
+        ended:
+          "SCRIM ENDED"
+
+      };
+
+
+      badge.textContent =
+        names[status] ||
+        "REGISTRATION OPEN";
+
+
+      badge.className =
+        "status " +
+        (
+          status === "live"
+          ? "live"
+          : ""
+        );
+
+    }
+  );
+
+
+  /* =========================
+     ANNOUNCEMENT
+  ========================= */
+
+  onValue(
+    announcementRef,
+
+    snapshot=>{
+
+      document.getElementById(
+        "announcement"
+      ).textContent =
+        snapshot.val() ||
+        "No announcement yet.";
+
+    }
+  );
+
+
+  /* =========================
+     ACTIVITY
+  ========================= */
+
+  onValue(
+    activityRef,
+
+    snapshot=>{
+
+      const data =
+        snapshot.val() || {};
+
+
+      const items =
+        Object.values(data)
+        .sort(
+          (a,b)=>
+            (b.time || 0) -
+            (a.time || 0)
+        )
+        .slice(0,30);
+
+
+      const element =
+        document.getElementById(
+          "activity"
+        );
+
+
+      if(!items.length){
+
+        element.innerHTML =
+          "No activity yet.";
+
+        return;
+
+      }
+
+
+      element.innerHTML =
+        items.map(item=>`
+
+          <div class="activity-item">
+
+            <div>
+              ⚡ ${escapeHTML(item.message)}
+            </div>
+
+            <div class="activity-time">
+
+              ${new Date(
+                item.time
+              ).toLocaleString("en-PH")}
+
+            </div>
+
+          </div>
+
+        `).join("");
+
+    }
+  );
+
+}
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+  auth,
+  user=>{
+
+    currentUser =
+      user;
+
+
+    if(!user){
+
+      isAdmin =
+        false;
+
+
+      document.getElementById(
+        "adminPanel"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "loginArea"
+      ).style.display =
+        "block";
+
+
+      return;
+
+    }
+
+
+    /*
+      Check whether this is
+      the admin account.
+    */
+
+    if(
+      user.uid === ADMIN_UID
+    ){
+
+      isAdmin =
+        true;
+
+
+      document.getElementById(
+        "adminPanel"
+      ).style.display =
+        "block";
+
+
+      document.getElementById(
+        "loginArea"
+      ).style.display =
+        "none";
+
+    }
+
+    else{
+
+      isAdmin =
+        false;
+
+
+      document.getElementById(
+        "adminPanel"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "loginArea"
+      ).style.display =
+        "block";
+
+    }
+
+
+    /*
+      MOST IMPORTANT FIX:
+      Start Firebase listeners only
+      after authentication succeeds.
+    */
+
+    startDatabaseListeners();
+
+  }
+);
+
+
+/* =========================
+   ANONYMOUS AUTH
+========================= */
+
+signInAnonymously(auth)
+.catch(error=>{
+
+  console.error(
+    "Anonymous authentication:",
+    error
+  );
+
+
+  connection.textContent =
+    "● AUTHENTICATION ERROR";
+
+  connection.style.color =
+    "#ff8cce";
 
 });
 
@@ -913,232 +1408,262 @@ onValue(slotsRef,snapshot=>{
 
 document
 .getElementById("registerBtn")
-.addEventListener("click",async()=>{
+.addEventListener(
+  "click",
+  async()=>{
 
-  const name =
-    document.getElementById("teamName")
-    .value.trim();
-
-  const handler =
-    document.getElementById("handler")
-    .value.trim();
-
-  const discord =
-    document.getElementById("discord")
-    .value.trim();
-
-  const logo =
-    document.getElementById("logo")
-    .value.trim();
-
-  const slot =
-    document.getElementById("slot")
-    .value;
-
-  const message =
-    document.getElementById("registerMessage");
+    const name =
+      document.getElementById(
+        "teamName"
+      ).value.trim();
 
 
-  if(!name || !handler || !discord || !slot){
-
-    message.textContent=
-      "⚠️ Please complete all required fields.";
-
-    return;
-  }
+    const handler =
+      document.getElementById(
+        "handler"
+      ).value.trim();
 
 
-  if(!miningUnlocked){
-
-    message.textContent=
-      "🔒 Registration is currently locked.";
-
-    return;
-  }
+    const discord =
+      document.getElementById(
+        "discord"
+      ).value.trim();
 
 
-  if(slotData[slot]){
-
-    message.textContent=
-      "❌ That slot is already occupied.";
-
-    return;
-  }
+    const logo =
+      document.getElementById(
+        "logo"
+      ).value.trim();
 
 
-  if(!currentUser){
-
-    message.textContent=
-      "❌ Authentication not ready.";
-
-    return;
-  }
+    const slot =
+      document.getElementById(
+        "slot"
+      ).value;
 
 
-  try{
+    const message =
+      document.getElementById(
+        "registerMessage"
+      );
 
-    const data={
 
-      name:name,
-      handler:handler,
-      discord:discord,
-      logo:logo,
-      registeredAt:Date.now(),
-      registeredBy:currentUser.uid
+    message.style.color =
+      "#fff";
+
+
+    if(
+      !name ||
+      !handler ||
+      !discord ||
+      !slot
+    ){
+
+      message.textContent =
+        "⚠️ Please complete all required fields.";
+
+      return;
+
+    }
+
+
+    if(!currentUser){
+
+      message.textContent =
+        "⏳ Connecting to NOVEX...";
+
+      return;
+
+    }
+
+
+    if(!miningUnlocked){
+
+      message.textContent =
+        "🔒 Registration is currently locked.";
+
+      return;
+
+    }
+
+
+    /*
+      Local check.
+    */
+
+    if(
+      slotData[String(slot)]
+    ){
+
+      message.textContent =
+        "❌ That slot is already occupied.";
+
+      renderSlots();
+
+      return;
+
+    }
+
+
+    const data = {
+
+      name:
+        name,
+
+      handler:
+        handler,
+
+      discord:
+        discord,
+
+      logo:
+        logo,
+
+      registeredAt:
+        Date.now(),
+
+      registeredBy:
+        currentUser.uid
 
     };
 
 
-    await set(
-      ref(db,`novex/slots/${slot}`),
-      data
-    );
+    try{
+
+      /*
+        Firebase Rules perform
+        the final server-side
+        protection.
+      */
+
+      await set(
+        ref(
+          db,
+          `novex/slots/${slot}`
+        ),
+        data
+      );
 
 
-    await push(activityRef,{
+      /*
+        Activity is separate.
+      */
 
-      message:
-        `${name} registered Slot ${slot}`,
+      try{
 
-      time:Date.now()
+        await push(
+          activityRef,
+          {
 
-    });
+            message:
+              `${name} registered Slot ${slot}`,
 
+            time:
+              Date.now()
 
-    message.style.color="#8dffbd";
+          }
+        );
 
-    message.textContent=
-      `✅ ${name} registered Slot ${slot}!`;
+      }catch(activityError){
 
+        console.warn(
+          "Activity error:",
+          activityError
+        );
 
-    document.getElementById("teamName")
-      .value="";
-
-    document.getElementById("handler")
-      .value="";
-
-    document.getElementById("discord")
-      .value="";
-
-    document.getElementById("logo")
-      .value="";
-
-    document.getElementById("slot")
-      .value="";
+      }
 
 
-  }catch(error){
+      message.style.color =
+        "#8dffbd";
 
-    console.error(error);
 
-    message.style.color="#ff8cce";
+      message.textContent =
+        `✅ ${name} registered Slot ${slot}!`;
 
-    message.textContent=
-      "❌ Registration failed.";
+
+      document.getElementById(
+        "teamName"
+      ).value = "";
+
+
+      document.getElementById(
+        "handler"
+      ).value = "";
+
+
+      document.getElementById(
+        "discord"
+      ).value = "";
+
+
+      document.getElementById(
+        "logo"
+      ).value = "";
+
+
+      document.getElementById(
+        "slot"
+      ).value = "";
+
+    }
+
+
+    catch(error){
+
+      console.error(
+        "Registration error:",
+        error
+      );
+
+
+      message.style.color =
+        "#ff8cce";
+
+
+      if(
+        error.code ===
+        "PERMISSION_DENIED"
+      ){
+
+        message.textContent =
+          "❌ That slot was already claimed or registration is locked.";
+
+      }
+
+      else{
+
+        message.textContent =
+          "❌ Registration failed. Please try again.";
+
+      }
+
+    }
 
   }
-
-});
-
-
-/* =========================
-   MINING
-========================= */
-
-onValue(miningRef,snapshot=>{
-
-  miningUnlocked =
-    snapshot.val() === true;
-
-  document.getElementById("miningState")
-    .textContent =
-      miningUnlocked
-      ? "🟢 MINING UNLOCKED"
-      : "🔴 MINING LOCKED";
-
-  document.getElementById("miningState")
-    .style.color =
-      miningUnlocked
-      ? "#8dffbd"
-      : "#ff8cce";
-
-});
-
-
-document
-.getElementById("unlockBtn")
-.addEventListener("click",async()=>{
-
-  if(!isAdmin) return;
-
-  await set(miningRef,true);
-
-  await push(activityRef,{
-
-    message:"Admin unlocked mining",
-
-    time:Date.now()
-
-  });
-
-});
-
-
-document
-.getElementById("lockBtn")
-.addEventListener("click",async()=>{
-
-  if(!isAdmin) return;
-
-  await set(miningRef,false);
-
-  await push(activityRef,{
-
-    message:"Admin locked mining",
-
-    time:Date.now()
-
-  });
-
-});
+);
 
 
 /* =========================
    TIMER
 ========================= */
 
-onValue(timeRef,snapshot=>{
-
-  scrimTime =
-    snapshot.val();
-
-  if(isAdmin && scrimTime){
-
-    document.getElementById(
-      "scrimTimeInput"
-    ).value =
-      toLocalInput(scrimTime);
-
-  }
-
-  updateTimer();
-
-});
-
-
 function toLocalInput(timestamp){
 
   const date =
     new Date(timestamp);
 
+
   const offset =
     date.getTimezoneOffset();
 
+
   const local =
     new Date(
-      date.getTime()
-      - offset*60000
+      date.getTime() -
+      offset * 60000
     );
+
 
   return local
     .toISOString()
@@ -1150,19 +1675,26 @@ function toLocalInput(timestamp){
 function updateTimer(){
 
   const countdown =
-    document.getElementById("countdown");
+    document.getElementById(
+      "countdown"
+    );
+
 
   const dateElement =
-    document.getElementById("scrimDate");
+    document.getElementById(
+      "scrimDate"
+    );
 
 
   if(!scrimTime){
 
-    countdown.textContent=
+    countdown.textContent =
       "SET BY ADMIN";
 
-    dateElement.textContent=
+
+    dateElement.textContent =
       "No scrim time has been set.";
+
 
     return;
 
@@ -1170,23 +1702,29 @@ function updateTimer(){
 
 
   const difference =
-    scrimTime-Date.now();
+    Number(scrimTime) -
+    Date.now();
 
 
-  dateElement.textContent=
+  dateElement.textContent =
     new Date(scrimTime)
     .toLocaleString(
       "en-PH",
       {
-        dateStyle:"full",
-        timeStyle:"short"
+        dateStyle:
+          "full",
+
+        timeStyle:
+          "short"
       }
     );
 
 
-  if(difference<=0){
+  if(
+    difference <= 0
+  ){
 
-    countdown.textContent=
+    countdown.textContent =
       "SCRIM STARTED";
 
     return;
@@ -1195,147 +1733,207 @@ function updateTimer(){
 
 
   const totalSeconds =
-    Math.floor(difference/1000);
+    Math.floor(
+      difference / 1000
+    );
+
 
   const days =
-    Math.floor(totalSeconds/86400);
+    Math.floor(
+      totalSeconds / 86400
+    );
+
 
   const hours =
     Math.floor(
-      (totalSeconds%86400)/3600
+      (totalSeconds % 86400) /
+      3600
     );
+
 
   const minutes =
     Math.floor(
-      (totalSeconds%3600)/60
+      (totalSeconds % 3600) /
+      60
     );
 
+
   const seconds =
-    totalSeconds%60;
+    totalSeconds % 60;
 
 
-  countdown.textContent=
-    `${days}D ${String(hours).padStart(2,"0")}H ${String(minutes).padStart(2,"0")}M ${String(seconds).padStart(2,"0")}S`;
+  countdown.textContent =
+    `${days}D ` +
+    `${String(hours).padStart(2,"0")}H ` +
+    `${String(minutes).padStart(2,"0")}M ` +
+    `${String(seconds).padStart(2,"0")}S`;
 
 }
 
 
-setInterval(updateTimer,1000);
+setInterval(
+  updateTimer,
+  1000
+);
 
 
-/* SAVE TIMER */
+/* =========================
+   SAVE TIMER
+========================= */
 
 document
 .getElementById("saveTimeBtn")
-.addEventListener("click",async()=>{
+.addEventListener(
+  "click",
+  async()=>{
 
-  if(!isAdmin) return;
+    if(!isAdmin)
+      return;
 
-  const value =
-    document.getElementById(
-      "scrimTimeInput"
-    ).value;
 
-  if(!value){
+    const value =
+      document.getElementById(
+        "scrimTimeInput"
+      ).value;
 
-    alert("Choose a date and time.");
 
-    return;
+    if(!value){
+
+      alert(
+        "Choose a date and time."
+      );
+
+      return;
+
+    }
+
+
+    const timestamp =
+      new Date(value).getTime();
+
+
+    try{
+
+      await set(
+        timeRef,
+        timestamp
+      );
+
+
+      await push(
+        activityRef,
+        {
+
+          message:
+            "Admin updated the scrim timer",
+
+          time:
+            Date.now()
+
+        }
+      );
+
+
+      alert(
+        "Scrim time saved!"
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Unable to save scrim time."
+      );
+
+    }
 
   }
+);
 
 
-  const timestamp =
-    new Date(value).getTime();
-
-
-  await set(timeRef,timestamp);
-
-  await push(activityRef,{
-
-    message:"Admin updated the scrim timer",
-
-    time:Date.now()
-
-  });
-
-
-  alert("Scrim time saved!");
-
-});
-
-
-/* CLEAR TIMER */
+/* =========================
+   CLEAR TIMER
+========================= */
 
 document
 .getElementById("clearTimeBtn")
-.addEventListener("click",async()=>{
+.addEventListener(
+  "click",
+  async()=>{
 
-  if(!isAdmin) return;
+    if(!isAdmin)
+      return;
 
-  await remove(timeRef);
 
-  document.getElementById(
-    "scrimTimeInput"
-  ).value="";
+    try{
 
-});
+      await remove(
+        timeRef
+      );
+
+
+      document.getElementById(
+        "scrimTimeInput"
+      ).value = "";
+
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Unable to clear timer."
+      );
+
+    }
+
+  }
+);
 
 
 /* =========================
    STATUS
 ========================= */
 
-onValue(statusRef,snapshot=>{
-
-  const status =
-    snapshot.val() || "open";
-
-  const badge =
-    document.getElementById(
-      "statusBadge"
-    );
-
-
-  const names={
-
-    open:"REGISTRATION OPEN",
-
-    room:"ROOM OPEN",
-
-    live:"SCRIM LIVE",
-
-    ended:"SCRIM ENDED"
-
-  };
-
-
-  badge.textContent =
-    names[status] || "REGISTRATION OPEN";
-
-
-  badge.className=
-    "status " +
-    (status==="live" ? "live":"");
-
-});
-
-
 window.changeStatus =
 async function(status){
 
-  if(!isAdmin) return;
+  if(!isAdmin)
+    return;
 
-  await set(statusRef,status);
 
-  await push(activityRef,{
+  try{
 
-    message:
-      `Admin changed status to ${status}`,
+    await set(
+      statusRef,
+      status
+    );
 
-    time:Date.now()
 
-  });
+    await push(
+      activityRef,
+      {
+
+        message:
+          `Admin changed status to ${status}`,
+
+        time:
+          Date.now()
+
+      }
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Unable to change status."
+    );
+
+  }
 
 };
 
@@ -1344,108 +1942,64 @@ async function(status){
    ANNOUNCEMENT
 ========================= */
 
-onValue(
-  announcementRef,
-  snapshot=>{
-
-    document.getElementById(
-      "announcement"
-    ).textContent =
-      snapshot.val()
-      || "No announcement yet.";
-
-  }
-);
-
-
 document
 .getElementById("announcementBtn")
-.addEventListener("click",async()=>{
+.addEventListener(
+  "click",
+  async()=>{
 
-  if(!isAdmin) return;
-
-  const input =
-    document.getElementById(
-      "announcementInput"
-    );
-
-  const text =
-    input.value.trim();
-
-  if(!text) return;
-
-  await set(
-    announcementRef,
-    text
-  );
-
-  await push(activityRef,{
-
-    message:
-      "Admin posted an announcement",
-
-    time:Date.now()
-
-  });
-
-  input.value="";
-
-});
+    if(!isAdmin)
+      return;
 
 
-/* =========================
-   ACTIVITY
-========================= */
-
-onValue(
-  activityRef,
-  snapshot=>{
-
-    const data =
-      snapshot.val() || {};
-
-    const items =
-      Object.values(data)
-      .sort(
-        (a,b)=>
-          (b.time||0)-(a.time||0)
-      )
-      .slice(0,30);
-
-
-    const element =
+    const input =
       document.getElementById(
-        "activity"
+        "announcementInput"
       );
 
 
-    if(!items.length){
+    const text =
+      input.value.trim();
 
-      element.innerHTML=
-        "No activity yet.";
 
+    if(!text)
       return;
 
+
+    try{
+
+      await set(
+        announcementRef,
+        text
+      );
+
+
+      await push(
+        activityRef,
+        {
+
+          message:
+            "Admin posted an announcement",
+
+          time:
+            Date.now()
+
+        }
+      );
+
+
+      input.value = "";
+
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Unable to publish announcement."
+      );
+
     }
-
-
-    element.innerHTML =
-      items.map(item=>`
-
-        <div class="activity-item">
-
-          <div>
-            ⚡ ${escapeHTML(item.message)}
-          </div>
-
-          <div class="activity-time">
-            ${new Date(item.time)
-              .toLocaleString("en-PH")}
-          </div>
-
-        </div>
-
-      `).join("");
 
   }
 );
@@ -1457,56 +2011,76 @@ onValue(
 
 document
 .getElementById("loginBtn")
-.addEventListener("click",async()=>{
+.addEventListener(
+  "click",
+  async()=>{
 
-  const email =
-    document.getElementById(
-      "adminEmail"
-    ).value.trim();
-
-  const password =
-    document.getElementById(
-      "adminPassword"
-    ).value;
+    const email =
+      document.getElementById(
+        "adminEmail"
+      ).value.trim();
 
 
-  const message =
-    document.getElementById(
-      "loginMessage"
-    );
+    const password =
+      document.getElementById(
+        "adminPassword"
+      ).value;
 
 
-  if(!email || !password){
+    const message =
+      document.getElementById(
+        "loginMessage"
+      );
 
-    message.textContent=
-      "Enter admin email and password.";
 
-    return;
+    if(
+      !email ||
+      !password
+    ){
+
+      message.textContent =
+        "Enter admin email and password.";
+
+      return;
+
+    }
+
+
+    try{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+      message.style.color =
+        "#8dffbd";
+
+
+      message.textContent =
+        "✅ Logged in.";
+
+    }
+
+
+    catch(error){
+
+      console.error(error);
+
+
+      message.style.color =
+        "#ff8cce";
+
+
+      message.textContent =
+        "❌ Invalid admin login.";
+
+    }
 
   }
-
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    message.textContent=
-      "✅ Logged in.";
-
-  }catch(error){
-
-    console.error(error);
-
-    message.textContent=
-      "❌ Invalid admin login.";
-
-  }
-
-});
+);
 
 
 /* =========================
@@ -1515,13 +2089,24 @@ document
 
 document
 .getElementById("logoutBtn")
-.addEventListener("click",async()=>{
+.addEventListener(
+  "click",
+  async()=>{
 
-  await signOut(auth);
+    try{
 
-  location.reload();
+      await signOut(auth);
 
-});
+      location.reload();
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  }
+);
 
 
 /* =========================
@@ -1530,30 +2115,57 @@ document
 
 document
 .getElementById("clearSlotsBtn")
-.addEventListener("click",async()=>{
+.addEventListener(
+  "click",
+  async()=>{
 
-  if(!isAdmin) return;
-
-  const confirmClear =
-    confirm(
-      "⚠️ CLEAR ALL 25 SLOTS?"
-    );
-
-  if(!confirmClear) return;
+    if(!isAdmin)
+      return;
 
 
-  await remove(slotsRef);
+    const confirmed =
+      confirm(
+        "⚠️ CLEAR ALL 25 SLOTS?"
+      );
 
-  await push(activityRef,{
 
-    message:
-      "Admin cleared all slots",
+    if(!confirmed)
+      return;
 
-    time:Date.now()
 
-  });
+    try{
 
-});
+      await remove(
+        slotsRef
+      );
+
+
+      await push(
+        activityRef,
+        {
+
+          message:
+            "Admin cleared all slots",
+
+          time:
+            Date.now()
+
+        }
+      );
+
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Unable to clear slots."
+      );
+
+    }
+
+  }
+);
 
 
 /* =========================
@@ -1562,12 +2174,34 @@ document
 
 function escapeHTML(value){
 
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  return String(
+    value ?? ""
+  )
+
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
 
 }
 
@@ -1578,10 +2212,14 @@ function escapeHTML(value){
 
 <script>
 
-let deferredPrompt = null;
+let deferredPrompt =
+  null;
+
 
 const installBtn =
-  document.getElementById("installBtn");
+  document.getElementById(
+    "installBtn"
+  );
 
 
 window.addEventListener(
@@ -1590,7 +2228,8 @@ window.addEventListener(
 
     event.preventDefault();
 
-    deferredPrompt = event;
+    deferredPrompt =
+      event;
 
     installBtn.style.display =
       "block";
@@ -1627,9 +2266,11 @@ installBtn.addEventListener(
     );
 
 
-    deferredPrompt=null;
+    deferredPrompt =
+      null;
 
-    installBtn.style.display=
+
+    installBtn.style.display =
       "none";
 
   }
@@ -1640,16 +2281,20 @@ window.addEventListener(
   "appinstalled",
   ()=>{
 
-    installBtn.style.display=
+    installBtn.style.display =
       "none";
 
   }
 );
 
 
-/* Service Worker */
+/* =========================
+   SERVICE WORKER
+========================= */
 
-if("serviceWorker" in navigator){
+if(
+  "serviceWorker" in navigator
+){
 
   window.addEventListener(
     "load",
@@ -1657,16 +2302,22 @@ if("serviceWorker" in navigator){
 
       navigator.serviceWorker
         .register("./sw.js")
+
         .then(()=>{
+
           console.log(
             "NOVEX Service Worker registered"
           );
+
         })
+
         .catch(error=>{
+
           console.error(
             "Service Worker error:",
             error
           );
+
         });
 
     }
@@ -1677,4 +2328,4 @@ if("serviceWorker" in navigator){
 </script>
 
 </body>
-</html>
+  </html>
