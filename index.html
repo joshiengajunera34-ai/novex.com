@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>NOVEX CODM</title>
-
-<link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#7c3cff">
 
 <style>
@@ -127,6 +125,32 @@ header{
 .status.live{
   background:#32115c;
   box-shadow:0 0 20px rgba(124,60,255,.4);
+}
+
+.chat-button{
+  display:block;
+  width:100%;
+  margin-bottom:20px;
+  padding:15px;
+  border-radius:14px;
+  text-align:center;
+  text-decoration:none;
+  color:white;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:1px;
+  background:
+    linear-gradient(135deg,#6124bd,#9d45ff,#c14cff);
+  border:1px solid #a15cff;
+  box-shadow:
+    0 0 18px rgba(124,60,255,.35);
+  transition:.2s;
+}
+
+.chat-button:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 0 28px rgba(124,60,255,.65);
 }
 
 .form-grid{
@@ -377,18 +401,37 @@ footer{
 <body>
 
 <header>
-  <div class="logo">NOVEX</div>
-  <div class="subtitle">CODM BR SCRIMMAGE</div>
+
+  <div class="logo">
+    NOVEX
+  </div>
+
+  <div class="subtitle">
+    CODM BR SCRIMMAGE
+  </div>
+
 </header>
 
+
 <div class="container">
+
 
 <button id="installBtn" class="install">
   📲 INSTALL NOVEX APP
 </button>
 
 
+<!-- CHAT BUTTON -->
+
+<a
+  href="chat.html"
+  class="chat-button">
+  💬 OPEN NOVEX CHAT
+</a>
+
+
 <!-- TIMER -->
+
 <div class="card timer">
 
   <div class="timer-label">
@@ -415,11 +458,14 @@ footer{
 
 
 <!-- ANNOUNCEMENT -->
+
 <div class="card">
 
   <h2>📢 ANNOUNCEMENT</h2>
 
-  <div id="announcement" class="announcement">
+  <div
+    id="announcement"
+    class="announcement">
     No announcement yet.
   </div>
 
@@ -427,6 +473,7 @@ footer{
 
 
 <!-- REGISTRATION -->
+
 <div class="card">
 
   <h2>⚡ TEAM REGISTRATION</h2>
@@ -458,30 +505,46 @@ footer{
     >
 
     <select id="slot">
+
       <option value="">
         SELECT SLOT
       </option>
+
     </select>
 
   </div>
 
-  <button id="registerBtn" class="full">
+
+  <button
+    id="registerBtn"
+    class="full">
+
     REGISTER TEAM
+
   </button>
 
-  <div id="registerMessage"
-    style="text-align:center;margin-top:12px;font-size:13px;">
+
+  <div
+    id="registerMessage"
+    style="
+      text-align:center;
+      margin-top:12px;
+      font-size:13px;
+    ">
   </div>
 
 </div>
 
 
 <!-- SLOTS -->
+
 <div class="card">
 
   <h2>🎯 SCRIMMAGE SLOTS</h2>
 
-  <div id="slots" class="slots">
+  <div
+    id="slots"
+    class="slots">
 
     <div style="
       grid-column:1/-1;
@@ -498,21 +561,28 @@ footer{
 
 
 <!-- ACTIVITY -->
+
 <div class="card">
 
   <h2>⚡ LIVE ACTIVITY</h2>
 
-  <div id="activity" class="activity">
+  <div
+    id="activity"
+    class="activity">
+
     Loading activity...
+
   </div>
 
 </div>
 
 
 <!-- ADMIN -->
+
 <div class="card">
 
   <h2>🔐 ADMIN</h2>
+
 
   <div id="loginArea">
 
@@ -529,39 +599,59 @@ footer{
       style="margin-top:10px;"
     >
 
-    <button id="loginBtn" class="full">
+    <button
+      id="loginBtn"
+      class="full">
+
       ADMIN LOGIN
+
     </button>
 
-    <div id="loginMessage"
-      style="text-align:center;margin-top:10px;font-size:12px;">
+
+    <div
+      id="loginMessage"
+      style="
+        text-align:center;
+        margin-top:10px;
+        font-size:12px;
+      ">
     </div>
 
   </div>
 
 
   <!-- ADMIN PANEL -->
-  <div id="adminPanel" class="admin">
+
+  <div
+    id="adminPanel"
+    class="admin">
 
 
-    <!-- TIMER -->
     <div class="admin-section">
 
-      <h3>⏱ SCRIM TIMER</h3>
+      <h3>
+        ⏱ SCRIM TIMER
+      </h3>
 
       <input
         id="scrimTimeInput"
         type="datetime-local"
       >
 
-      <div class="row" style="margin-top:10px;">
+      <div
+        class="row"
+        style="margin-top:10px;">
 
         <button id="saveTimeBtn">
           SAVE SCRIM TIME
         </button>
 
-        <button id="clearTimeBtn" class="gray">
+        <button
+          id="clearTimeBtn"
+          class="gray">
+
           CLEAR TIMER
+
         </button>
 
       </div>
@@ -569,10 +659,11 @@ footer{
     </div>
 
 
-    <!-- MINING -->
     <div class="admin-section">
 
-      <h3>⛏ MINING CONTROL</h3>
+      <h3>
+        ⛏ MINING CONTROL
+      </h3>
 
       <div class="row">
 
@@ -580,42 +671,66 @@ footer{
           UNLOCK MINING
         </button>
 
-        <button id="lockBtn" class="gray">
+        <button
+          id="lockBtn"
+          class="gray">
+
           LOCK MINING
+
         </button>
 
       </div>
 
-      <div id="miningState"
-        style="margin-top:10px;font-size:12px;">
+
+      <div
+        id="miningState"
+        style="
+          margin-top:10px;
+          font-size:12px;
+        ">
+
         Loading...
+
       </div>
 
     </div>
 
 
-    <!-- STATUS -->
     <div class="admin-section">
 
-      <h3>📡 SCRIM STATUS</h3>
+      <h3>
+        📡 SCRIM STATUS
+      </h3>
 
       <div class="row">
 
-        <button onclick="changeStatus('open')">
+        <button
+          onclick="changeStatus('open')">
+
           REGISTRATION
+
         </button>
 
-        <button onclick="changeStatus('room')">
+        <button
+          onclick="changeStatus('room')">
+
           ROOM OPEN
+
         </button>
 
-        <button onclick="changeStatus('live')">
+        <button
+          onclick="changeStatus('live')">
+
           SCRIM LIVE
+
         </button>
 
-        <button onclick="changeStatus('ended')"
+        <button
+          onclick="changeStatus('ended')"
           class="gray">
+
           SCRIM ENDED
+
         </button>
 
       </div>
@@ -623,10 +738,11 @@ footer{
     </div>
 
 
-    <!-- ANNOUNCEMENT -->
     <div class="admin-section">
 
-      <h3>📢 ANNOUNCEMENT</h3>
+      <h3>
+        📢 ANNOUNCEMENT
+      </h3>
 
       <input
         id="announcementInput"
@@ -634,51 +750,70 @@ footer{
         maxlength="500"
       >
 
-      <button id="announcementBtn"
+      <button
+        id="announcementBtn"
         class="full">
+
         PUBLISH ANNOUNCEMENT
+
       </button>
 
     </div>
 
 
-    <!-- SLOT MANAGEMENT -->
     <div class="admin-section">
 
-      <h3>🗑 SLOT MANAGEMENT</h3>
+      <h3>
+        🗑 SLOT MANAGEMENT
+      </h3>
 
       <p style="
         color:#8f7b9b;
         font-size:11px;
         margin-bottom:10px;
       ">
-        Use REMOVE beside a team to remove only that team.
+
+        Use REMOVE beside a team
+        to remove only that team.
+
       </p>
 
-      <button id="clearSlotsBtn"
+      <button
+        id="clearSlotsBtn"
         class="danger full">
+
         CLEAR ALL 25 SLOTS
+
       </button>
 
     </div>
 
 
-    <!-- SCORE MANAGER -->
     <div class="admin-section">
 
-      <h3>📊 SCORE MANAGER</h3>
+      <h3>
+        📊 SCORE MANAGER
+      </h3>
 
-      <button class="full"
-        onclick="location.href='score-manager.html'">
+      <button
+        class="full"
+        onclick="
+          location.href='score-manager.html'
+        ">
+
         OPEN SCORE MANAGER
+
       </button>
 
     </div>
 
 
-    <button id="logoutBtn"
+    <button
+      id="logoutBtn"
       class="gray full">
+
       LOGOUT
+
     </button>
 
   </div>
@@ -686,6 +821,7 @@ footer{
 </div>
 
 </div>
+
 
 <footer>
   NOVEX CODM • ONE SQUAD, ONE FATE
@@ -746,12 +882,15 @@ const firebaseConfig = {
 
   measurementId:
     "G-9Z50JE2GFW"
+
 };
+
 
 const ADMIN_UID =
   "MGHp1mPC8LUAtqM73gw9GBXseyE2";
 
 const TOTAL_SLOTS = 25;
+
 
 const app =
   initializeApp(firebaseConfig);
@@ -764,7 +903,7 @@ const db =
 
 
 /* =========================
-   DATABASE REFERENCES
+   REFERENCES
 ========================= */
 
 const slotsRef =
@@ -813,7 +952,7 @@ const connection =
 
 
 /* =========================
-   SLOT DROPDOWN
+   SLOT OPTIONS
 ========================= */
 
 function createSlotOptions(){
@@ -821,7 +960,11 @@ function createSlotOptions(){
   slotSelect.innerHTML =
     `<option value="">SELECT SLOT</option>`;
 
-  for(let i=1;i<=TOTAL_SLOTS;i++){
+  for(
+    let i=1;
+    i<=TOTAL_SLOTS;
+    i++
+  ){
 
     const option =
       document.createElement("option");
@@ -832,8 +975,12 @@ function createSlotOptions(){
     option.textContent =
       `SLOT ${i}`;
 
-    slotSelect.appendChild(option);
+    slotSelect.appendChild(
+      option
+    );
+
   }
+
 }
 
 createSlotOptions();
@@ -847,20 +994,30 @@ function renderSlots(){
 
   slotsElement.innerHTML = "";
 
-  for(let i=1;i<=TOTAL_SLOTS;i++){
 
-    const key = String(i);
-    const data = slotData[key];
+  for(
+    let i=1;
+    i<=TOTAL_SLOTS;
+    i++
+  ){
+
+    const key =
+      String(i);
+
+    const data =
+      slotData[key];
 
     const div =
       document.createElement("div");
 
-    div.className = "slot";
+    div.className =
+      "slot";
 
 
     if(data){
 
       let logoHTML = "";
+
 
       if(
         typeof data.logo === "string" &&
@@ -868,13 +1025,18 @@ function renderSlots(){
       ){
 
         logoHTML = `
+
           <img
             class="logo-img"
             src="${escapeHTML(data.logo)}"
             alt="Team Logo"
-            onerror="this.style.display='none'"
+            onerror="
+              this.style.display='none'
+            "
           >
+
         `;
+
       }
 
 
@@ -905,11 +1067,15 @@ function renderSlots(){
         ${
           isAdmin
           ? `
+
             <button
               class="remove-btn"
               data-slot="${i}">
+
               REMOVE
+
             </button>
+
           `
           : ""
         }
@@ -937,15 +1103,18 @@ function renderSlots(){
         </div>
 
       `;
+
     }
 
-    slotsElement.appendChild(div);
+
+    slotsElement.appendChild(
+      div
+    );
+
   }
 
 
-  /* =========================
-     ADMIN REMOVE BUTTONS
-  ========================= */
+  /* ADMIN REMOVE */
 
   if(isAdmin){
 
@@ -973,11 +1142,6 @@ function renderSlots(){
 
             if(!confirmed)
               return;
-
-
-            button.disabled = true;
-            button.textContent =
-              "REMOVING...";
 
 
             try{
@@ -1008,29 +1172,20 @@ function renderSlots(){
               }catch(activityError){
 
                 console.warn(
-                  "Activity error:",
                   activityError
                 );
-              }
 
+              }
 
             }catch(error){
 
               console.error(
-                "Remove error:",
                 error
               );
-
 
               alert(
                 "❌ Unable to remove team."
               );
-
-
-              button.disabled = false;
-
-              button.textContent =
-                "REMOVE";
 
             }
 
@@ -1038,12 +1193,11 @@ function renderSlots(){
         );
 
       });
+
   }
 
 
-  /* =========================
-     UPDATE SLOT DROPDOWN
-  ========================= */
+  /* DROPDOWN */
 
   Array
     .from(slotSelect.options)
@@ -1051,6 +1205,7 @@ function renderSlots(){
 
       if(!option.value)
         return;
+
 
       const number =
         option.value;
@@ -1061,14 +1216,16 @@ function renderSlots(){
 
       if(data){
 
-        option.disabled = true;
+        option.disabled =
+          true;
 
         option.textContent =
           `SLOT ${number} — ${data.name}`;
 
       }else{
 
-        option.disabled = false;
+        option.disabled =
+          false;
 
         option.textContent =
           `SLOT ${number}`;
@@ -1081,7 +1238,7 @@ function renderSlots(){
 
 
 /* =========================
-   FIREBASE LISTENERS
+   DATABASE LISTENERS
 ========================= */
 
 function startDatabaseListeners(){
@@ -1089,10 +1246,9 @@ function startDatabaseListeners(){
   if(listenersStarted)
     return;
 
-  listenersStarted = true;
+  listenersStarted =
+    true;
 
-
-  /* SLOTS */
 
   onValue(
     slotsRef,
@@ -1112,25 +1268,9 @@ function startDatabaseListeners(){
       connection.textContent =
         "● LIVE • CONNECTED TO NOVEX";
 
-      connection.style.color =
-        "#8dffbd";
-
-    },
-    error=>{
-
-      console.error(error);
-
-      connection.textContent =
-        "● DATABASE CONNECTION ERROR";
-
-      connection.style.color =
-        "#ff8cce";
-
     }
   );
 
-
-  /* MINING */
 
   onValue(
     miningRef,
@@ -1139,10 +1279,12 @@ function startDatabaseListeners(){
       miningUnlocked =
         snapshot.val() === true;
 
+
       const state =
         document.getElementById(
           "miningState"
         );
+
 
       state.textContent =
         miningUnlocked
@@ -1158,8 +1300,6 @@ function startDatabaseListeners(){
   );
 
 
-  /* TIMER */
-
   onValue(
     timeRef,
     snapshot=>{
@@ -1167,47 +1307,48 @@ function startDatabaseListeners(){
       scrimTime =
         snapshot.val();
 
-      if(isAdmin && scrimTime){
-
-        document.getElementById(
-          "scrimTimeInput"
-        ).value =
-          toLocalInput(scrimTime);
-
-      }
-
       updateTimer();
 
     }
   );
 
 
-  /* STATUS */
-
   onValue(
     statusRef,
     snapshot=>{
 
       const status =
-        snapshot.val() || "open";
+        snapshot.val() ||
+        "open";
+
 
       const badge =
         document.getElementById(
           "statusBadge"
         );
 
+
       const names = {
 
-        open:"REGISTRATION OPEN",
-        room:"ROOM OPEN",
-        live:"SCRIM LIVE",
-        ended:"SCRIM ENDED"
+        open:
+          "REGISTRATION OPEN",
+
+        room:
+          "ROOM OPEN",
+
+        live:
+          "SCRIM LIVE",
+
+        ended:
+          "SCRIM ENDED"
 
       };
+
 
       badge.textContent =
         names[status] ||
         "REGISTRATION OPEN";
+
 
       badge.className =
         "status " +
@@ -1220,8 +1361,6 @@ function startDatabaseListeners(){
     }
   );
 
-
-  /* ANNOUNCEMENT */
 
   onValue(
     announcementRef,
@@ -1237,14 +1376,13 @@ function startDatabaseListeners(){
   );
 
 
-  /* ACTIVITY */
-
   onValue(
     activityRef,
     snapshot=>{
 
       const data =
         snapshot.val() || {};
+
 
       const items =
         Object.values(data)
@@ -1255,6 +1393,7 @@ function startDatabaseListeners(){
         )
         .slice(0,30);
 
+
       const element =
         document.getElementById(
           "activity"
@@ -1263,10 +1402,11 @@ function startDatabaseListeners(){
 
       if(!items.length){
 
-        element.innerHTML =
+        element.textContent =
           "No activity yet.";
 
         return;
+
       }
 
 
@@ -1296,7 +1436,7 @@ function startDatabaseListeners(){
 
 
 /* =========================
-   AUTH
+   AUTH STATE
 ========================= */
 
 onAuthStateChanged(
@@ -1309,7 +1449,8 @@ onAuthStateChanged(
 
     if(!user){
 
-      isAdmin = false;
+      isAdmin =
+        false;
 
       document.getElementById(
         "adminPanel"
@@ -1324,11 +1465,13 @@ onAuthStateChanged(
       renderSlots();
 
       return;
+
     }
 
 
     isAdmin =
-      user.uid === ADMIN_UID;
+      user.uid ===
+      ADMIN_UID;
 
 
     document.getElementById(
@@ -1347,12 +1490,6 @@ onAuthStateChanged(
       : "block";
 
 
-    /*
-      IMPORTANT:
-      Database listeners start only
-      after authentication.
-    */
-
     startDatabaseListeners();
 
     renderSlots();
@@ -1362,28 +1499,22 @@ onAuthStateChanged(
 
 
 /* =========================
-   ANONYMOUS LOGIN
+   ANONYMOUS AUTH
 ========================= */
 
 signInAnonymously(auth)
 .catch(error=>{
 
-  console.error(
-    "Anonymous authentication error:",
-    error
-  );
+  console.error(error);
 
   connection.textContent =
     "● AUTHENTICATION ERROR";
-
-  connection.style.color =
-    "#ff8cce";
 
 });
 
 
 /* =========================
-   REGISTER TEAM
+   REGISTER
 ========================= */
 
 document
@@ -1434,6 +1565,7 @@ document
         "⚠️ Please complete all required fields.";
 
       return;
+
     }
 
 
@@ -1443,6 +1575,7 @@ document
         "⏳ Connecting to NOVEX...";
 
       return;
+
     }
 
 
@@ -1452,6 +1585,7 @@ document
         "🔒 Registration is currently locked.";
 
       return;
+
     }
 
 
@@ -1460,24 +1594,18 @@ document
       message.textContent =
         "❌ That slot is already occupied.";
 
-      renderSlots();
-
       return;
+
     }
 
 
     const data = {
 
       name:name,
-
       handler:handler,
-
       discord:discord,
-
       logo:logo,
-
       registeredAt:Date.now(),
-
       registeredBy:currentUser.uid
 
     };
@@ -1509,11 +1637,10 @@ document
           }
         );
 
-      }catch(activityError){
+      }catch(error){
 
         console.warn(
-          "Activity error:",
-          activityError
+          error
         );
 
       }
@@ -1548,29 +1675,13 @@ document
 
     }catch(error){
 
-      console.error(
-        "Registration error:",
-        error
-      );
+      console.error(error);
 
       message.style.color =
         "#ff8cce";
 
-
-      if(
-        error.code ===
-        "PERMISSION_DENIED"
-      ){
-
-        message.textContent =
-          "❌ That slot was already claimed or registration is locked.";
-
-      }else{
-
-        message.textContent =
-          "❌ Registration failed. Please try again.";
-
-      }
+      message.textContent =
+        "❌ Registration failed. Slot may already be claimed.";
 
     }
 
@@ -1579,29 +1690,8 @@ document
 
 
 /* =========================
-   TIMER FUNCTIONS
+   TIMER
 ========================= */
-
-function toLocalInput(timestamp){
-
-  const date =
-    new Date(timestamp);
-
-  const offset =
-    date.getTimezoneOffset();
-
-  const local =
-    new Date(
-      date.getTime() -
-      offset * 60000
-    );
-
-  return local
-    .toISOString()
-    .slice(0,16);
-
-}
-
 
 function updateTimer(){
 
@@ -1625,6 +1715,7 @@ function updateTimer(){
       "No scrim time has been set.";
 
     return;
+
   }
 
 
@@ -1650,6 +1741,7 @@ function updateTimer(){
       "SCRIM STARTED";
 
     return;
+
   }
 
 
@@ -1688,6 +1780,7 @@ function updateTimer(){
 
 }
 
+
 setInterval(
   updateTimer,
   1000
@@ -1695,7 +1788,7 @@ setInterval(
 
 
 /* =========================
-   SAVE TIMER
+   ADMIN TIMER
 ========================= */
 
 document
@@ -1707,10 +1800,12 @@ document
     if(!isAdmin)
       return;
 
+
     const value =
       document.getElementById(
         "scrimTimeInput"
       ).value;
+
 
     if(!value){
 
@@ -1719,6 +1814,7 @@ document
       );
 
       return;
+
     }
 
 
@@ -1760,6 +1856,7 @@ document
     if(!isAdmin)
       return;
 
+
     try{
 
       await remove(
@@ -1774,9 +1871,63 @@ document
 
       console.error(error);
 
-      alert(
-        "Unable to clear timer."
+    }
+
+  }
+);
+
+
+/* =========================
+   MINING
+========================= */
+
+document
+.getElementById("unlockBtn")
+.addEventListener(
+  "click",
+  async()=>{
+
+    if(!isAdmin)
+      return;
+
+
+    try{
+
+      await set(
+        miningRef,
+        true
       );
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  }
+);
+
+
+document
+.getElementById("lockBtn")
+.addEventListener(
+  "click",
+  async()=>{
+
+    if(!isAdmin)
+      return;
+
+
+    try{
+
+      await set(
+        miningRef,
+        false
+      );
+
+    }catch(error){
+
+      console.error(error);
 
     }
 
@@ -1794,6 +1945,7 @@ async function(status){
   if(!isAdmin)
     return;
 
+
   try{
 
     await set(
@@ -1804,10 +1956,6 @@ async function(status){
   }catch(error){
 
     console.error(error);
-
-    alert(
-      "Unable to change status."
-    );
 
   }
 
@@ -1827,6 +1975,7 @@ document
     if(!isAdmin)
       return;
 
+
     const input =
       document.getElementById(
         "announcementInput"
@@ -1834,6 +1983,7 @@ document
 
     const text =
       input.value.trim();
+
 
     if(!text)
       return;
@@ -1851,10 +2001,6 @@ document
     }catch(error){
 
       console.error(error);
-
-      alert(
-        "Unable to publish announcement."
-      );
 
     }
 
@@ -1897,6 +2043,7 @@ document
         "Enter admin email and password.";
 
       return;
+
     }
 
 
@@ -2003,11 +2150,10 @@ document
           }
         );
 
-      }catch(activityError){
+      }catch(error){
 
         console.warn(
-          "Activity error:",
-          activityError
+          error
         );
 
       }
@@ -2046,9 +2192,11 @@ function escapeHTML(value){
 </script>
 
 
-<!-- PWA -->
-
 <script>
+
+/* =========================
+   PWA INSTALL
+========================= */
 
 let deferredPrompt = null;
 
@@ -2081,24 +2229,20 @@ installBtn.addEventListener(
     if(!deferredPrompt){
 
       alert(
-        "Use your browser menu and choose 'Install app' or 'Add to Home screen'."
+        "Use your browser menu and choose Install App or Add to Home Screen."
       );
 
       return;
+
     }
 
 
     deferredPrompt.prompt();
 
-    const result =
-      await deferredPrompt.userChoice;
+    await deferredPrompt.userChoice;
 
-    console.log(
-      "Install result:",
-      result.outcome
-    );
-
-    deferredPrompt = null;
+    deferredPrompt =
+      null;
 
     installBtn.style.display =
       "none";
@@ -2117,6 +2261,8 @@ window.addEventListener(
   }
 );
 
+
+/* SERVICE WORKER */
 
 if("serviceWorker" in navigator){
 
