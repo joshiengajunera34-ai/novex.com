@@ -2,227 +2,195 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>NOVEX CODM</title>
 
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#7c3cff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:Arial,sans-serif;
 }
 
 body{
+  font-family:Arial,Helvetica,sans-serif;
   background:
-    radial-gradient(circle at top,#28104d,#08040d 45%,#020204);
-  color:#fff;
+    radial-gradient(circle at top,#351064 0%,#10051c 35%,#050208 75%);
+  color:white;
   min-height:100vh;
 }
 
-.container{
-  width:min(1050px,94%);
-  margin:auto;
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(124,60,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,60,255,.025) 1px,transparent 1px);
+  background-size:40px 40px;
 }
 
 header{
+  padding:25px 15px;
   text-align:center;
-  padding:45px 10px 25px;
+  border-bottom:1px solid #54228b;
+  background:rgba(5,2,8,.75);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:20;
 }
 
 .logo{
-  font-size:55px;
+  font-size:42px;
   font-weight:1000;
-  letter-spacing:7px;
-  text-shadow:0 0 15px #7c3cff,0 0 35px #7c3cff;
-}
-
-.logo span{
-  color:#a879ff;
+  letter-spacing:8px;
+  color:#fff;
+  text-shadow:
+    0 0 8px #7c3cff,
+    0 0 25px #7c3cff,
+    0 0 50px #7c3cff;
+  animation:pulse 2s infinite alternate;
 }
 
 .subtitle{
-  color:#a994bd;
-  font-size:11px;
+  color:#bca5d8;
+  font-size:12px;
   letter-spacing:4px;
-  margin-top:7px;
-}
-
-.card{
-  background:rgba(12,7,20,.9);
-  border:1px solid #321b50;
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:18px;
-  box-shadow:0 0 25px rgba(124,60,255,.08);
-}
-
-.title{
-  color:#c8a8ff;
-  font-size:13px;
-  font-weight:bold;
-  letter-spacing:2px;
-  margin-bottom:15px;
-}
-
-.scrimTitle{
-  text-align:center;
-  font-size:25px;
-  font-weight:900;
-}
-
-.center{
-  text-align:center;
-}
-
-.infoGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-top:18px;
-}
-
-.info{
-  background:#09060e;
-  border:1px solid #251634;
-  border-radius:12px;
-  padding:14px;
-  text-align:center;
-}
-
-.info strong{
-  display:block;
-  color:#bd91ff;
-}
-
-.info small{
-  display:block;
-  color:#75677f;
   margin-top:5px;
 }
 
-.timer{
-  font-size:38px;
-  font-weight:1000;
-  color:#c49aff;
-  text-shadow:0 0 18px #7c3cff;
-  letter-spacing:2px;
+@keyframes pulse{
+  from{filter:brightness(.9)}
+  to{filter:brightness(1.35)}
 }
 
-.timerDate{
-  color:#74657e;
-  font-size:11px;
-  margin-top:8px;
+.container{
+  width:min(1100px,94%);
+  margin:25px auto;
+}
+
+.card{
+  background:rgba(14,6,24,.86);
+  border:1px solid #54228b;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:
+    0 0 25px rgba(124,60,255,.12),
+    inset 0 0 30px rgba(124,60,255,.025);
+}
+
+.card h2{
+  color:#c99cff;
+  margin-bottom:15px;
+  font-size:20px;
+}
+
+.timer{
+  text-align:center;
+}
+
+.timer-label{
+  color:#a990bd;
+  font-size:12px;
+  letter-spacing:3px;
+}
+
+#countdown{
+  font-size:38px;
+  font-weight:900;
+  color:#fff;
+  margin:10px 0;
+  text-shadow:0 0 20px #7c3cff;
+}
+
+#scrimDate{
+  color:#c7a9dc;
+  font-size:14px;
 }
 
 .status{
-  text-align:center;
-  padding:13px;
-  border-radius:10px;
-  background:#100b17;
-  border:1px solid #39254e;
+  display:inline-block;
+  padding:8px 16px;
+  border-radius:30px;
+  background:#28103f;
+  color:#d9b9ff;
+  border:1px solid #743dcc;
+  font-size:12px;
   font-weight:bold;
+  margin-top:12px;
 }
 
-.open{
-  color:#5dff96;
+.status.live{
+  color:#fff;
+  background:#32115c;
+  box-shadow:0 0 20px rgba(124,60,255,.4);
 }
 
-.room{
-  color:#ffd75d;
-}
-
-.live{
-  color:#ff6868;
-}
-
-.ended{
-  color:#aaa;
-}
-
-.lock{
-  text-align:center;
-  padding:25px;
-  border:1px dashed #3b2852;
-  border-radius:12px;
-  color:#9685a4;
-}
-
-.openMining{
-  text-align:center;
-  color:#61ff9a;
-  background:#07160d;
-  border:1px solid #255d3a;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:15px;
-  font-weight:bold;
-}
-
-.formGrid{
+.form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:12px;
 }
 
 input,select{
   width:100%;
   padding:13px;
-  background:#08050d;
-  color:#fff;
-  border:1px solid #38204f;
   border-radius:10px;
+  border:1px solid #54228b;
+  background:#0a0410;
+  color:white;
   outline:none;
 }
 
 input:focus,select:focus{
-  border-color:#8c55ff;
+  border-color:#9c5cff;
+  box-shadow:0 0 12px rgba(124,60,255,.3);
 }
 
 button{
   border:0;
-  padding:13px;
   border-radius:10px;
+  padding:12px 18px;
   color:white;
-  background:linear-gradient(135deg,#7c3cff,#4915a8);
-  font-weight:bold;
+  background:linear-gradient(135deg,#6c2bca,#9a4dff);
+  font-weight:800;
   cursor:pointer;
+  transition:.2s;
 }
 
 button:hover{
-  filter:brightness(1.15);
+  transform:translateY(-1px);
+  box-shadow:0 0 18px rgba(124,60,255,.45);
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
 }
 
 .full{
   width:100%;
-  margin-top:10px;
+  margin-top:12px;
 }
 
-.progressText{
-  display:flex;
-  justify-content:space-between;
-  color:#9b8ba8;
-  font-size:12px;
-  margin-bottom:7px;
-}
-
-.progress{
-  height:10px;
-  background:#09060d;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.progressBar{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#5420c4,#b27aff);
-  box-shadow:0 0 15px #7c3cff;
-  transition:.3s;
+.install{
+  display:none;
+  width:100%;
+  margin-bottom:15px;
+  background:linear-gradient(135deg,#7c3cff,#c15cff);
+  box-shadow:0 0 25px rgba(124,60,255,.45);
 }
 
 .slots{
@@ -232,53 +200,87 @@ button:hover{
 }
 
 .slot{
+  border:1px solid #432064;
+  background:#0a0410;
+  border-radius:12px;
+  padding:12px;
   display:flex;
   align-items:center;
   gap:12px;
-  padding:12px;
-  background:#09060e;
-  border:1px solid #241534;
-  border-radius:12px;
+  min-height:70px;
 }
 
-.slotNum{
-  min-width:35px;
-  height:35px;
+.slot-number{
+  width:38px;
+  height:38px;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#160d25;
   border-radius:9px;
-  color:#ac80ff;
-  font-weight:bold;
+  background:#241039;
+  color:#c78cff;
+  font-weight:900;
 }
 
-.slotLogo{
-  width:43px;
-  height:43px;
-  object-fit:cover;
-  border-radius:9px;
+.slot-info{
+  flex:1;
+  min-width:0;
 }
 
-.available{
-  color:#51465b;
+.slot-name{
+  font-weight:900;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.activity{
-  max-height:250px;
-  overflow:auto;
+.slot-handler{
+  color:#927aa5;
+  font-size:11px;
+  margin-top:3px;
 }
 
-.activityItem{
-  padding:10px;
-  border-bottom:1px solid #21152c;
-  color:#aaa0b1;
+.open{
+  color:#8dffbd;
   font-size:12px;
 }
 
-.activityItem small{
-  display:block;
-  color:#5f5368;
+.occupied{
+  color:#d8b5ff;
+  font-size:12px;
+}
+
+.logo-img{
+  width:42px;
+  height:42px;
+  object-fit:cover;
+  border-radius:9px;
+  border:1px solid #713bb2;
+}
+
+.announcement{
+  padding:14px;
+  border-radius:12px;
+  background:#10071b;
+  border-left:4px solid #8b4cff;
+  color:#ddd;
+  white-space:pre-wrap;
+}
+
+.activity{
+  max-height:280px;
+  overflow:auto;
+}
+
+.activity-item{
+  padding:10px;
+  border-bottom:1px solid #24132f;
+  font-size:13px;
+}
+
+.activity-time{
+  color:#80688e;
+  font-size:10px;
   margin-top:4px;
 }
 
@@ -286,50 +288,59 @@ button:hover{
   display:none;
 }
 
-.adminGrid{
+.admin-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
+.admin-section{
+  padding:15px;
+  background:#09040f;
+  border:1px solid #30154a;
+  border-radius:12px;
+  margin-top:12px;
+}
+
+.admin-section h3{
+  color:#c99cff;
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+.row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.row>*{
+  flex:1;
+}
+
 .danger{
-  background:linear-gradient(135deg,#9d2940,#511321);
+  background:linear-gradient(135deg,#7b1d75,#b52d91);
 }
 
 .gray{
-  background:#18121e;
+  background:#241b2a;
 }
 
-.score{
-  display:block;
+footer{
   text-align:center;
-  text-decoration:none;
-  color:#fff;
-  padding:14px;
-  background:linear-gradient(135deg,#7c3cff,#4915a8);
-  border-radius:12px;
-  font-weight:bold;
-}
-
-.announcement{
-  background:#110a1c;
-  border:1px solid #35204e;
-  padding:14px;
-  border-radius:10px;
-  color:#d5c7e1;
+  color:#634d70;
+  padding:30px 10px;
+  font-size:11px;
 }
 
 @media(max-width:700px){
-
   .logo{
-    font-size:43px;
+    font-size:32px;
+    letter-spacing:5px;
   }
 
-  .infoGrid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .formGrid{
+  .form-grid,
+  .admin-grid{
     grid-template-columns:1fr;
   }
 
@@ -337,12 +348,12 @@ button:hover{
     grid-template-columns:1fr;
   }
 
-  .adminGrid{
-    grid-template-columns:1fr;
+  #countdown{
+    font-size:29px;
   }
 
-  .timer{
-    font-size:27px;
+  .card{
+    padding:16px;
   }
 }
 </style>
@@ -351,312 +362,256 @@ button:hover{
 <body>
 
 <header>
-  <div class="logo">N<span>Ø</span>VEX</div>
-  <div class="subtitle">ONE SQUAD • ONE FATE</div>
+  <div class="logo">NOVEX</div>
+  <div class="subtitle">CODM BR SCRIMMAGE</div>
 </header>
 
 <div class="container">
 
-<!-- SCRIM -->
+<!-- INSTALL -->
+<button id="installBtn" class="install">
+  📲 INSTALL NOVEX APP
+</button>
 
-<div class="card">
-  <div class="scrimTitle">NOVEX BR SCRIMMAGE</div>
+<!-- TIMER -->
+<div class="card timer">
 
-  <div class="infoGrid">
+  <div class="timer-label">NEXT SCRIMMAGE</div>
 
-    <div class="info">
-      <strong>25</strong>
-      <small>MAX TEAMS</small>
-    </div>
-
-    <div class="info">
-      <strong>ISO • BO • ISO</strong>
-      <small>MAPS</small>
-    </div>
-
-    <div class="info">
-      <strong id="teamCount">0 / 25</strong>
-      <small>REGISTERED</small>
-    </div>
-
-    <div class="info">
-      <strong>PH</strong>
-      <small>TIMEZONE</small>
-    </div>
-
-  </div>
-</div>
-
-<!-- COUNTDOWN -->
-
-<div class="card center">
-
-  <div class="title">⏳ SCRIMMAGE COUNTDOWN</div>
-
-  <div id="timer" class="timer">
+  <div id="countdown">
     SET BY ADMIN
   </div>
 
-  <div id="timerDate" class="timerDate">
-    Waiting for admin to set the scrim time.
+  <div id="scrimDate">
+    No scrim time has been set.
   </div>
 
-</div>
-
-<!-- STATUS -->
-
-<div class="card">
-
-  <div class="title">⚡ SCRIM STATUS</div>
-
-  <div id="status" class="status open">
-    🟢 REGISTRATION OPEN
+  <div id="statusBadge" class="status">
+    REGISTRATION OPEN
   </div>
 
 </div>
 
 <!-- ANNOUNCEMENT -->
-
 <div class="card">
-
-  <div class="title">📢 ANNOUNCEMENT</div>
-
+  <h2>📢 ANNOUNCEMENT</h2>
   <div id="announcement" class="announcement">
     No announcement yet.
   </div>
-
 </div>
 
-<!-- MINING -->
-
+<!-- REGISTRATION -->
 <div class="card">
 
-  <div class="title">⛏️ SLOT MINING</div>
+  <h2>⚡ TEAM REGISTRATION</h2>
 
-  <div id="locked" class="lock">
-    🔒<br><br>
-    <b>MINING LOCKED</b>
-    <br><br>
-    Wait for an admin to unlock mining.
-  </div>
+  <div class="form-grid">
 
-  <div id="mining" style="display:none">
+    <input
+      id="teamName"
+      placeholder="Team Name"
+      maxlength="40"
+    >
 
-    <div class="openMining">
-      🔓 MINING OPEN
-    </div>
+    <input
+      id="handler"
+      placeholder="Team Handler"
+      maxlength="40"
+    >
 
-    <form id="registerForm">
+    <input
+      id="discord"
+      placeholder="Discord / Contact"
+      maxlength="60"
+    >
 
-      <div class="formGrid">
+    <input
+      id="logo"
+      placeholder="Team Logo URL"
+      maxlength="500"
+    >
 
-        <input
-          id="teamName"
-          maxlength="40"
-          placeholder="Team Name"
-          required
-        >
-
-        <input
-          id="handler"
-          maxlength="40"
-          placeholder="Team Handler"
-          required
-        >
-
-        <input
-          id="discord"
-          maxlength="60"
-          placeholder="Discord / Contact"
-          required
-        >
-
-        <input
-          id="logo"
-          maxlength="500"
-          placeholder="Team Logo URL"
-        >
-
-      </div>
-
-      <select id="slot" class="full" required>
-        <option value="">SELECT SLOT</option>
-      </select>
-
-      <button class="full">
-        ⛏️ MINE SLOT
-      </button>
-
-    </form>
+    <select id="slot">
+      <option value="">SELECT SLOT</option>
+    </select>
 
   </div>
 
-</div>
+  <button id="registerBtn" class="full">
+    REGISTER TEAM
+  </button>
 
-<!-- PROGRESS -->
-
-<div class="card">
-
-  <div class="title">📊 SLOT PROGRESS</div>
-
-  <div class="progressText">
-    <span>REGISTERED</span>
-    <span id="percent">0%</span>
-  </div>
-
-  <div class="progress">
-    <div id="bar" class="progressBar"></div>
+  <div id="registerMessage"
+       style="text-align:center;margin-top:12px;font-size:13px;">
   </div>
 
 </div>
 
 <!-- SLOTS -->
-
 <div class="card">
 
-  <div class="title">🎮 LIVE SLOTS</div>
+  <h2>🎯 SCRIMMAGE SLOTS</h2>
 
   <div id="slots" class="slots"></div>
 
 </div>
 
 <!-- ACTIVITY -->
-
 <div class="card">
 
-  <div class="title">📋 LIVE ACTIVITY</div>
+  <h2>⚡ LIVE ACTIVITY</h2>
 
   <div id="activity" class="activity">
-    <div class="activityItem">
-      NOVEX system online.
-    </div>
+    Loading activity...
   </div>
 
 </div>
 
-<!-- SCORE -->
-
-<div class="card">
-  <a class="score" href="./score-manager.html">
-    🧮 OPEN NOVEX SCORE MANAGER
-  </a>
-</div>
-
-<!-- ADMIN -->
-
+<!-- ADMIN LOGIN -->
 <div class="card">
 
-  <div class="title">🔐 ADMIN ACCESS</div>
+  <h2>🔐 ADMIN</h2>
 
-  <div id="login">
+  <div id="loginArea">
 
     <input
-      id="email"
+      id="adminEmail"
       type="email"
       placeholder="Admin Email"
     >
 
     <input
-      id="password"
+      id="adminPassword"
       type="password"
       placeholder="Admin Password"
-      class="full"
+      style="margin-top:10px;"
     >
 
     <button id="loginBtn" class="full">
-      LOGIN
+      ADMIN LOGIN
     </button>
+
+    <div id="loginMessage"
+         style="text-align:center;margin-top:10px;font-size:12px;">
+    </div>
 
   </div>
 
-  <div id="admin" class="admin">
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" class="admin">
 
-    <!-- TIME CONTROL -->
+    <div class="admin-section">
 
-    <div class="title" style="margin-top:10px">
-      ⏰ CONTROL SCRIM TIME
-    </div>
+      <h3>⏱ SCRIM TIMER</h3>
 
-    <input
-      id="dateInput"
-      type="datetime-local"
-    >
+      <input
+        id="scrimTimeInput"
+        type="datetime-local"
+      >
 
-    <button id="saveTime" class="full">
-      💾 SAVE SCRIM TIME
-    </button>
+      <div class="row" style="margin-top:10px;">
 
-    <button id="clearTime" class="full gray">
-      🗑️ CLEAR SCRIM TIME
-    </button>
+        <button id="saveTimeBtn">
+          SAVE SCRIM TIME
+        </button>
 
-    <!-- MINING CONTROL -->
+        <button id="clearTimeBtn" class="gray">
+          CLEAR TIMER
+        </button>
 
-    <div class="title" style="margin-top:20px">
-      ⛏️ MINING CONTROL
-    </div>
-
-    <div class="adminGrid">
-
-      <button id="unlock">
-        🔓 UNLOCK MINING
-      </button>
-
-      <button id="lock">
-        🔒 LOCK MINING
-      </button>
+      </div>
 
     </div>
 
-    <!-- STATUS CONTROL -->
+    <div class="admin-section">
 
-    <div class="title" style="margin-top:20px">
-      ⚡ STATUS CONTROL
-    </div>
+      <h3>⛏ MINING CONTROL</h3>
 
-    <div class="adminGrid">
+      <div class="row">
 
-      <button id="openStatus">
-        🟢 REGISTRATION
-      </button>
+        <button id="unlockBtn">
+          UNLOCK MINING
+        </button>
 
-      <button id="roomStatus">
-        🟡 ROOM OPEN
-      </button>
+        <button id="lockBtn" class="gray">
+          LOCK MINING
+        </button>
 
-      <button id="liveStatus">
-        🔴 SCRIM LIVE
-      </button>
+      </div>
 
-      <button id="endStatus">
-        ⚪ ENDED
-      </button>
+      <div id="miningState"
+           style="margin-top:10px;font-size:12px;">
+        Loading...
+      </div>
 
     </div>
 
-    <!-- ANNOUNCEMENT -->
+    <div class="admin-section">
 
-    <div class="title" style="margin-top:20px">
-      📢 ANNOUNCEMENT
+      <h3>📡 SCRIM STATUS</h3>
+
+      <div class="row">
+
+        <button onclick="changeStatus('open')">
+          REGISTRATION
+        </button>
+
+        <button onclick="changeStatus('room')">
+          ROOM OPEN
+        </button>
+
+        <button onclick="changeStatus('live')">
+          SCRIM LIVE
+        </button>
+
+        <button onclick="changeStatus('ended')" class="gray">
+          SCRIM ENDED
+        </button>
+
+      </div>
+
     </div>
 
-    <input
-      id="announcementInput"
-      maxlength="200"
-      placeholder="Write announcement..."
-    >
+    <div class="admin-section">
 
-    <button id="postAnnouncement" class="full">
-      📢 POST ANNOUNCEMENT
-    </button>
+      <h3>📢 ANNOUNCEMENT</h3>
 
-    <!-- CLEAR -->
+      <input
+        id="announcementInput"
+        placeholder="Write announcement..."
+        maxlength="500"
+      >
 
-    <button id="clearSlots" class="full danger">
-      🗑️ CLEAR ALL SLOTS
-    </button>
+      <button id="announcementBtn" class="full">
+        PUBLISH ANNOUNCEMENT
+      </button>
 
-    <button id="logout" class="full gray">
+    </div>
+
+    <div class="admin-section">
+
+      <h3>🗑 SLOT MANAGEMENT</h3>
+
+      <button id="clearSlotsBtn" class="danger full">
+        CLEAR ALL SLOTS
+      </button>
+
+    </div>
+
+    <div class="admin-section">
+
+      <h3>📊 SCORE MANAGER</h3>
+
+      <button
+        class="full"
+        onclick="location.href='score-manager.html'"
+      >
+        OPEN SCORE MANAGER
+      </button>
+
+    </div>
+
+    <button id="logoutBtn" class="gray full">
       LOGOUT
     </button>
 
@@ -666,11 +621,15 @@ button:hover{
 
 </div>
 
+<footer>
+  NOVEX CODM • ONE SQUAD, ONE FATE
+</footer>
+
+
 <script type="module">
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getAuth,
@@ -678,7 +637,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 import {
   getDatabase,
@@ -687,10 +647,13 @@ import {
   set,
   remove,
   push
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
-/* FIREBASE */
+/* =========================
+   FIREBASE
+========================= */
 
 const firebaseConfig = {
   apiKey:"AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
@@ -706,96 +669,237 @@ const firebaseConfig = {
 const ADMIN_UID =
 "MGHp1mPC8LUAtqM73gw9GBXseyE2";
 
+
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-
 const db = getDatabase(app);
 
 
-/* DATABASE */
+/* =========================
+   DATABASE REFERENCES
+========================= */
 
 const slotsRef =
-ref(db,"novex/slots");
+  ref(db,"novex/slots");
 
 const miningRef =
-ref(db,"novex/settings/miningUnlocked");
+  ref(db,"novex/settings/miningUnlocked");
 
 const statusRef =
-ref(db,"novex/settings/status");
+  ref(db,"novex/settings/status");
 
 const announcementRef =
-ref(db,"novex/settings/announcement");
+  ref(db,"novex/settings/announcement");
 
-const scrimTimeRef =
-ref(db,"novex/settings/scrimTime");
+const timeRef =
+  ref(db,"novex/settings/scrimTime");
 
 const activityRef =
-ref(db,"novex/activity");
+  ref(db,"novex/activity");
 
 
-let slotsData = {};
+/* =========================
+   VARIABLES
+========================= */
+
+let currentUser = null;
+let isAdmin = false;
+
+let slotData = {};
 let miningUnlocked = false;
 let scrimTime = null;
 
-
-/* AUTH */
-
-signInAnonymously(auth);
+const TOTAL_SLOTS = 25;
 
 
-/* ADMIN AUTH */
+/* =========================
+   AUTH
+========================= */
 
 onAuthStateChanged(auth,user=>{
 
-  if(!user) return;
+  currentUser = user;
 
-  if(user.uid === ADMIN_UID){
+  if(user && user.uid === ADMIN_UID){
 
-    document.getElementById("login").style.display="none";
+    isAdmin = true;
 
-    document.getElementById("admin").style.display="block";
+    document.getElementById("adminPanel")
+      .style.display="block";
+
+    document.getElementById("loginArea")
+      .style.display="none";
 
   }else{
 
-    document.getElementById("admin").style.display="none";
+    isAdmin = false;
 
-    document.getElementById("login").style.display="block";
+    document.getElementById("adminPanel")
+      .style.display="none";
+
+    document.getElementById("loginArea")
+      .style.display="block";
 
   }
 
 });
 
 
-/* ADMIN CHECK */
+/* Anonymous login */
 
-function isAdmin(){
+signInAnonymously(auth)
+.catch(error=>{
+  console.error("Anonymous login:",error);
+});
 
-  return auth.currentUser &&
-         auth.currentUser.uid === ADMIN_UID;
+
+/* =========================
+   SLOT LIST
+========================= */
+
+const slotsElement =
+  document.getElementById("slots");
+
+const slotSelect =
+  document.getElementById("slot");
+
+
+function createSlotOptions(){
+
+  slotSelect.innerHTML =
+    `<option value="">SELECT SLOT</option>`;
+
+  for(let i=1;i<=TOTAL_SLOTS;i++){
+
+    const option =
+      document.createElement("option");
+
+    option.value=i;
+
+    option.textContent=
+      `SLOT ${i}`;
+
+    slotSelect.appendChild(option);
+
+  }
 
 }
 
+createSlotOptions();
 
-/* ESCAPE */
 
-function escapeHTML(value){
+function renderSlots(){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  slotsElement.innerHTML="";
+
+  for(let i=1;i<=TOTAL_SLOTS;i++){
+
+    const data = slotData[i];
+
+    const div =
+      document.createElement("div");
+
+    div.className="slot";
+
+    if(data){
+
+      let logoHTML="";
+
+      if(data.logo){
+
+        logoHTML=
+        `<img
+          class="logo-img"
+          src="${escapeHTML(data.logo)}"
+          onerror="this.style.display='none'"
+        >`;
+
+      }
+
+      div.innerHTML=`
+
+        ${logoHTML}
+
+        <div class="slot-number">
+          ${i}
+        </div>
+
+        <div class="slot-info">
+
+          <div class="slot-name">
+            ${escapeHTML(data.name)}
+          </div>
+
+          <div class="slot-handler">
+            ${escapeHTML(data.handler)}
+          </div>
+
+          <div class="occupied">
+            ● OCCUPIED
+          </div>
+
+        </div>
+      `;
+
+    }else{
+
+      div.innerHTML=`
+
+        <div class="slot-number">
+          ${i}
+        </div>
+
+        <div class="slot-info">
+
+          <div class="slot-name">
+            SLOT ${i}
+          </div>
+
+          <div class="open">
+            ● OPEN
+          </div>
+
+        </div>
+      `;
+
+    }
+
+    slotsElement.appendChild(div);
+  }
+
+
+  /* Update dropdown */
+
+  [...slotSelect.options].forEach(option=>{
+
+    if(!option.value) return;
+
+    const number=option.value;
+
+    if(slotData[number]){
+
+      option.disabled=true;
+
+      option.textContent=
+        `SLOT ${number} — ${slotData[number].name}`;
+
+    }else{
+
+      option.disabled=false;
+
+      option.textContent=
+        `SLOT ${number}`;
+
+    }
+
+  });
 
 }
 
-
-/* SLOTS */
 
 onValue(slotsRef,snapshot=>{
 
-  slotsData =
+  slotData =
     snapshot.val() || {};
 
   renderSlots();
@@ -803,229 +907,237 @@ onValue(slotsRef,snapshot=>{
 });
 
 
-function renderSlots(){
+/* =========================
+   REGISTER TEAM
+========================= */
 
-  const slots =
-    document.getElementById("slots");
+document
+.getElementById("registerBtn")
+.addEventListener("click",async()=>{
 
-  const select =
-    document.getElementById("slot");
+  const name =
+    document.getElementById("teamName")
+    .value.trim();
 
-  slots.innerHTML="";
-  select.innerHTML=
-    `<option value="">SELECT SLOT</option>`;
+  const handler =
+    document.getElementById("handler")
+    .value.trim();
 
-  let count=0;
+  const discord =
+    document.getElementById("discord")
+    .value.trim();
 
-  for(let i=1;i<=25;i++){
+  const logo =
+    document.getElementById("logo")
+    .value.trim();
 
-    const team=slotsData[i];
+  const slot =
+    document.getElementById("slot")
+    .value;
 
-    const div=document.createElement("div");
+  const message =
+    document.getElementById("registerMessage");
 
-    div.className="slot";
 
-    if(team){
+  if(!name || !handler || !discord || !slot){
 
-      count++;
+    message.textContent=
+      "⚠️ Please complete all required fields.";
 
-      const logo =
-        team.logo ||
-        "https://via.placeholder.com/100/140b20/9b6cff?text=N";
+    return;
+  }
 
-      div.innerHTML=`
 
-        <div class="slotNum">${i}</div>
+  if(!miningUnlocked){
 
-        <img
-          class="slotLogo"
-          src="${escapeHTML(logo)}"
-          onerror="this.src='https://via.placeholder.com/100/140b20/9b6cff?text=N'"
-        >
+    message.textContent=
+      "🔒 Registration is currently locked.";
 
-        <div>
-          <b>${escapeHTML(team.name)}</b>
-          <br>
-          <small style="color:#71627c">
-            @${escapeHTML(team.handler)}
-          </small>
-        </div>
+    return;
+  }
 
-      `;
 
-      const option =
-        document.createElement("option");
+  if(slotData[slot]){
 
-      option.value=i;
-      option.textContent=
-        `SLOT ${i} — ${team.name}`;
-      option.disabled=true;
+    message.textContent=
+      "❌ That slot is already occupied.";
 
-      select.appendChild(option);
+    return;
+  }
 
-    }else{
 
-      div.innerHTML=`
+  if(!currentUser){
 
-        <div class="slotNum">${i}</div>
+    message.textContent=
+      "❌ Authentication not ready.";
 
-        <div class="available">
-          <b>AVAILABLE</b><br>
-          <small>Slot ${i}</small>
-        </div>
+    return;
+  }
 
-      `;
 
-      const option =
-        document.createElement("option");
+  try{
 
-      option.value=i;
-      option.textContent=
-        `SLOT ${i} — AVAILABLE`;
+    const data={
 
-      select.appendChild(option);
+      name:name,
+      handler:handler,
+      discord:discord,
+      logo:logo,
+      registeredAt:Date.now(),
+      registeredBy:currentUser.uid
 
-    }
+    };
 
-    slots.appendChild(div);
+
+    await set(
+      ref(db,`novex/slots/${slot}`),
+      data
+    );
+
+
+    await push(activityRef,{
+
+      message:
+        `${name} registered Slot ${slot}`,
+
+      time:Date.now()
+
+    });
+
+
+    message.style.color="#8dffbd";
+
+    message.textContent=
+      `✅ ${name} registered Slot ${slot}!`;
+
+
+    document.getElementById("teamName")
+      .value="";
+
+    document.getElementById("handler")
+      .value="";
+
+    document.getElementById("discord")
+      .value="";
+
+    document.getElementById("logo")
+      .value="";
+
+    document.getElementById("slot")
+      .value="";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    message.style.color="#ff8cce";
+
+    message.textContent=
+      "❌ Registration failed.";
 
   }
 
-  document.getElementById("teamCount")
-    .textContent=`${count} / 25`;
-
-  const percent =
-    Math.round((count/25)*100);
-
-  document.getElementById("percent")
-    .textContent=percent+"%";
-
-  document.getElementById("bar")
-    .style.width=percent+"%";
-
-}
+});
 
 
-/* MINING */
+/* =========================
+   MINING
+========================= */
 
 onValue(miningRef,snapshot=>{
 
   miningUnlocked =
     snapshot.val() === true;
 
-  document.getElementById("locked")
-    .style.display=
-      miningUnlocked ? "none":"block";
+  document.getElementById("miningState")
+    .textContent =
+      miningUnlocked
+      ? "🟢 MINING UNLOCKED"
+      : "🔴 MINING LOCKED";
 
-  document.getElementById("mining")
-    .style.display=
-      miningUnlocked ? "block":"none";
-
-});
-
-
-/* SCRIM STATUS */
-
-onValue(statusRef,snapshot=>{
-
-  const value =
-    snapshot.val() || "open";
-
-  const status =
-    document.getElementById("status");
-
-  status.className="status";
-
-  if(value==="open"){
-
-    status.classList.add("open");
-    status.textContent=
-      "🟢 REGISTRATION OPEN";
-
-  }
-
-  if(value==="room"){
-
-    status.classList.add("room");
-    status.textContent=
-      "🟡 ROOM OPEN";
-
-  }
-
-  if(value==="live"){
-
-    status.classList.add("live");
-    status.textContent=
-      "🔴 SCRIM LIVE";
-
-  }
-
-  if(value==="ended"){
-
-    status.classList.add("ended");
-    status.textContent=
-      "⚪ SCRIM ENDED";
-
-  }
+  document.getElementById("miningState")
+    .style.color =
+      miningUnlocked
+      ? "#8dffbd"
+      : "#ff8cce";
 
 });
 
 
-/* ANNOUNCEMENT */
+document
+.getElementById("unlockBtn")
+.addEventListener("click",async()=>{
 
-onValue(announcementRef,snapshot=>{
+  if(!isAdmin) return;
 
-  document.getElementById("announcement")
-    .textContent=
-      snapshot.val() ||
-      "No announcement yet.";
+  await set(miningRef,true);
+
+  await push(activityRef,{
+
+    message:"Admin unlocked mining",
+
+    time:Date.now()
+
+  });
 
 });
 
 
-/* SCRIM TIME */
+document
+.getElementById("lockBtn")
+.addEventListener("click",async()=>{
 
-onValue(scrimTimeRef,snapshot=>{
+  if(!isAdmin) return;
 
-  const value=snapshot.val();
+  await set(miningRef,false);
 
-  if(value){
+  await push(activityRef,{
 
-    scrimTime=Number(value);
+    message:"Admin locked mining",
 
-    document.getElementById("dateInput").value =
+    time:Date.now()
+
+  });
+
+});
+
+
+/* =========================
+   TIMER
+========================= */
+
+onValue(timeRef,snapshot=>{
+
+  scrimTime =
+    snapshot.val();
+
+  if(isAdmin && scrimTime){
+
+    document.getElementById(
+      "scrimTimeInput"
+    ).value =
       toLocalInput(scrimTime);
 
-    updateTimer();
-
-  }else{
-
-    scrimTime=null;
-
-    document.getElementById("timer")
-      .textContent="SET BY ADMIN";
-
-    document.getElementById("timerDate")
-      .textContent=
-        "Waiting for admin to set the scrim time.";
-
   }
+
+  updateTimer();
 
 });
 
-
-/* DATE INPUT FORMAT */
 
 function toLocalInput(timestamp){
 
-  const date=new Date(timestamp);
+  const date =
+    new Date(timestamp);
 
   const offset =
     date.getTimezoneOffset();
 
   const local =
     new Date(
-      date.getTime() - offset*60000
+      date.getTime()
+      - offset*60000
     );
 
   return local
@@ -1035,31 +1147,35 @@ function toLocalInput(timestamp){
 }
 
 
-/* TIMER */
-
 function updateTimer(){
 
-  const timer =
-    document.getElementById("timer");
+  const countdown =
+    document.getElementById("countdown");
 
-  const dateText =
-    document.getElementById("timerDate");
+  const dateElement =
+    document.getElementById("scrimDate");
+
 
   if(!scrimTime){
 
-    timer.textContent="SET BY ADMIN";
+    countdown.textContent=
+      "SET BY ADMIN";
+
+    dateElement.textContent=
+      "No scrim time has been set.";
 
     return;
+
   }
 
-  const distance =
+
+  const difference =
     scrimTime-Date.now();
 
-  const date =
-    new Date(scrimTime);
 
-  dateText.textContent =
-    date.toLocaleString(
+  dateElement.textContent=
+    new Date(scrimTime)
+    .toLocaleString(
       "en-PH",
       {
         dateStyle:"full",
@@ -1067,207 +1183,308 @@ function updateTimer(){
       }
     );
 
-  if(distance<=0){
 
-    timer.textContent=
+  if(difference<=0){
+
+    countdown.textContent=
       "SCRIM STARTED";
 
     return;
+
   }
 
+
+  const totalSeconds =
+    Math.floor(difference/1000);
+
   const days =
-    Math.floor(distance/86400000);
+    Math.floor(totalSeconds/86400);
 
   const hours =
     Math.floor(
-      (distance%86400000)/3600000
+      (totalSeconds%86400)/3600
     );
 
   const minutes =
     Math.floor(
-      (distance%3600000)/60000
+      (totalSeconds%3600)/60
     );
 
   const seconds =
-    Math.floor(
-      (distance%60000)/1000
-    );
+    totalSeconds%60;
 
-  timer.textContent=
-    `${String(days).padStart(2,"0")}D `+
-    `${String(hours).padStart(2,"0")}H `+
-    `${String(minutes).padStart(2,"0")}M `+
-    `${String(seconds).padStart(2,"0")}S`;
+
+  countdown.textContent=
+    `${days}D ${String(hours).padStart(2,"0")}H ${String(minutes).padStart(2,"0")}M ${String(seconds).padStart(2,"0")}S`;
 
 }
+
 
 setInterval(updateTimer,1000);
 
 
-/* ACTIVITY */
+/* SAVE TIMER */
 
-onValue(activityRef,snapshot=>{
+document
+.getElementById("saveTimeBtn")
+.addEventListener("click",async()=>{
 
-  const box=
-    document.getElementById("activity");
+  if(!isAdmin) return;
 
-  box.innerHTML="";
+  const value =
+    document.getElementById(
+      "scrimTimeInput"
+    ).value;
 
-  const data=
-    snapshot.val() || {};
+  if(!value){
 
-  const list=
-    Object.values(data)
-      .sort((a,b)=>
-        (b.time||0)-(a.time||0)
-      )
-      .slice(0,30);
+    alert("Choose a date and time.");
 
-  list.forEach(item=>{
+    return;
 
-    const div=
-      document.createElement("div");
+  }
 
-    div.className="activityItem";
 
-    div.innerHTML=`
-      ${escapeHTML(item.message)}
-      <small>
-        ${new Date(item.time).toLocaleString()}
-      </small>
-    `;
+  const timestamp =
+    new Date(value).getTime();
 
-    box.appendChild(div);
+
+  await set(timeRef,timestamp);
+
+  await push(activityRef,{
+
+    message:"Admin updated the scrim timer",
+
+    time:Date.now()
 
   });
 
+
+  alert("Scrim time saved!");
+
 });
 
 
-/* ACTIVITY LOG */
-
-async function logActivity(message){
-
-  try{
-
-    await push(activityRef,{
-      message:message,
-      time:Date.now()
-    });
-
-  }catch(error){
-
-    console.log(error);
-
-  }
-
-}
-
-
-/* REGISTER */
+/* CLEAR TIMER */
 
 document
-.getElementById("registerForm")
-.addEventListener("submit",async e=>{
+.getElementById("clearTimeBtn")
+.addEventListener("click",async()=>{
 
-  e.preventDefault();
+  if(!isAdmin) return;
 
-  if(!miningUnlocked){
+  await remove(timeRef);
 
-    alert("Mining is locked.");
+  document.getElementById(
+    "scrimTimeInput"
+  ).value="";
 
-    return;
-  }
+});
 
-  const slot=
-    Number(
-      document.getElementById("slot").value
+
+/* =========================
+   STATUS
+========================= */
+
+onValue(statusRef,snapshot=>{
+
+  const status =
+    snapshot.val() || "open";
+
+  const badge =
+    document.getElementById(
+      "statusBadge"
     );
 
-  if(!slot){
 
-    alert("Select a slot.");
+  const names={
 
-    return;
-  }
+    open:"REGISTRATION OPEN",
 
-  if(slotsData[slot]){
+    room:"ROOM OPEN",
 
-    alert("That slot is already taken.");
+    live:"SCRIM LIVE",
 
-    return;
-  }
-
-  const data={
-
-    name:
-      document.getElementById("teamName")
-      .value.trim(),
-
-    handler:
-      document.getElementById("handler")
-      .value.trim(),
-
-    discord:
-      document.getElementById("discord")
-      .value.trim(),
-
-    logo:
-      document.getElementById("logo")
-      .value.trim(),
-
-    registeredAt:Date.now(),
-
-    registeredBy:
-      auth.currentUser.uid
+    ended:"SCRIM ENDED"
 
   };
 
-  try{
 
-    await set(
-      ref(db,`novex/slots/${slot}`),
-      data
-    );
+  badge.textContent =
+    names[status] || "REGISTRATION OPEN";
 
-    await logActivity(
-      `🎮 ${data.name} claimed SLOT ${slot}`
-    );
 
-    alert(
-      `SLOT ${slot} successfully claimed!`
-    );
-
-    document
-      .getElementById("registerForm")
-      .reset();
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "Registration failed. Try again."
-    );
-
-  }
+  badge.className=
+    "status " +
+    (status==="live" ? "live":"");
 
 });
 
 
-/* LOGIN */
+window.changeStatus =
+async function(status){
+
+  if(!isAdmin) return;
+
+  await set(statusRef,status);
+
+  await push(activityRef,{
+
+    message:
+      `Admin changed status to ${status}`,
+
+    time:Date.now()
+
+  });
+
+};
+
+
+/* =========================
+   ANNOUNCEMENT
+========================= */
+
+onValue(
+  announcementRef,
+  snapshot=>{
+
+    document.getElementById(
+      "announcement"
+    ).textContent =
+      snapshot.val()
+      || "No announcement yet.";
+
+  }
+);
+
+
+document
+.getElementById("announcementBtn")
+.addEventListener("click",async()=>{
+
+  if(!isAdmin) return;
+
+  const input =
+    document.getElementById(
+      "announcementInput"
+    );
+
+  const text =
+    input.value.trim();
+
+  if(!text) return;
+
+  await set(
+    announcementRef,
+    text
+  );
+
+  await push(activityRef,{
+
+    message:
+      "Admin posted an announcement",
+
+    time:Date.now()
+
+  });
+
+  input.value="";
+
+});
+
+
+/* =========================
+   ACTIVITY
+========================= */
+
+onValue(
+  activityRef,
+  snapshot=>{
+
+    const data =
+      snapshot.val() || {};
+
+    const items =
+      Object.values(data)
+      .sort(
+        (a,b)=>
+          (b.time||0)-(a.time||0)
+      )
+      .slice(0,30);
+
+
+    const element =
+      document.getElementById(
+        "activity"
+      );
+
+
+    if(!items.length){
+
+      element.innerHTML=
+        "No activity yet.";
+
+      return;
+
+    }
+
+
+    element.innerHTML =
+      items.map(item=>`
+
+        <div class="activity-item">
+
+          <div>
+            ⚡ ${escapeHTML(item.message)}
+          </div>
+
+          <div class="activity-time">
+            ${new Date(item.time)
+              .toLocaleString("en-PH")}
+          </div>
+
+        </div>
+
+      `).join("");
+
+  }
+);
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
 
 document
 .getElementById("loginBtn")
-.onclick=async()=>{
+.addEventListener("click",async()=>{
 
-  const email=
-    document.getElementById("email")
-    .value.trim();
+  const email =
+    document.getElementById(
+      "adminEmail"
+    ).value.trim();
 
-  const password=
-    document.getElementById("password")
-    .value;
+  const password =
+    document.getElementById(
+      "adminPassword"
+    ).value;
+
+
+  const message =
+    document.getElementById(
+      "loginMessage"
+    );
+
+
+  if(!email || !password){
+
+    message.textContent=
+      "Enter admin email and password.";
+
+    return;
+
+  }
+
 
   try{
 
@@ -1277,232 +1494,181 @@ document
       password
     );
 
+    message.textContent=
+      "✅ Logged in.";
+
   }catch(error){
 
-    alert("Admin login failed.");
+    console.error(error);
+
+    message.textContent=
+      "❌ Invalid admin login.";
 
   }
 
-};
+});
 
 
-/* SAVE TIME */
-
-document
-.getElementById("saveTime")
-.onclick=async()=>{
-
-  if(!isAdmin()) return;
-
-  const input=
-    document.getElementById("dateInput")
-    .value;
-
-  if(!input){
-
-    alert("Select the scrim date and time.");
-
-    return;
-  }
-
-  const timestamp =
-    new Date(input).getTime();
-
-  await set(
-    scrimTimeRef,
-    timestamp
-  );
-
-  await logActivity(
-    "⏰ Admin changed the scrim countdown."
-  );
-
-  alert("Scrim time updated!");
-
-};
-
-
-/* CLEAR TIME */
+/* =========================
+   LOGOUT
+========================= */
 
 document
-.getElementById("clearTime")
-.onclick=async()=>{
-
-  if(!isAdmin()) return;
-
-  await remove(scrimTimeRef);
-
-  document.getElementById("dateInput")
-    .value="";
-
-  alert("Scrim time cleared.");
-
-};
-
-
-/* MINING CONTROL */
-
-document
-.getElementById("unlock")
-.onclick=async()=>{
-
-  if(!isAdmin()) return;
-
-  await set(miningRef,true);
-
-  await logActivity(
-    "🔓 Admin unlocked mining."
-  );
-
-};
-
-
-document
-.getElementById("lock")
-.onclick=async()=>{
-
-  if(!isAdmin()) return;
-
-  await set(miningRef,false);
-
-  await logActivity(
-    "🔒 Admin locked mining."
-  );
-
-};
-
-
-/* STATUS CONTROL */
-
-async function setStatus(value,message){
-
-  if(!isAdmin()) return;
-
-  await set(statusRef,value);
-
-  await logActivity(message);
-
-}
-
-
-document.getElementById("openStatus")
-.onclick=()=>setStatus(
-  "open",
-  "🟢 Registration opened."
-);
-
-document.getElementById("roomStatus")
-.onclick=()=>setStatus(
-  "room",
-  "🟡 Room opened."
-);
-
-document.getElementById("liveStatus")
-.onclick=()=>setStatus(
-  "live",
-  "🔴 Scrim started."
-);
-
-document.getElementById("endStatus")
-.onclick=()=>setStatus(
-  "ended",
-  "⚪ Scrim ended."
-);
-
-
-/* ANNOUNCEMENT */
-
-document
-.getElementById("postAnnouncement")
-.onclick=async()=>{
-
-  if(!isAdmin()) return;
-
-  const input=
-    document.getElementById(
-      "announcementInput"
-    );
-
-  const message=input.value.trim();
-
-  if(!message){
-
-    alert("Write an announcement.");
-
-    return;
-  }
-
-  await set(
-    announcementRef,
-    message
-  );
-
-  await logActivity(
-    `📢 ${message}`
-  );
-
-  input.value="";
-
-};
-
-
-/* CLEAR SLOTS */
-
-document
-.getElementById("clearSlots")
-.onclick=async()=>{
-
-  if(!isAdmin()) return;
-
-  if(!confirm(
-    "Clear all 25 slots?"
-  )) return;
-
-  for(let i=1;i<=25;i++){
-
-    await remove(
-      ref(db,`novex/slots/${i}`)
-    );
-
-  }
-
-  await logActivity(
-    "🗑️ Admin cleared all slots."
-  );
-
-  alert("All slots cleared.");
-
-};
-
-
-/* LOGOUT */
-
-document
-.getElementById("logout")
-.onclick=async()=>{
+.getElementById("logoutBtn")
+.addEventListener("click",async()=>{
 
   await signOut(auth);
 
   location.reload();
 
-};
+});
 
 
-/* SERVICE WORKER */
+/* =========================
+   CLEAR ALL SLOTS
+========================= */
+
+document
+.getElementById("clearSlotsBtn")
+.addEventListener("click",async()=>{
+
+  if(!isAdmin) return;
+
+  const confirmClear =
+    confirm(
+      "⚠️ CLEAR ALL 25 SLOTS?"
+    );
+
+  if(!confirmClear) return;
+
+
+  await remove(slotsRef);
+
+  await push(activityRef,{
+
+    message:
+      "Admin cleared all slots",
+
+    time:Date.now()
+
+  });
+
+});
+
+
+/* =========================
+   XSS PROTECTION
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+</script>
+
+
+<!-- PWA INSTALL SYSTEM -->
+
+<script>
+
+let deferredPrompt = null;
+
+const installBtn =
+  document.getElementById("installBtn");
+
+
+window.addEventListener(
+  "beforeinstallprompt",
+  event=>{
+
+    event.preventDefault();
+
+    deferredPrompt = event;
+
+    installBtn.style.display =
+      "block";
+
+  }
+);
+
+
+installBtn.addEventListener(
+  "click",
+  async()=>{
+
+    if(!deferredPrompt){
+
+      alert(
+        "Use your browser menu and choose 'Install app' or 'Add to Home screen'."
+      );
+
+      return;
+
+    }
+
+
+    deferredPrompt.prompt();
+
+
+    const result =
+      await deferredPrompt.userChoice;
+
+
+    console.log(
+      "Install result:",
+      result.outcome
+    );
+
+
+    deferredPrompt=null;
+
+    installBtn.style.display=
+      "none";
+
+  }
+);
+
+
+window.addEventListener(
+  "appinstalled",
+  ()=>{
+
+    installBtn.style.display=
+      "none";
+
+  }
+);
+
+
+/* Service Worker */
 
 if("serviceWorker" in navigator){
 
   window.addEventListener(
     "load",
     ()=>{
+
       navigator.serviceWorker
         .register("./sw.js")
-        .catch(error=>{
+        .then(()=>{
           console.log(
-            "Service worker:",
+            "NOVEX Service Worker registered"
+          );
+        })
+        .catch(error=>{
+          console.error(
+            "Service Worker error:",
             error
           );
         });
+
     }
   );
 
@@ -1511,4 +1677,4 @@ if("serviceWorker" in navigator){
 </script>
 
 </body>
-    </html>
+</html>
