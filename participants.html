@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>NOVEX Final Participants</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top,#35105c 0%,#12051f 35%,#050208 75%);
+  color:white;
+  font-family:Arial,Helvetica,sans-serif;
+  padding:20px;
+}
+
+.container{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  padding:25px 15px;
+  border:1px solid #9d3cff;
+  border-radius:18px;
+  background:rgba(20,5,35,.85);
+  box-shadow:
+    0 0 20px rgba(157,60,255,.35),
+    inset 0 0 25px rgba(157,60,255,.08);
+}
+
+.logo{
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:6px;
+  color:#d98cff;
+  text-shadow:
+    0 0 10px #9d3cff,
+    0 0 25px #9d3cff;
+}
+
+.subtitle{
+  margin-top:8px;
+  color:#cba9e8;
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+.status{
+  display:inline-block;
+  margin-top:15px;
+  padding:7px 15px;
+  border-radius:20px;
+  background:#27103c;
+  border:1px solid #9d3cff;
+  color:#dca8ff;
+  font-size:12px;
+}
+
+.list-box{
+  margin-top:20px;
+  padding:18px;
+  border:1px solid #6625a0;
+  border-radius:18px;
+  background:rgba(12,4,20,.9);
+}
+
+.list-title{
+  text-align:center;
+  color:#d98cff;
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:15px;
+}
+
+.participant{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+  padding:13px;
+  border-radius:12px;
+  background:linear-gradient(
+    90deg,
+    rgba(102,37,160,.25),
+    rgba(30,8,45,.7)
+  );
+  border:1px solid rgba(157,60,255,.3);
+}
+
+.number{
+  min-width:35px;
+  height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:9px;
+  background:#6e24a8;
+  color:white;
+  font-weight:900;
+}
+
+.team-name{
+  font-size:16px;
+  font-weight:800;
+  word-break:break-word;
+}
+
+.empty{
+  text-align:center;
+  padding:35px 10px;
+  color:#a98bb8;
+}
+
+.total{
+  margin-top:18px;
+  text-align:center;
+  color:#cda9e8;
+  font-size:14px;
+}
+
+button{
+  width:100%;
+  margin-top:18px;
+  padding:13px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#7126b5,#b52df0);
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(181,45,240,.3);
+}
+
+button:hover{
+  box-shadow:0 0 25px rgba(181,45,240,.6);
+}
+
+.footer{
+  text-align:center;
+  margin-top:20px;
+  color:#745b82;
+  font-size:11px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">NOVEX</div>
+    <div class="subtitle">CODM BR SCRIMMAGE</div>
+
+    <div class="status" id="status">
+      LOADING...
+    </div>
+  </div>
+
+  <div class="list-box">
+
+    <div class="list-title">
+      FINAL PARTICIPANTS
+    </div>
+
+    <div id="participants">
+      <div class="empty">
+        Loading participants...
+      </div>
+    </div>
+
+    <div class="total" id="total">
+      TOTAL TEAMS: 0
+    </div>
+
+    <button onclick="location.href='index.html'">
+      ← BACK TO NOVEX
+    </button>
+
+  </div>
+
+  <div class="footer">
+    NOVEX CODM • ONE SQUAD, ONE FATE
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInAnonymously,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+const firebaseConfig = {
+  apiKey:"AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
+  authDomain:"novex-codm.firebaseapp.com",
+  databaseURL:"https://novex-codm-default-rtdb.firebaseio.com",
+  projectId:"novex-codm",
+  storageBucket:"novex-codm.firebasestorage.app",
+  messagingSenderId:"422875706154",
+  appId:"1:422875706154:web:3f21e037173f8b51ba2453",
+  measurementId:"G-9Z50JE2GFW"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+
+const participants = document.getElementById("participants");
+const total = document.getElementById("total");
+const status = document.getElementById("status");
+
+
+/* AUTH */
+
+signInAnonymously(auth);
+
+
+/* LOAD PARTICIPANTS */
+
+onAuthStateChanged(auth, user => {
+
+  if(!user) return;
+
+  const slotsRef = ref(db,"novex/slots");
+
+  onValue(slotsRef, snapshot => {
+
+    const data = snapshot.val() || {};
+
+    participants.innerHTML = "";
+
+    let count = 0;
+
+    /*
+      IMPORTANT:
+      The team name is displayed EXACTLY
+      as the participant entered it.
+
+      Example:
+      NV3 MAIN
+
+      NOT:
+      TEAM NV3 MAIN
+    */
+
+    for(let i = 1; i <= 25; i++){
+
+      const team = data[i];
+
+      if(!team) continue;
+
+      count++;
+
+      const row = document.createElement("div");
+      row.className = "participant";
+
+      const number = document.createElement("div");
+      number.className = "number";
+      number.textContent = count;
+
+      const name = document.createElement("div");
+      name.className = "team-name";
+
+      /*
+        EXACT TEAM NAME
+      */
+      name.textContent = team.name;
+
+      row.appendChild(number);
+      row.appendChild(name);
+
+      participants.appendChild(row);
+    }
+
+    if(count === 0){
+
+      participants.innerHTML = `
+        <div class="empty">
+          No participants yet.
+        </div>
+      `;
+
+    }
+
+    total.textContent = "TOTAL TEAMS: " + count;
+
+    status.textContent =
+      count > 0
+      ? "PARTICIPANTS LOADED"
+      : "WAITING FOR TEAMS";
+
+  });
+
+});
+
+</script>
+
+</body>
+  </html>
