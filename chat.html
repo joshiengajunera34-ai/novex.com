@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>NOVEX CHAT</title>
+<meta name="theme-color" content="#7c3cff">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top,#351064,#10051c 40%,#050208 80%);
+  color:white;
+}
+
+header{
+  padding:22px 15px;
+  text-align:center;
+  background:rgba(5,2,8,.9);
+  border-bottom:1px solid #54228b;
+}
+
+.logo{
+  font-size:38px;
+  font-weight:1000;
+  letter-spacing:7px;
+  color:white;
+  text-shadow:
+    0 0 10px #7c3cff,
+    0 0 25px #7c3cff,
+    0 0 45px #7c3cff;
+}
+
+.subtitle{
+  margin-top:5px;
+  font-size:11px;
+  letter-spacing:4px;
+  color:#bca5d8;
+}
+
+.container{
+  width:min(850px,94%);
+  margin:20px auto;
+}
+
+.card{
+  background:rgba(14,6,24,.94);
+  border:1px solid #54228b;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(124,60,255,.15);
+}
+
+.topbar{
+  padding:16px;
+  border-bottom:1px solid #32164b;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.chat-title{
+  font-size:18px;
+  font-weight:900;
+  color:#d1a8ff;
+}
+
+.online{
+  font-size:11px;
+  color:#8dffbd;
+}
+
+.messages{
+  height:60vh;
+  min-height:400px;
+  overflow-y:auto;
+  padding:15px;
+}
+
+.message{
+  display:flex;
+  margin-bottom:12px;
+  gap:9px;
+}
+
+.avatar{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#6c2bca,#b04cff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  flex-shrink:0;
+}
+
+.message-box{
+  max-width:80%;
+  background:#160b21;
+  border:1px solid #32164b;
+  border-radius:4px 13px 13px 13px;
+  padding:9px 12px;
+}
+
+.name{
+  color:#bd82ff;
+  font-size:12px;
+  font-weight:900;
+}
+
+.text{
+  margin-top:4px;
+  font-size:14px;
+  line-height:1.4;
+  word-break:break-word;
+}
+
+.time{
+  margin-top:5px;
+  font-size:9px;
+  color:#725c7e;
+}
+
+.admin-message{
+  border-color:#8b4cff;
+}
+
+.system{
+  text-align:center;
+  color:#806b8c;
+  font-size:11px;
+  margin:12px 0;
+}
+
+.input-area{
+  border-top:1px solid #32164b;
+  padding:12px;
+  background:#09040f;
+}
+
+.name-row{
+  display:flex;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+input,
+textarea{
+  border:1px solid #54228b;
+  background:#0a0410;
+  color:white;
+  outline:none;
+  border-radius:10px;
+  padding:12px;
+}
+
+input{
+  width:100%;
+}
+
+textarea{
+  width:100%;
+  resize:none;
+  height:50px;
+}
+
+input:focus,
+textarea:focus{
+  border-color:#9c5cff;
+  box-shadow:0 0 12px rgba(124,60,255,.3);
+}
+
+.send-row{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.send-row textarea{
+  flex:1;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:12px 18px;
+  color:white;
+  background:linear-gradient(135deg,#6c2bca,#9a4dff);
+  font-weight:900;
+  cursor:pointer;
+}
+
+button:hover{
+  box-shadow:0 0 18px rgba(124,60,255,.45);
+}
+
+.delete{
+  margin-top:6px;
+  padding:5px 8px;
+  font-size:9px;
+  background:#7b1d75;
+}
+
+.back{
+  width:100%;
+  margin-top:15px;
+  background:#241b2a;
+}
+
+.login{
+  padding:15px;
+  border-bottom:1px solid #32164b;
+}
+
+.login h3{
+  font-size:13px;
+  color:#c99cff;
+  margin-bottom:8px;
+}
+
+.login-row{
+  display:flex;
+  gap:8px;
+}
+
+#adminPanel{
+  display:none;
+}
+
+.status{
+  text-align:center;
+  font-size:11px;
+  padding:8px;
+  color:#8dffbd;
+}
+
+@media(max-width:600px){
+
+  .logo{
+    font-size:30px;
+    letter-spacing:5px;
+  }
+
+  .messages{
+    height:62vh;
+    min-height:350px;
+  }
+
+  .message-box{
+    max-width:85%;
+  }
+
+  .login-row{
+    flex-direction:column;
+  }
+
+  .send-row{
+    align-items:stretch;
+  }
+
+  .send-row button{
+    width:80px;
+    padding:8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    NOVEX
+  </div>
+
+  <div class="subtitle">
+    COMMUNITY CHAT
+  </div>
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+  <div class="topbar">
+
+    <div class="chat-title">
+      💬 NOVEX CHAT
+    </div>
+
+    <div class="online">
+      ● LIVE
+    </div>
+
+  </div>
+
+
+  <!-- ADMIN LOGIN -->
+
+  <div class="login">
+
+    <h3>ADMIN MODERATION</h3>
+
+    <div id="loginArea">
+
+      <div class="login-row">
+
+        <input
+          id="adminEmail"
+          type="email"
+          placeholder="Admin email"
+        >
+
+        <input
+          id="adminPassword"
+          type="password"
+          placeholder="Admin password"
+        >
+
+        <button id="loginBtn">
+          LOGIN
+        </button>
+
+      </div>
+
+      <div
+        id="loginMessage"
+        style="font-size:11px;margin-top:7px;">
+      </div>
+
+    </div>
+
+
+    <div id="adminPanel">
+
+      <div style="
+        color:#8dffbd;
+        font-size:11px;
+        margin-bottom:8px;
+      ">
+        🛡 ADMIN MODE ACTIVE
+      </div>
+
+      <button id="logoutBtn">
+        LOGOUT
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- STATUS -->
+
+  <div id="status" class="status">
+    Connecting...
+  </div>
+
+
+  <!-- MESSAGES -->
+
+  <div id="messages" class="messages">
+
+    <div class="system">
+      Connecting to NOVEX Chat...
+    </div>
+
+  </div>
+
+
+  <!-- SEND -->
+
+  <div class="input-area">
+
+    <div class="name-row">
+
+      <input
+        id="username"
+        maxlength="30"
+        placeholder="Your name / team"
+      >
+
+    </div>
+
+
+    <div class="send-row">
+
+      <textarea
+        id="messageInput"
+        maxlength="300"
+        placeholder="Type your message..."
+      ></textarea>
+
+      <button id="sendBtn">
+        SEND
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<button
+  class="back"
+  onclick="location.href='index.html'">
+  ← BACK TO NOVEX SCRIM
+</button>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInAnonymously,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getDatabase,
+  ref,
+  push,
+  remove,
+  onValue
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+/* =========================
+   FIREBASE
+========================= */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
+
+  authDomain:
+    "novex-codm.firebaseapp.com",
+
+  databaseURL:
+    "https://novex-codm-default-rtdb.firebaseio.com",
+
+  projectId:
+    "novex-codm",
+
+  storageBucket:
+    "novex-codm.firebasestorage.app",
+
+  messagingSenderId:
+    "422875706154",
+
+  appId:
+    "1:422875706154:web:3f21e037173f8b51ba2453",
+
+  measurementId:
+    "G-9Z50JE2GFW"
+};
+
+
+const ADMIN_UID =
+  "MGHp1mPC8LUAtqM73gw9GBXseyE2";
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getDatabase(app);
+
+
+/* =========================
+   DATABASE
+========================= */
+
+const chatRef =
+  ref(db,"novex/chat");
+
+
+/* =========================
+   STATE
+========================= */
+
+let currentUser = null;
+let isAdmin = false;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const messages =
+  document.getElementById(
+    "messages"
+  );
+
+const status =
+  document.getElementById(
+    "status"
+  );
+
+
+/* =========================
+   AUTH
+========================= */
+
+onAuthStateChanged(
+  auth,
+  user=>{
+
+    currentUser =
+      user;
+
+    if(!user){
+
+      isAdmin = false;
+
+      document.getElementById(
+        "loginArea"
+      ).style.display =
+        "block";
+
+      document.getElementById(
+        "adminPanel"
+      ).style.display =
+        "none";
+
+      return;
+    }
+
+
+    isAdmin =
+      user.uid === ADMIN_UID;
+
+
+    if(isAdmin){
+
+      document.getElementById(
+        "loginArea"
+      ).style.display =
+        "none";
+
+      document.getElementById(
+        "adminPanel"
+      ).style.display =
+        "block";
+
+    }
+
+
+    startChat();
+
+  }
+);
+
+
+/* =========================
+   ANONYMOUS LOGIN
+========================= */
+
+signInAnonymously(auth)
+.catch(error=>{
+
+  console.error(error);
+
+  status.textContent =
+    "❌ AUTHENTICATION ERROR";
+
+  status.style.color =
+    "#ff8cce";
+
+});
+
+
+/* =========================
+   CHAT LISTENER
+========================= */
+
+let chatStarted = false;
+
+function startChat(){
+
+  if(chatStarted)
+    return;
+
+  chatStarted = true;
+
+
+  onValue(
+    chatRef,
+    snapshot=>{
+
+      const data =
+        snapshot.val() || {};
+
+      const items =
+        Object.entries(data)
+        .sort(
+          (a,b)=>
+            (a[1].time || 0) -
+            (b[1].time || 0)
+        );
+
+
+      messages.innerHTML = "";
+
+
+      if(items.length === 0){
+
+        messages.innerHTML = `
+          <div class="system">
+            No messages yet. Start the conversation! 💜
+          </div>
+        `;
+
+      }
+
+
+      items.forEach(
+        ([id,msg])=>{
+
+          addMessage(
+            id,
+            msg
+          );
+
+        }
+      );
+
+
+      messages.scrollTop =
+        messages.scrollHeight;
+
+
+      status.textContent =
+        "● LIVE • CONNECTED";
+
+      status.style.color =
+        "#8dffbd";
+
+    },
+    error=>{
+
+      console.error(error);
+
+      status.textContent =
+        "❌ CHAT CONNECTION ERROR";
+
+      status.style.color =
+        "#ff8cce";
+
+    }
+  );
+
+}
+
+
+/* =========================
+   ADD MESSAGE
+========================= */
+
+function addMessage(id,msg){
+
+  const wrapper =
+    document.createElement(
+      "div"
+    );
+
+  wrapper.className =
+    "message";
+
+
+  const avatar =
+    document.createElement(
+      "div"
+    );
+
+  avatar.className =
+    "avatar";
+
+  avatar.textContent =
+    (
+      msg.name ||
+      "?"
+    )
+    .charAt(0)
+    .toUpperCase();
+
+
+  const box =
+    document.createElement(
+      "div"
+    );
+
+  box.className =
+    "message-box";
+
+
+  if(msg.admin === true){
+
+    box.classList.add(
+      "admin-message"
+    );
+
+  }
+
+
+  const name =
+    document.createElement(
+      "div"
+    );
+
+  name.className =
+    "name";
+
+  name.textContent =
+    msg.name ||
+    "Unknown";
+
+
+  if(msg.admin === true){
+
+    name.textContent +=
+      " 🛡 ADMIN";
+
+  }
+
+
+  const text =
+    document.createElement(
+      "div"
+    );
+
+  text.className =
+    "text";
+
+  text.textContent =
+    msg.text ||
+    "";
+
+
+  const time =
+    document.createElement(
+      "div"
+    );
+
+  time.className =
+    "time";
+
+  time.textContent =
+    msg.time
+    ? new Date(
+        msg.time
+      ).toLocaleString(
+        "en-PH"
+      )
+    : "";
+
+
+  box.appendChild(name);
+  box.appendChild(text);
+  box.appendChild(time);
+
+
+  if(isAdmin){
+
+    const deleteBtn =
+      document.createElement(
+        "button"
+      );
+
+    deleteBtn.className =
+      "delete";
+
+    deleteBtn.textContent =
+      "DELETE";
+
+
+    deleteBtn.onclick =
+      async()=>{
+
+        const confirmed =
+          confirm(
+            "Delete this message?"
+          );
+
+        if(!confirmed)
+          return;
+
+
+        try{
+
+          await remove(
+            ref(
+              db,
+              `novex/chat/${id}`
+            )
+          );
+
+        }catch(error){
+
+          console.error(
+            error
+          );
+
+          alert(
+            "Unable to delete message."
+          );
+
+        }
+
+      };
+
+
+    box.appendChild(
+      deleteBtn
+    );
+
+  }
+
+
+  wrapper.appendChild(
+    avatar
+  );
+
+  wrapper.appendChild(
+    box
+  );
+
+  messages.appendChild(
+    wrapper
+  );
+
+}
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+async function sendMessage(){
+
+  if(!currentUser){
+
+    alert(
+      "Connecting to chat..."
+    );
+
+    return;
+  }
+
+
+  const username =
+    document.getElementById(
+      "username"
+    ).value.trim();
+
+  const input =
+    document.getElementById(
+      "messageInput"
+    );
+
+  const text =
+    input.value.trim();
+
+
+  if(!username){
+
+    alert(
+      "Enter your name or team."
+    );
+
+    return;
+  }
+
+
+  if(!text)
+    return;
+
+
+  try{
+
+    await push(
+      chatRef,
+      {
+
+        name:
+          username,
+
+        text:
+          text,
+
+        time:
+          Date.now(),
+
+        uid:
+          currentUser.uid,
+
+        admin:
+          isAdmin
+
+      }
+    );
+
+
+    input.value = "";
+
+    input.focus();
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    alert(
+      "❌ Unable to send message."
+    );
+
+  }
+
+}
+
+
+document
+.getElementById("sendBtn")
+.addEventListener(
+  "click",
+  sendMessage
+);
+
+
+/* ENTER TO SEND */
+
+document
+.getElementById("messageInput")
+.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key === "Enter" &&
+      !event.shiftKey
+    ){
+
+      event.preventDefault();
+
+      sendMessage();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+document
+.getElementById("loginBtn")
+.addEventListener(
+  "click",
+  async()=>{
+
+    const email =
+      document.getElementById(
+        "adminEmail"
+      ).value.trim();
+
+    const password =
+      document.getElementById(
+        "adminPassword"
+      ).value;
+
+    const message =
+      document.getElementById(
+        "loginMessage"
+      );
+
+
+    if(
+      !email ||
+      !password
+    ){
+
+      message.textContent =
+        "Enter email and password.";
+
+      return;
+    }
+
+
+    try{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+      message.style.color =
+        "#8dffbd";
+
+      message.textContent =
+        "Login successful.";
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+      message.style.color =
+        "#ff8cce";
+
+      message.textContent =
+        "❌ Invalid admin login.";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+  "click",
+  async()=>{
+
+    try{
+
+      await signOut(auth);
+
+      location.reload();
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+  </html>
