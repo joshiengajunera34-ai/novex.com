@@ -8,9 +8,6 @@
 
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#7c3cff">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <style>
 *{
@@ -42,8 +39,7 @@ header{
   padding:25px 15px;
   text-align:center;
   border-bottom:1px solid #54228b;
-  background:rgba(5,2,8,.75);
-  backdrop-filter:blur(10px);
+  background:rgba(5,2,8,.8);
   position:sticky;
   top:0;
   z-index:20;
@@ -53,7 +49,6 @@ header{
   font-size:42px;
   font-weight:1000;
   letter-spacing:8px;
-  color:#fff;
   text-shadow:
     0 0 8px #7c3cff,
     0 0 25px #7c3cff,
@@ -69,8 +64,8 @@ header{
 }
 
 @keyframes pulse{
-  from{filter:brightness(.9)}
-  to{filter:brightness(1.35)}
+  from{filter:brightness:.9}
+  to{filter:brightness:1.35}
 }
 
 .container{
@@ -79,7 +74,7 @@ header{
 }
 
 .card{
-  background:rgba(14,6,24,.86);
+  background:rgba(14,6,24,.9);
   border:1px solid #54228b;
   border-radius:18px;
   padding:22px;
@@ -108,7 +103,6 @@ header{
 #countdown{
   font-size:38px;
   font-weight:900;
-  color:#fff;
   margin:10px 0;
   text-shadow:0 0 20px #7c3cff;
 }
@@ -131,7 +125,6 @@ header{
 }
 
 .status.live{
-  color:#fff;
   background:#32115c;
   box-shadow:0 0 20px rgba(124,60,255,.4);
 }
@@ -142,7 +135,8 @@ header{
   gap:12px;
 }
 
-input,select{
+input,
+select{
   width:100%;
   padding:13px;
   border-radius:10px;
@@ -152,7 +146,8 @@ input,select{
   outline:none;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
   border-color:#9c5cff;
   box-shadow:0 0 12px rgba(124,60,255,.3);
 }
@@ -190,7 +185,6 @@ button:disabled{
   width:100%;
   margin-bottom:15px;
   background:linear-gradient(135deg,#7c3cff,#c15cff);
-  box-shadow:0 0 25px rgba(124,60,255,.45);
 }
 
 .slots{
@@ -206,8 +200,8 @@ button:disabled{
   padding:12px;
   display:flex;
   align-items:center;
-  gap:12px;
-  min-height:70px;
+  gap:10px;
+  min-height:76px;
 }
 
 .slot-number{
@@ -244,11 +238,13 @@ button:disabled{
 .open{
   color:#8dffbd;
   font-size:12px;
+  margin-top:3px;
 }
 
 .occupied{
   color:#d8b5ff;
   font-size:12px;
+  margin-top:3px;
 }
 
 .logo-img{
@@ -258,6 +254,17 @@ button:disabled{
   border-radius:9px;
   border:1px solid #713bb2;
   flex-shrink:0;
+}
+
+.remove-btn{
+  background:linear-gradient(135deg,#8b1e68,#d8329d);
+  padding:8px 9px;
+  font-size:10px;
+  flex-shrink:0;
+}
+
+.remove-btn:hover{
+  box-shadow:0 0 15px rgba(216,50,157,.5);
 }
 
 .announcement{
@@ -358,6 +365,11 @@ footer{
   .card{
     padding:16px;
   }
+
+  .remove-btn{
+    padding:7px;
+    font-size:9px;
+  }
 }
 </style>
 </head>
@@ -457,8 +469,7 @@ footer{
     REGISTER TEAM
   </button>
 
-  <div
-    id="registerMessage"
+  <div id="registerMessage"
     style="text-align:center;margin-top:12px;font-size:13px;">
   </div>
 
@@ -522,8 +533,7 @@ footer{
       ADMIN LOGIN
     </button>
 
-    <div
-      id="loginMessage"
+    <div id="loginMessage"
       style="text-align:center;margin-top:10px;font-size:12px;">
     </div>
 
@@ -534,7 +544,7 @@ footer{
   <div id="adminPanel" class="admin">
 
 
-    <!-- TIMER CONTROL -->
+    <!-- TIMER -->
     <div class="admin-section">
 
       <h3>⏱ SCRIM TIMER</h3>
@@ -576,8 +586,7 @@ footer{
 
       </div>
 
-      <div
-        id="miningState"
+      <div id="miningState"
         style="margin-top:10px;font-size:12px;">
         Loading...
       </div>
@@ -604,8 +613,7 @@ footer{
           SCRIM LIVE
         </button>
 
-        <button
-          onclick="changeStatus('ended')"
+        <button onclick="changeStatus('ended')"
           class="gray">
           SCRIM ENDED
         </button>
@@ -626,8 +634,7 @@ footer{
         maxlength="500"
       >
 
-      <button
-        id="announcementBtn"
+      <button id="announcementBtn"
         class="full">
         PUBLISH ANNOUNCEMENT
       </button>
@@ -640,10 +647,17 @@ footer{
 
       <h3>🗑 SLOT MANAGEMENT</h3>
 
-      <button
-        id="clearSlotsBtn"
+      <p style="
+        color:#8f7b9b;
+        font-size:11px;
+        margin-bottom:10px;
+      ">
+        Use REMOVE beside a team to remove only that team.
+      </p>
+
+      <button id="clearSlotsBtn"
         class="danger full">
-        CLEAR ALL SLOTS
+        CLEAR ALL 25 SLOTS
       </button>
 
     </div>
@@ -654,8 +668,7 @@ footer{
 
       <h3>📊 SCORE MANAGER</h3>
 
-      <button
-        class="full"
+      <button class="full"
         onclick="location.href='score-manager.html'">
         OPEN SCORE MANAGER
       </button>
@@ -663,8 +676,7 @@ footer{
     </div>
 
 
-    <button
-      id="logoutBtn"
+    <button id="logoutBtn"
       class="gray full">
       LOGOUT
     </button>
@@ -674,7 +686,6 @@ footer{
 </div>
 
 </div>
-
 
 <footer>
   NOVEX CODM • ONE SQUAD, ONE FATE
@@ -707,7 +718,7 @@ from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
 
 
 /* =========================
-   FIREBASE CONFIG
+   FIREBASE
 ========================= */
 
 const firebaseConfig = {
@@ -737,13 +748,10 @@ const firebaseConfig = {
     "G-9Z50JE2GFW"
 };
 
-
 const ADMIN_UID =
   "MGHp1mPC8LUAtqM73gw9GBXseyE2";
 
-
 const TOTAL_SLOTS = 25;
-
 
 const app =
   initializeApp(firebaseConfig);
@@ -756,7 +764,7 @@ const db =
 
 
 /* =========================
-   REFERENCES
+   DATABASE REFERENCES
 ========================= */
 
 const slotsRef =
@@ -779,19 +787,14 @@ const activityRef =
 
 
 /* =========================
-   VARIABLES
+   STATE
 ========================= */
 
 let currentUser = null;
-
 let isAdmin = false;
-
 let slotData = {};
-
 let miningUnlocked = false;
-
 let scrimTime = null;
-
 let listenersStarted = false;
 
 
@@ -810,7 +813,7 @@ const connection =
 
 
 /* =========================
-   CREATE 25 OPTIONS
+   SLOT DROPDOWN
 ========================= */
 
 function createSlotOptions(){
@@ -818,11 +821,7 @@ function createSlotOptions(){
   slotSelect.innerHTML =
     `<option value="">SELECT SLOT</option>`;
 
-  for(
-    let i=1;
-    i<=TOTAL_SLOTS;
-    i++
-  ){
+  for(let i=1;i<=TOTAL_SLOTS;i++){
 
     const option =
       document.createElement("option");
@@ -834,51 +833,34 @@ function createSlotOptions(){
       `SLOT ${i}`;
 
     slotSelect.appendChild(option);
-
   }
-
 }
 
 createSlotOptions();
 
 
 /* =========================
-   RENDER ALL 25 SLOTS
+   RENDER SLOTS
 ========================= */
 
 function renderSlots(){
 
   slotsElement.innerHTML = "";
 
+  for(let i=1;i<=TOTAL_SLOTS;i++){
 
-  for(
-    let i=1;
-    i<=TOTAL_SLOTS;
-    i++
-  ){
-
-    const key =
-      String(i);
-
-    const data =
-      slotData[key];
-
+    const key = String(i);
+    const data = slotData[key];
 
     const div =
       document.createElement("div");
 
-    div.className =
-      "slot";
+    div.className = "slot";
 
-
-    /* =====================
-       OCCUPIED
-    ===================== */
 
     if(data){
 
       let logoHTML = "";
-
 
       if(
         typeof data.logo === "string" &&
@@ -893,7 +875,6 @@ function renderSlots(){
             onerror="this.style.display='none'"
           >
         `;
-
       }
 
 
@@ -921,16 +902,21 @@ function renderSlots(){
 
         </div>
 
+        ${
+          isAdmin
+          ? `
+            <button
+              class="remove-btn"
+              data-slot="${i}">
+              REMOVE
+            </button>
+          `
+          : ""
+        }
+
       `;
 
-    }
-
-
-    /* =====================
-       OPEN
-    ===================== */
-
-    else{
+    }else{
 
       div.innerHTML = `
 
@@ -951,17 +937,112 @@ function renderSlots(){
         </div>
 
       `;
-
     }
 
-
     slotsElement.appendChild(div);
-
   }
 
 
   /* =========================
-     UPDATE DROPDOWN
+     ADMIN REMOVE BUTTONS
+  ========================= */
+
+  if(isAdmin){
+
+    document
+      .querySelectorAll(".remove-btn")
+      .forEach(button=>{
+
+        button.addEventListener(
+          "click",
+          async()=>{
+
+            const slot =
+              button.dataset.slot;
+
+            const team =
+              slotData[slot]?.name ||
+              `Slot ${slot}`;
+
+
+            const confirmed =
+              confirm(
+                `Remove ${team} from Slot ${slot}?`
+              );
+
+
+            if(!confirmed)
+              return;
+
+
+            button.disabled = true;
+            button.textContent =
+              "REMOVING...";
+
+
+            try{
+
+              await remove(
+                ref(
+                  db,
+                  `novex/slots/${slot}`
+                )
+              );
+
+
+              try{
+
+                await push(
+                  activityRef,
+                  {
+
+                    message:
+                      `Admin removed ${team} from Slot ${slot}`,
+
+                    time:
+                      Date.now()
+
+                  }
+                );
+
+              }catch(activityError){
+
+                console.warn(
+                  "Activity error:",
+                  activityError
+                );
+              }
+
+
+            }catch(error){
+
+              console.error(
+                "Remove error:",
+                error
+              );
+
+
+              alert(
+                "❌ Unable to remove team."
+              );
+
+
+              button.disabled = false;
+
+              button.textContent =
+                "REMOVE";
+
+            }
+
+          }
+        );
+
+      });
+  }
+
+
+  /* =========================
+     UPDATE SLOT DROPDOWN
   ========================= */
 
   Array
@@ -970,7 +1051,6 @@ function renderSlots(){
 
       if(!option.value)
         return;
-
 
       const number =
         option.value;
@@ -981,16 +1061,14 @@ function renderSlots(){
 
       if(data){
 
-        option.disabled =
-          true;
+        option.disabled = true;
 
         option.textContent =
           `SLOT ${number} — ${data.name}`;
 
       }else{
 
-        option.disabled =
-          false;
+        option.disabled = false;
 
         option.textContent =
           `SLOT ${number}`;
@@ -1003,7 +1081,7 @@ function renderSlots(){
 
 
 /* =========================
-   DATABASE LISTENERS
+   FIREBASE LISTENERS
 ========================= */
 
 function startDatabaseListeners(){
@@ -1014,32 +1092,22 @@ function startDatabaseListeners(){
   listenersStarted = true;
 
 
-  /* =========================
-     LIVE SLOTS
-  ========================= */
+  /* SLOTS */
 
   onValue(
     slotsRef,
-
     snapshot=>{
 
       const value =
         snapshot.val();
 
-
-      /*
-        Always convert Firebase
-        object into a fresh object.
-      */
-
       slotData =
-        value && typeof value === "object"
+        value &&
+        typeof value === "object"
         ? value
         : {};
 
-
       renderSlots();
-
 
       connection.textContent =
         "● LIVE • CONNECTED TO NOVEX";
@@ -1048,14 +1116,9 @@ function startDatabaseListeners(){
         "#8dffbd";
 
     },
-
     error=>{
 
-      console.error(
-        "Firebase slots error:",
-        error
-      );
-
+      console.error(error);
 
       connection.textContent =
         "● DATABASE CONNECTION ERROR";
@@ -1063,50 +1126,28 @@ function startDatabaseListeners(){
       connection.style.color =
         "#ff8cce";
 
-
-      slotsElement.innerHTML = `
-
-        <div style="
-          grid-column:1/-1;
-          text-align:center;
-          padding:20px;
-          color:#ff8cce;
-        ">
-
-          ❌ Unable to load live slots.
-
-        </div>
-
-      `;
-
     }
   );
 
 
-  /* =========================
-     MINING
-  ========================= */
+  /* MINING */
 
   onValue(
     miningRef,
-
     snapshot=>{
 
       miningUnlocked =
         snapshot.val() === true;
-
 
       const state =
         document.getElementById(
           "miningState"
         );
 
-
       state.textContent =
         miningUnlocked
         ? "🟢 MINING UNLOCKED"
         : "🔴 MINING LOCKED";
-
 
       state.style.color =
         miningUnlocked
@@ -1117,23 +1158,16 @@ function startDatabaseListeners(){
   );
 
 
-  /* =========================
-     TIMER
-  ========================= */
+  /* TIMER */
 
   onValue(
     timeRef,
-
     snapshot=>{
 
       scrimTime =
         snapshot.val();
 
-
-      if(
-        isAdmin &&
-        scrimTime
-      ){
+      if(isAdmin && scrimTime){
 
         document.getElementById(
           "scrimTimeInput"
@@ -1142,53 +1176,38 @@ function startDatabaseListeners(){
 
       }
 
-
       updateTimer();
 
     }
   );
 
 
-  /* =========================
-     STATUS
-  ========================= */
+  /* STATUS */
 
   onValue(
     statusRef,
-
     snapshot=>{
 
       const status =
         snapshot.val() || "open";
-
 
       const badge =
         document.getElementById(
           "statusBadge"
         );
 
-
       const names = {
 
-        open:
-          "REGISTRATION OPEN",
-
-        room:
-          "ROOM OPEN",
-
-        live:
-          "SCRIM LIVE",
-
-        ended:
-          "SCRIM ENDED"
+        open:"REGISTRATION OPEN",
+        room:"ROOM OPEN",
+        live:"SCRIM LIVE",
+        ended:"SCRIM ENDED"
 
       };
-
 
       badge.textContent =
         names[status] ||
         "REGISTRATION OPEN";
-
 
       badge.className =
         "status " +
@@ -1202,13 +1221,10 @@ function startDatabaseListeners(){
   );
 
 
-  /* =========================
-     ANNOUNCEMENT
-  ========================= */
+  /* ANNOUNCEMENT */
 
   onValue(
     announcementRef,
-
     snapshot=>{
 
       document.getElementById(
@@ -1221,18 +1237,14 @@ function startDatabaseListeners(){
   );
 
 
-  /* =========================
-     ACTIVITY
-  ========================= */
+  /* ACTIVITY */
 
   onValue(
     activityRef,
-
     snapshot=>{
 
       const data =
         snapshot.val() || {};
-
 
       const items =
         Object.values(data)
@@ -1242,7 +1254,6 @@ function startDatabaseListeners(){
             (a.time || 0)
         )
         .slice(0,30);
-
 
       const element =
         document.getElementById(
@@ -1256,7 +1267,6 @@ function startDatabaseListeners(){
           "No activity yet.";
 
         return;
-
       }
 
 
@@ -1270,11 +1280,9 @@ function startDatabaseListeners(){
             </div>
 
             <div class="activity-time">
-
               ${new Date(
                 item.time
               ).toLocaleString("en-PH")}
-
             </div>
 
           </div>
@@ -1288,7 +1296,7 @@ function startDatabaseListeners(){
 
 
 /* =========================
-   AUTH STATE
+   AUTH
 ========================= */
 
 onAuthStateChanged(
@@ -1301,97 +1309,69 @@ onAuthStateChanged(
 
     if(!user){
 
-      isAdmin =
-        false;
-
+      isAdmin = false;
 
       document.getElementById(
         "adminPanel"
       ).style.display =
         "none";
 
-
       document.getElementById(
         "loginArea"
       ).style.display =
         "block";
 
+      renderSlots();
 
       return;
-
     }
+
+
+    isAdmin =
+      user.uid === ADMIN_UID;
+
+
+    document.getElementById(
+      "adminPanel"
+    ).style.display =
+      isAdmin
+      ? "block"
+      : "none";
+
+
+    document.getElementById(
+      "loginArea"
+    ).style.display =
+      isAdmin
+      ? "none"
+      : "block";
 
 
     /*
-      Check whether this is
-      the admin account.
-    */
-
-    if(
-      user.uid === ADMIN_UID
-    ){
-
-      isAdmin =
-        true;
-
-
-      document.getElementById(
-        "adminPanel"
-      ).style.display =
-        "block";
-
-
-      document.getElementById(
-        "loginArea"
-      ).style.display =
-        "none";
-
-    }
-
-    else{
-
-      isAdmin =
-        false;
-
-
-      document.getElementById(
-        "adminPanel"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "loginArea"
-      ).style.display =
-        "block";
-
-    }
-
-
-    /*
-      MOST IMPORTANT FIX:
-      Start Firebase listeners only
-      after authentication succeeds.
+      IMPORTANT:
+      Database listeners start only
+      after authentication.
     */
 
     startDatabaseListeners();
+
+    renderSlots();
 
   }
 );
 
 
 /* =========================
-   ANONYMOUS AUTH
+   ANONYMOUS LOGIN
 ========================= */
 
 signInAnonymously(auth)
 .catch(error=>{
 
   console.error(
-    "Anonymous authentication:",
+    "Anonymous authentication error:",
     error
   );
-
 
   connection.textContent =
     "● AUTHENTICATION ERROR";
@@ -1417,39 +1397,30 @@ document
         "teamName"
       ).value.trim();
 
-
     const handler =
       document.getElementById(
         "handler"
       ).value.trim();
-
 
     const discord =
       document.getElementById(
         "discord"
       ).value.trim();
 
-
     const logo =
       document.getElementById(
         "logo"
       ).value.trim();
-
 
     const slot =
       document.getElementById(
         "slot"
       ).value;
 
-
     const message =
       document.getElementById(
         "registerMessage"
       );
-
-
-    message.style.color =
-      "#fff";
 
 
     if(
@@ -1463,7 +1434,6 @@ document
         "⚠️ Please complete all required fields.";
 
       return;
-
     }
 
 
@@ -1473,7 +1443,6 @@ document
         "⏳ Connecting to NOVEX...";
 
       return;
-
     }
 
 
@@ -1483,17 +1452,10 @@ document
         "🔒 Registration is currently locked.";
 
       return;
-
     }
 
 
-    /*
-      Local check.
-    */
-
-    if(
-      slotData[String(slot)]
-    ){
+    if(slotData[String(slot)]){
 
       message.textContent =
         "❌ That slot is already occupied.";
@@ -1501,40 +1463,27 @@ document
       renderSlots();
 
       return;
-
     }
 
 
     const data = {
 
-      name:
-        name,
+      name:name,
 
-      handler:
-        handler,
+      handler:handler,
 
-      discord:
-        discord,
+      discord:discord,
 
-      logo:
-        logo,
+      logo:logo,
 
-      registeredAt:
-        Date.now(),
+      registeredAt:Date.now(),
 
-      registeredBy:
-        currentUser.uid
+      registeredBy:currentUser.uid
 
     };
 
 
     try{
-
-      /*
-        Firebase Rules perform
-        the final server-side
-        protection.
-      */
 
       await set(
         ref(
@@ -1544,10 +1493,6 @@ document
         data
       );
 
-
-      /*
-        Activity is separate.
-      */
 
       try{
 
@@ -1577,7 +1522,6 @@ document
       message.style.color =
         "#8dffbd";
 
-
       message.textContent =
         `✅ ${name} registered Slot ${slot}!`;
 
@@ -1586,36 +1530,28 @@ document
         "teamName"
       ).value = "";
 
-
       document.getElementById(
         "handler"
       ).value = "";
-
 
       document.getElementById(
         "discord"
       ).value = "";
 
-
       document.getElementById(
         "logo"
       ).value = "";
-
 
       document.getElementById(
         "slot"
       ).value = "";
 
-    }
-
-
-    catch(error){
+    }catch(error){
 
       console.error(
         "Registration error:",
         error
       );
-
 
       message.style.color =
         "#ff8cce";
@@ -1629,9 +1565,7 @@ document
         message.textContent =
           "❌ That slot was already claimed or registration is locked.";
 
-      }
-
-      else{
+      }else{
 
         message.textContent =
           "❌ Registration failed. Please try again.";
@@ -1645,7 +1579,7 @@ document
 
 
 /* =========================
-   TIMER
+   TIMER FUNCTIONS
 ========================= */
 
 function toLocalInput(timestamp){
@@ -1653,17 +1587,14 @@ function toLocalInput(timestamp){
   const date =
     new Date(timestamp);
 
-
   const offset =
     date.getTimezoneOffset();
-
 
   const local =
     new Date(
       date.getTime() -
       offset * 60000
     );
-
 
   return local
     .toISOString()
@@ -1679,7 +1610,6 @@ function updateTimer(){
       "countdown"
     );
 
-
   const dateElement =
     document.getElementById(
       "scrimDate"
@@ -1691,13 +1621,10 @@ function updateTimer(){
     countdown.textContent =
       "SET BY ADMIN";
 
-
     dateElement.textContent =
       "No scrim time has been set.";
 
-
     return;
-
   }
 
 
@@ -1711,24 +1638,18 @@ function updateTimer(){
     .toLocaleString(
       "en-PH",
       {
-        dateStyle:
-          "full",
-
-        timeStyle:
-          "short"
+        dateStyle:"full",
+        timeStyle:"short"
       }
     );
 
 
-  if(
-    difference <= 0
-  ){
+  if(difference <= 0){
 
     countdown.textContent =
       "SCRIM STARTED";
 
     return;
-
   }
 
 
@@ -1743,20 +1664,17 @@ function updateTimer(){
       totalSeconds / 86400
     );
 
-
   const hours =
     Math.floor(
       (totalSeconds % 86400) /
       3600
     );
 
-
   const minutes =
     Math.floor(
       (totalSeconds % 3600) /
       60
     );
-
 
   const seconds =
     totalSeconds % 60;
@@ -1769,7 +1687,6 @@ function updateTimer(){
     `${String(seconds).padStart(2,"0")}S`;
 
 }
-
 
 setInterval(
   updateTimer,
@@ -1790,12 +1707,10 @@ document
     if(!isAdmin)
       return;
 
-
     const value =
       document.getElementById(
         "scrimTimeInput"
       ).value;
-
 
     if(!value){
 
@@ -1804,35 +1719,15 @@ document
       );
 
       return;
-
     }
-
-
-    const timestamp =
-      new Date(value).getTime();
 
 
     try{
 
       await set(
         timeRef,
-        timestamp
+        new Date(value).getTime()
       );
-
-
-      await push(
-        activityRef,
-        {
-
-          message:
-            "Admin updated the scrim timer",
-
-          time:
-            Date.now()
-
-        }
-      );
-
 
       alert(
         "Scrim time saved!"
@@ -1865,18 +1760,15 @@ document
     if(!isAdmin)
       return;
 
-
     try{
 
       await remove(
         timeRef
       );
 
-
       document.getElementById(
         "scrimTimeInput"
       ).value = "";
-
 
     }catch(error){
 
@@ -1902,28 +1794,12 @@ async function(status){
   if(!isAdmin)
     return;
 
-
   try{
 
     await set(
       statusRef,
       status
     );
-
-
-    await push(
-      activityRef,
-      {
-
-        message:
-          `Admin changed status to ${status}`,
-
-        time:
-          Date.now()
-
-      }
-    );
-
 
   }catch(error){
 
@@ -1951,16 +1827,13 @@ document
     if(!isAdmin)
       return;
 
-
     const input =
       document.getElementById(
         "announcementInput"
       );
 
-
     const text =
       input.value.trim();
-
 
     if(!text)
       return;
@@ -1973,23 +1846,7 @@ document
         text
       );
 
-
-      await push(
-        activityRef,
-        {
-
-          message:
-            "Admin posted an announcement",
-
-          time:
-            Date.now()
-
-        }
-      );
-
-
       input.value = "";
-
 
     }catch(error){
 
@@ -2020,12 +1877,10 @@ document
         "adminEmail"
       ).value.trim();
 
-
     const password =
       document.getElementById(
         "adminPassword"
       ).value;
-
 
     const message =
       document.getElementById(
@@ -2042,7 +1897,6 @@ document
         "Enter admin email and password.";
 
       return;
-
     }
 
 
@@ -2058,21 +1912,15 @@ document
       message.style.color =
         "#8dffbd";
 
-
       message.textContent =
         "✅ Logged in.";
 
-    }
-
-
-    catch(error){
+    }catch(error){
 
       console.error(error);
 
-
       message.style.color =
         "#ff8cce";
-
 
       message.textContent =
         "❌ Invalid admin login.";
@@ -2140,19 +1988,29 @@ document
       );
 
 
-      await push(
-        activityRef,
-        {
+      try{
 
-          message:
-            "Admin cleared all slots",
+        await push(
+          activityRef,
+          {
 
-          time:
-            Date.now()
+            message:
+              "Admin cleared all 25 slots",
 
-        }
-      );
+            time:
+              Date.now()
 
+          }
+        );
+
+      }catch(activityError){
+
+        console.warn(
+          "Activity error:",
+          activityError
+        );
+
+      }
 
     }catch(error){
 
@@ -2169,7 +2027,7 @@ document
 
 
 /* =========================
-   XSS PROTECTION
+   ESCAPE HTML
 ========================= */
 
 function escapeHTML(value){
@@ -2177,44 +2035,22 @@ function escapeHTML(value){
   return String(
     value ?? ""
   )
-
-  .replaceAll(
-    "&",
-    "&amp;"
-  )
-
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
-
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
-
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
-
-  .replaceAll(
-    "'",
-    "&#039;"
-  );
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 
 }
 
 </script>
 
 
-<!-- PWA INSTALL SYSTEM -->
+<!-- PWA -->
 
 <script>
 
-let deferredPrompt =
-  null;
-
+let deferredPrompt = null;
 
 const installBtn =
   document.getElementById(
@@ -2249,26 +2085,20 @@ installBtn.addEventListener(
       );
 
       return;
-
     }
 
 
     deferredPrompt.prompt();
 
-
     const result =
       await deferredPrompt.userChoice;
-
 
     console.log(
       "Install result:",
       result.outcome
     );
 
-
-    deferredPrompt =
-      null;
-
+    deferredPrompt = null;
 
     installBtn.style.display =
       "none";
@@ -2288,13 +2118,7 @@ window.addEventListener(
 );
 
 
-/* =========================
-   SERVICE WORKER
-========================= */
-
-if(
-  "serviceWorker" in navigator
-){
+if("serviceWorker" in navigator){
 
   window.addEventListener(
     "load",
@@ -2302,23 +2126,7 @@ if(
 
       navigator.serviceWorker
         .register("./sw.js")
-
-        .then(()=>{
-
-          console.log(
-            "NOVEX Service Worker registered"
-          );
-
-        })
-
-        .catch(error=>{
-
-          console.error(
-            "Service Worker error:",
-            error
-          );
-
-        });
+        .catch(console.error);
 
     }
   );
