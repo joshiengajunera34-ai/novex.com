@@ -3,169 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>NOVEX Score Manager</title>
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#7c3cff">
 
 <style>
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  color:white;
+  font-family:Arial,Helvetica,sans-serif;
   background:
-    radial-gradient(circle at top,#35105c,#10051a 45%,#030005);
+    radial-gradient(circle at top,#351064,#10051c 40%,#050208 80%);
+  color:white;
   min-height:100vh;
 }
 
 header{
   text-align:center;
-  padding:35px 15px 25px;
-  border-bottom:1px solid #632a88;
+  padding:25px 15px;
+  border-bottom:1px solid #54228b;
+  background:rgba(5,2,8,.8);
 }
 
 .logo{
-  font-size:48px;
+  font-size:38px;
   font-weight:1000;
   letter-spacing:7px;
-  animation:pulse 2s infinite;
+  text-shadow:
+    0 0 10px #7c3cff,
+    0 0 30px #7c3cff;
 }
 
-.logo span{
-  color:#b94cff;
-}
-
-@keyframes pulse{
-  0%,100%{
-    text-shadow:0 0 10px #8d2cff;
-  }
-  50%{
-    text-shadow:
-      0 0 15px #b94cff,
-      0 0 35px #8d2cff;
-  }
-}
-
-.subtitle{
-  color:#cfa7ff;
-  margin-top:8px;
-  font-weight:bold;
+.sub{
+  color:#b99bcf;
+  font-size:11px;
+  letter-spacing:3px;
+  margin-top:5px;
 }
 
 .container{
   width:min(1100px,94%);
-  margin:auto;
+  margin:25px auto;
 }
 
 .card{
-  background:rgba(17,5,30,.94);
-  border:1px solid rgba(183,74,255,.3);
+  background:rgba(14,6,24,.9);
+  border:1px solid #54228b;
   border-radius:18px;
-  padding:22px;
-  margin:25px 0;
-  box-shadow:0 0 30px rgba(130,30,255,.13);
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 0 25px rgba(124,60,255,.1);
 }
 
 h2{
-  color:#d28aff;
-  margin-top:0;
+  color:#ca9cff;
+  margin-bottom:15px;
 }
 
-.info{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+h3{
+  color:#c99cff;
+  margin-bottom:10px;
 }
 
-.info div{
-  background:#ffffff08;
-  border-radius:10px;
-  padding:13px;
-  text-align:center;
+.login{
+  max-width:450px;
+  margin:60px auto;
 }
 
-.upload-box{
-  border:2px dashed #8f38c7;
-  border-radius:15px;
-  padding:30px 15px;
-  text-align:center;
-  cursor:pointer;
-  transition:.2s;
+input{
+  width:100%;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:9px;
+  border:1px solid #54228b;
+  background:#09040f;
+  color:white;
+  outline:none;
 }
 
-.upload-box:hover{
-  background:#b94cff0d;
-  border-color:#b94cff;
-}
-
-.upload-box input{
-  display:none;
-}
-
-.upload-title{
-  font-size:20px;
-  font-weight:900;
-}
-
-.upload-sub{
-  color:#a98bb8;
-  margin-top:8px;
-  font-size:13px;
-}
-
-.preview{
-  display:none;
-  margin-top:18px;
-  text-align:center;
-}
-
-.preview img{
-  max-width:100%;
-  max-height:400px;
-  border-radius:12px;
-  border:1px solid #7134a0;
+input:focus{
+  border-color:#9d5cff;
+  box-shadow:0 0 10px rgba(124,60,255,.3);
 }
 
 button{
-  width:100%;
   border:0;
-  border-radius:11px;
-  padding:14px;
-  margin-top:15px;
-  background:linear-gradient(90deg,#7227c9,#b94cff);
+  border-radius:9px;
+  padding:11px 16px;
+  background:linear-gradient(135deg,#6828c7,#9c4fff);
   color:white;
-  font-weight:900;
-  font-size:15px;
+  font-weight:800;
   cursor:pointer;
+  margin:3px;
 }
 
 button:hover{
-  filter:brightness(1.15);
+  box-shadow:0 0 18px rgba(124,60,255,.4);
 }
 
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
+button.danger{
+  background:linear-gradient(135deg,#761d67,#bd318f);
 }
 
-.secondary{
-  background:#281735;
-  border:1px solid #6e398e;
+button.gray{
+  background:#261c2d;
 }
 
-.danger{
-  background:#701c39;
+button.green{
+  background:linear-gradient(135deg,#27704c,#35a96e);
 }
 
-.progress{
-  display:none;
-  margin-top:15px;
-  padding:13px;
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.status{
+  padding:12px;
   border-radius:10px;
-  background:#ffffff08;
-  color:#dcbcff;
-  text-align:center;
+  background:#0b0511;
+  border:1px solid #32154b;
+  margin-bottom:12px;
+  color:#c9b3d8;
 }
 
 .table-wrap{
@@ -175,83 +141,69 @@ button:disabled{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:650px;
+  min-width:700px;
 }
 
 th{
-  background:#4c176f;
-  padding:12px;
-  text-align:left;
+  background:#241039;
+  color:#d8b5ff;
+  padding:10px;
 }
 
 td{
-  padding:9px;
-  border-bottom:1px solid #ffffff12;
+  border-bottom:1px solid #281533;
+  padding:7px;
+  text-align:center;
 }
 
 td input{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #552875;
-  background:#0d0614;
-  color:white;
-}
-
-.total{
-  font-weight:1000;
-  color:#d48aff;
-  font-size:17px;
+  margin:0;
+  padding:8px;
 }
 
 .rank{
   font-weight:1000;
+  color:#d09cff;
 }
 
-.results{
-  display:none;
+.total{
+  font-size:17px;
+  font-weight:1000;
+  color:#fff;
 }
 
-.ocr-text{
-  display:none;
-  white-space:pre-wrap;
-  background:#08030d;
-  border:1px solid #3e2052;
+.published{
+  border-left:4px solid #8d4cff;
+  padding:12px;
+  margin-top:10px;
+  background:#0b0511;
+  border-radius:8px;
+}
+
+.history-item{
+  border:1px solid #30164a;
+  padding:12px;
   border-radius:10px;
-  padding:15px;
-  max-height:250px;
-  overflow:auto;
-  color:#bda7c8;
-  font-size:12px;
+  margin-bottom:8px;
+  background:#09040f;
 }
 
-.note{
-  color:#a88cb7;
-  font-size:13px;
-  line-height:1.5;
+.small{
+  color:#846b91;
+  font-size:11px;
 }
 
-.back{
-  display:block;
-  text-align:center;
-  color:#c98aff;
-  text-decoration:none;
-  margin:20px;
-  font-weight:bold;
-}
-
-.hidden{
+#app{
   display:none;
 }
 
 @media(max-width:700px){
-
   .logo{
-    font-size:36px;
+    font-size:29px;
   }
 
-  .info{
-    grid-template-columns:repeat(2,1fr);
+  .card{
+    padding:15px;
   }
 }
 </style>
@@ -260,907 +212,932 @@ td input{
 <body>
 
 <header>
-
-  <div class="logo">
-    N<span>Ø</span>VEX
-  </div>
-
-  <div class="subtitle">
-    SCORE MANAGER • ONE SQUAD, ONE FATE
-  </div>
-
+  <div class="logo">NOVEX</div>
+  <div class="sub">CODM SCORE MANAGER</div>
 </header>
 
 
-<main class="container">
+<!-- LOGIN -->
 
-<section class="card">
+<div id="loginScreen" class="container">
 
-<h2>🔥 NOVEX SCORING</h2>
+  <div class="card login">
 
-<div class="info">
+    <h2>🔐 ADMIN LOGIN</h2>
 
-<div>
-<b>KILL</b><br>
-1 = 5 PTS
-</div>
+    <input
+      id="email"
+      type="email"
+      placeholder="Admin Email"
+    >
 
-<div>
-<b>TOP 1</b><br>
-+20 PTS
-</div>
+    <input
+      id="password"
+      type="password"
+      placeholder="Admin Password"
+    >
 
-<div>
-<b>TOP 2</b><br>
-+15 PTS
-</div>
+    <button id="loginBtn" style="width:100%;">
+      LOGIN
+    </button>
 
-<div>
-<b>TOP 3</b><br>
-+5 PTS
-</div>
+    <div
+      id="loginMessage"
+      style="text-align:center;margin-top:10px;font-size:12px;"
+    ></div>
 
-</div>
-
-</section>
-
-
-<section class="card">
-
-<h2>📷 UPLOAD SCOREBOARD</h2>
-
-<p class="note">
-Upload a clear screenshot of your CODM scoreboard.
-NOVEX will use OCR to read the team names, kills and placements.
-</p>
-
-<label class="upload-box">
-
-<input
-type="file"
-id="imageInput"
-accept="image/*"
->
-
-<div class="upload-title">
-📷 UPLOAD SCOREBOARD IMAGE
-</div>
-
-<div class="upload-sub">
-Tap here to choose a screenshot
-</div>
-
-</label>
-
-
-<div
-id="preview"
-class="preview"
->
-
-<img
-id="previewImage"
-alt="Scoreboard preview"
->
+  </div>
 
 </div>
 
 
-<div
-id="progress"
-class="progress"
->
-Preparing OCR...
+<!-- APPLICATION -->
+
+<div id="app" class="container">
+
+  <div class="card">
+
+    <h2>📊 SCORE MANAGER</h2>
+
+    <div class="status">
+      <b>SCORING SYSTEM</b><br><br>
+      1 Kill = <b>5 pts</b><br>
+      Top 1 = <b>+20 pts</b><br>
+      Top 2 = <b>+15 pts</b><br>
+      Top 3 = <b>+5 pts</b>
+    </div>
+
+    <div id="firebaseStatus" class="status">
+      ☁️ Firebase: Connected
+    </div>
+
+  </div>
+
+
+  <!-- OCR -->
+
+  <div class="card">
+
+    <h2>📸 IMPORT SCOREBOARD</h2>
+
+    <input
+      id="imageInput"
+      type="file"
+      accept="image/*"
+    >
+
+    <button id="ocrBtn">
+      READ SCOREBOARD
+    </button>
+
+    <div
+      id="ocrStatus"
+      class="small"
+      style="margin-top:10px;"
+    ></div>
+
+  </div>
+
+
+  <!-- CONTROLS -->
+
+  <div class="card">
+
+    <h2>⚙️ MATCH CONTROLS</h2>
+
+    <input
+      id="matchName"
+      placeholder="Match name e.g. NOVEX SCRIM SEPT 29"
+      maxlength="80"
+    >
+
+    <div class="controls">
+
+      <button id="calculateBtn">
+        🧮 CALCULATE
+      </button>
+
+      <button id="publishBtn" class="green">
+        ☁️ PUBLISH TO FIREBASE
+      </button>
+
+      <button id="copyBtn">
+        📋 COPY RESULTS
+      </button>
+
+      <button id="resetBtn" class="danger">
+        RESET
+      </button>
+
+      <button
+        class="gray"
+        onclick="location.href='index.html'"
+      >
+        ← BACK TO NOVEX
+      </button>
+
+      <button
+        id="logoutBtn"
+        class="gray"
+      >
+        LOGOUT
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- SCORE TABLE -->
+
+  <div class="card">
+
+    <h2>🏆 CURRENT SCORES</h2>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>RANK</th>
+            <th>SLOT</th>
+            <th>TEAM</th>
+            <th>KILLS</th>
+            <th>PLACEMENT</th>
+            <th>KILL PTS</th>
+            <th>PLACE PTS</th>
+            <th>TOTAL</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="scoreBody"></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <!-- PUBLISHED -->
+
+  <div class="card">
+
+    <h2>☁️ PUBLISHED RESULT</h2>
+
+    <div id="publishedResult">
+      No result published yet.
+    </div>
+
+  </div>
+
+
+  <!-- HISTORY -->
+
+  <div class="card">
+
+    <h2>📚 MATCH HISTORY</h2>
+
+    <div id="history">
+      Loading history...
+    </div>
+
+  </div>
+
 </div>
 
 
-<button
-id="readButton"
-disabled
->
-🔎 READ IMAGE & COMPUTE
-</button>
-
-</section>
-
-
-<section
-id="ocrSection"
-class="card hidden"
->
-
-<h2>🔎 OCR RESULT</h2>
-
-<p class="note">
-This is what the image reader detected. If something is wrong, edit the table below.
-</p>
-
-<div
-id="ocrText"
-class="ocr-text"
-></div>
-
-</section>
-
-
-<section
-id="dataSection"
-class="card hidden"
->
-
-<h2>✏️ CHECK DETECTED DATA</h2>
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>#</th>
-<th>Team</th>
-<th>Kills</th>
-<th>Placement</th>
-<th>Score</th>
-</tr>
-
-</thead>
-
-<tbody id="scoreRows">
-</tbody>
-
-</table>
-
-</div>
-
-
-<button id="computeButton">
-🧮 COMPUTE FINAL SCORES
-</button>
-
-</section>
-
-
-<section
-id="resultsSection"
-class="card results"
->
-
-<h2>🏆 NOVEX RESULTS</h2>
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>Rank</th>
-<th>Team</th>
-<th>Kills</th>
-<th>Placement</th>
-<th>Total</th>
-</tr>
-
-</thead>
-
-<tbody id="resultsRows">
-</tbody>
-
-</table>
-
-</div>
-
-
-<button
-id="copyButton"
-class="secondary"
->
-📋 COPY RESULTS
-</button>
-
-
-<button
-id="resetButton"
-class="danger"
->
-🔄 RESET
-</button>
-
-</section>
-
-</main>
-
-
-<a
-href="index.html"
-class="back"
->
-← BACK TO NOVEX
-</a>
-
-
-<!-- Tesseract OCR -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
 
-<script>
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  onValue
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
 
 /* =========================
-   IMAGE UPLOAD
+   FIREBASE CONFIG
 ========================= */
 
-const imageInput =
-document.getElementById("imageInput");
+const firebaseConfig = {
 
-const preview =
-document.getElementById("preview");
+  apiKey:
+    "AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
 
-const previewImage =
-document.getElementById("previewImage");
+  authDomain:
+    "novex-codm.firebaseapp.com",
 
-const readButton =
-document.getElementById("readButton");
+  databaseURL:
+    "https://novex-codm-default-rtdb.firebaseio.com",
 
-const progress =
-document.getElementById("progress");
+  projectId:
+    "novex-codm",
+
+  storageBucket:
+    "novex-codm.firebasestorage.app",
+
+  messagingSenderId:
+    "422875706154",
+
+  appId:
+    "1:422875706154:web:3f21e037173f8b51ba2453",
+
+  measurementId:
+    "G-9Z50JE2GFW"
+};
 
 
-let selectedImage = null;
+const ADMIN_UID =
+  "MGHp1mPC8LUAtqM73gw9GBXseyE2";
 
 
-imageInput.addEventListener(
-"change",
-event => {
+const app =
+  initializeApp(firebaseConfig);
 
-  const file =
-    event.target.files[0];
+const auth =
+  getAuth(app);
 
-  if(!file){
-    return;
+const db =
+  getDatabase(app);
+
+
+/* =========================
+   DATABASE
+========================= */
+
+const scoresRef =
+  ref(db,"novex/scores");
+
+const historyRef =
+  ref(db,"novex/scoreHistory");
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+const TOTAL_TEAMS = 25;
+
+let currentUser = null;
+let isAdmin = false;
+
+let teams = [];
+
+
+/* =========================
+   CREATE TEAM ROWS
+========================= */
+
+function createRows(){
+
+  teams = [];
+
+  for(let i=1;i<=TOTAL_TEAMS;i++){
+
+    teams.push({
+
+      slot:i,
+
+      name:"",
+
+      kills:0,
+
+      placement:0,
+
+      killPoints:0,
+
+      placementPoints:0,
+
+      total:0
+
+    });
+
   }
 
-  selectedImage = file;
+  renderTable();
 
-  const reader =
-    new FileReader();
+}
 
-  reader.onload =
-    event => {
 
-      previewImage.src =
-        event.target.result;
+function renderTable(){
 
-      preview.style.display =
-        "block";
+  const body =
+    document.getElementById("scoreBody");
 
-      readButton.disabled =
-        false;
+  body.innerHTML="";
+
+
+  teams.forEach((team,index)=>{
+
+    const row =
+      document.createElement("tr");
+
+    row.innerHTML=`
+
+      <td class="rank">
+        ${index+1}
+      </td>
+
+      <td>
+        ${team.slot}
+      </td>
+
+      <td>
+        <input
+          class="team-name"
+          data-index="${index}"
+          value="${escapeHTML(team.name)}"
+          placeholder="Team Name"
+        >
+      </td>
+
+      <td>
+        <input
+          class="kills"
+          data-index="${index}"
+          type="number"
+          min="0"
+          value="${team.kills}"
+        >
+      </td>
+
+      <td>
+        <input
+          class="placement"
+          data-index="${index}"
+          type="number"
+          min="0"
+          max="25"
+          value="${team.placement || ""}"
+          placeholder="-"
+        >
+      </td>
+
+      <td>
+        ${team.killPoints}
+      </td>
+
+      <td>
+        ${team.placementPoints}
+      </td>
+
+      <td class="total">
+        ${team.total}
+      </td>
+
+    `;
+
+    body.appendChild(row);
+
+  });
+
+
+  document
+    .querySelectorAll(".team-name")
+    .forEach(input=>{
+
+      input.addEventListener(
+        "input",
+        e=>{
+
+          teams[
+            Number(e.target.dataset.index)
+          ].name =
+            e.target.value;
+
+        }
+      );
+
+    });
+
+
+  document
+    .querySelectorAll(".kills")
+    .forEach(input=>{
+
+      input.addEventListener(
+        "input",
+        e=>{
+
+          teams[
+            Number(e.target.dataset.index)
+          ].kills =
+            Number(e.target.value)||0;
+
+        }
+      );
+
+    });
+
+
+  document
+    .querySelectorAll(".placement")
+    .forEach(input=>{
+
+      input.addEventListener(
+        "input",
+        e=>{
+
+          teams[
+            Number(e.target.dataset.index)
+          ].placement =
+            Number(e.target.value)||0;
+
+        }
+      );
+
+    });
+
+}
+
+
+/* =========================
+   CALCULATE
+========================= */
+
+function calculateScores(){
+
+  teams.forEach(team=>{
+
+    team.kills =
+      Number(team.kills)||0;
+
+    team.placement =
+      Number(team.placement)||0;
+
+
+    team.killPoints =
+      team.kills*5;
+
+
+    if(team.placement===1){
+
+      team.placementPoints=20;
+
+    }else if(team.placement===2){
+
+      team.placementPoints=15;
+
+    }else if(team.placement===3){
+
+      team.placementPoints=5;
+
+    }else{
+
+      team.placementPoints=0;
+
+    }
+
+
+    team.total =
+      team.killPoints+
+      team.placementPoints;
+
+  });
+
+
+  teams.sort((a,b)=>{
+
+    if(b.total!==a.total)
+      return b.total-a.total;
+
+    if(b.kills!==a.kills)
+      return b.kills-a.kills;
+
+    return a.slot-b.slot;
+
+  });
+
+
+  renderTable();
+
+}
+
+
+document
+.getElementById("calculateBtn")
+.addEventListener(
+  "click",
+  calculateScores
+);
+
+
+/* =========================
+   PUBLISH TO FIREBASE
+========================= */
+
+document
+.getElementById("publishBtn")
+.addEventListener(
+  "click",
+  async()=>{
+
+    if(!isAdmin){
+
+      alert(
+        "Only the Firebase admin can publish scores."
+      );
+
+      return;
+
+    }
+
+
+    calculateScores();
+
+
+    const validTeams =
+      teams.filter(
+        team =>
+          team.name.trim() !== ""
+      );
+
+
+    if(!validTeams.length){
+
+      alert(
+        "Add at least one team."
+      );
+
+      return;
+
+    }
+
+
+    const matchName =
+      document
+        .getElementById("matchName")
+        .value
+        .trim()
+      || `NOVEX MATCH ${new Date()
+        .toLocaleDateString("en-PH")}`;
+
+
+    const result={
+
+      matchName:matchName,
+
+      publishedAt:Date.now(),
+
+      publishedBy:currentUser.uid,
+
+      teams:validTeams
 
     };
 
-  reader.readAsDataURL(file);
 
-});
+    try{
+
+      /* Current published result */
+
+      await set(
+        scoresRef,
+        result
+      );
+
+
+      /* Permanent history */
+
+      await push(
+        historyRef,
+        result
+      );
+
+
+      alert(
+        "✅ Scores published to Firebase!"
+      );
+
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "❌ Failed to publish scores.\n\n"+
+        error.message
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================
+   LOAD PUBLISHED RESULT
+========================= */
+
+onValue(
+  scoresRef,
+  snapshot=>{
+
+    const data =
+      snapshot.val();
+
+
+    const element =
+      document.getElementById(
+        "publishedResult"
+      );
+
+
+    if(!data){
+
+      element.textContent=
+        "No result published yet.";
+
+      return;
+
+    }
+
+
+    const list =
+      data.teams || [];
+
+
+    element.innerHTML=`
+
+      <b>${escapeHTML(
+        data.matchName
+      )}</b>
+
+      <div class="small">
+        Published:
+        ${new Date(
+          data.publishedAt
+        ).toLocaleString("en-PH")}
+      </div>
+
+      <br>
+
+      ${list.map((team,index)=>`
+
+        <div class="published">
+
+          <b>#${index+1}
+          ${escapeHTML(team.name)}</b>
+
+          — ${team.total} pts
+
+          <div class="small">
+            ${team.kills} kills
+            •
+            Placement ${team.placement || "-"}
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    `;
+
+  }
+);
+
+
+/* =========================
+   MATCH HISTORY
+========================= */
+
+onValue(
+  historyRef,
+  snapshot=>{
+
+    const data =
+      snapshot.val() || {};
+
+
+    const history =
+      Object.values(data)
+      .sort(
+        (a,b)=>
+          (b.publishedAt||0)
+          -
+          (a.publishedAt||0)
+      );
+
+
+    const element =
+      document.getElementById(
+        "history"
+      );
+
+
+    if(!history.length){
+
+      element.textContent=
+        "No match history.";
+
+      return;
+
+    }
+
+
+    element.innerHTML =
+      history.map(match=>`
+
+        <div class="history-item">
+
+          <b>
+            ${escapeHTML(match.matchName)}
+          </b>
+
+          <div class="small">
+            ${new Date(
+              match.publishedAt
+            ).toLocaleString("en-PH")}
+          </div>
+
+          <br>
+
+          ${
+            (match.teams||[])
+            .slice(0,3)
+            .map((team,index)=>`
+              #${index+1}
+              ${escapeHTML(team.name)}
+              — ${team.total} pts
+              <br>
+            `)
+            .join("")
+          }
+
+        </div>
+
+      `).join("");
+
+  }
+);
 
 
 /* =========================
    OCR
 ========================= */
 
-readButton.addEventListener(
-"click",
-async() => {
+document
+.getElementById("ocrBtn")
+.addEventListener(
+  "click",
+  async()=>{
 
-  if(!selectedImage){
-    return;
-  }
+    const file =
+      document
+        .getElementById("imageInput")
+        .files[0];
 
-  readButton.disabled =
-    true;
 
-  progress.style.display =
-    "block";
+    const status =
+      document
+        .getElementById("ocrStatus");
 
-  progress.textContent =
-    "🔎 Reading scoreboard image...";
 
-  try{
+    if(!file){
 
-    const result =
-      await Tesseract.recognize(
-        selectedImage,
-        "eng",
-        {
-          logger: message => {
+      status.textContent=
+        "Choose a scoreboard image first.";
 
-            if(
-              message.status ===
-              "recognizing text"
-            ){
+      return;
 
-              const percent =
-                Math.round(
-                  (message.progress || 0) * 100
-                );
+    }
 
-              progress.textContent =
-                `🔎 Reading image... ${percent}%`;
 
+    status.textContent=
+      "⏳ Reading scoreboard...";
+
+
+    try{
+
+      const result =
+        await Tesseract.recognize(
+          file,
+          "eng",
+          {
+            logger:m=>{
+              if(m.status==="recognizing text"){
+
+                status.textContent=
+                  `⏳ Reading ${Math.round(
+                    m.progress*100
+                  )}%`;
+
+              }
             }
-
           }
-        }
-      );
+        );
 
 
-    const text =
-      result.data.text;
+      const text =
+        result.data.text;
 
 
-    document
-      .getElementById("ocrText")
-      .textContent =
-      text;
+      parseOCR(text);
 
 
-    document
-      .getElementById("ocrSection")
-      .classList
-      .remove("hidden");
+      status.textContent=
+        "✅ OCR complete. Check the table before publishing.";
 
+    }catch(error){
 
-    const teams =
-      parseScoreboard(text);
+      console.error(error);
 
+      status.textContent=
+        "❌ OCR failed.";
 
-    createRows(teams);
-
-
-    document
-      .getElementById("dataSection")
-      .classList
-      .remove("hidden");
-
-
-    progress.textContent =
-      `✅ Done! Detected ${teams.length} possible team rows.`;
-
-
-  }catch(error){
-
-    console.error(error);
-
-    progress.textContent =
-      "❌ Could not read the image. Try a clearer screenshot.";
+    }
 
   }
-
-
-  readButton.disabled =
-    false;
-
-});
+);
 
 
 /* =========================
-   PARSE OCR TEXT
+   BASIC OCR PARSER
 ========================= */
 
-function parseScoreboard(text){
+function parseOCR(text){
 
   const lines =
     text
       .split("\n")
-      .map(line => line.trim())
-      .filter(line => line.length > 0);
+      .map(line=>line.trim())
+      .filter(Boolean);
 
 
-  const results = [];
+  let found=[];
 
 
-  /*
-   * Try to detect rows containing
-   * numbers that could represent kills.
-   */
-  for(
-    let i = 0;
-    i < lines.length;
-    i++
-  ){
-
-    const line =
-      lines[i];
-
+  lines.forEach(line=>{
 
     /*
-     * Ignore obvious headers.
-     */
-    const lower =
-      line.toLowerCase();
+      Attempts to detect:
+      TEAM  10  1
+      TEAM  10 kills  1
+    */
 
-    if(
-      lower.includes("team") &&
-      (
-        lower.includes("kill") ||
-        lower.includes("score") ||
-        lower.includes("point")
-      )
-    ){
-      continue;
-    }
+    const match =
+      line.match(
+        /^(.+?)\s+(\d+)\s+(\d+)$/
+      );
 
 
-    /*
-     * Find numbers in the line.
-     */
-    const numbers =
-      line.match(/\b\d+\b/g);
+    if(match){
 
+      found.push({
 
-    if(!numbers){
-      continue;
-    }
+        name:match[1]
+          .trim(),
 
+        kills:Number(match[2]),
 
-    /*
-     * Usually the last 1-3 numbers
-     * on a scoreboard line are useful.
-     */
-    const nums =
-      numbers.map(Number);
+        placement:Number(match[3])
 
-
-    let kills = null;
-    let placement = null;
-
-
-    /*
-     * Look for placement first.
-     */
-    for(const n of nums){
-
-      if(
-        n >= 1 &&
-        n <= 25 &&
-        !placement
-      ){
-
-        placement = n;
-
-      }
-
-    }
-
-
-    /*
-     * Look for a reasonable kill count.
-     */
-    for(
-      let j = nums.length - 1;
-      j >= 0;
-      j--
-    ){
-
-      if(
-        nums[j] >= 0 &&
-        nums[j] <= 100
-      ){
-
-        kills = nums[j];
-
-        break;
-
-      }
-
-    }
-
-
-    /*
-     * Remove numbers from team name.
-     */
-    let team =
-      line
-        .replace(/\b\d+\b/g," ")
-        .replace(
-          /\s+/g,
-          " "
-        )
-        .trim();
-
-
-    /*
-     * Skip lines that don't look
-     * like team names.
-     */
-    if(
-      team.length < 2 ||
-      team.length > 40
-    ){
-      continue;
-    }
-
-
-    if(
-      kills !== null
-    ){
-
-      results.push({
-        team:team,
-        kills:kills,
-        placement:placement || ""
       });
 
     }
 
-  }
+  });
 
 
-  /*
-   * Maximum 25 teams.
-   */
-  return results.slice(0,25);
+  found =
+    found.slice(0,TOTAL_TEAMS);
 
-}
 
+  found.forEach((item,index)=>{
 
-/* =========================
-   CREATE EDITABLE ROWS
-========================= */
+    teams[index].name =
+      item.name;
 
-function createRows(data){
+    teams[index].kills =
+      item.kills;
 
-  const tbody =
-    document.getElementById(
-      "scoreRows"
-    );
-
-  tbody.innerHTML = "";
-
-
-  /*
-   * If OCR finds nothing,
-   * create 25 empty rows.
-   */
-  if(data.length === 0){
-
-    for(
-      let i = 1;
-      i <= 25;
-      i++
-    ){
-
-      addRow(
-        i,
-        "",
-        "",
-        ""
-      );
-
-    }
-
-    return;
-
-  }
-
-
-  data.forEach(
-    (item,index) => {
-
-      addRow(
-        index + 1,
-        item.team,
-        item.kills,
-        item.placement
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================
-   ADD ROW
-========================= */
-
-function addRow(
-  number,
-  team,
-  kills,
-  placement
-){
-
-  const tbody =
-    document.getElementById(
-      "scoreRows"
-    );
-
-
-  const tr =
-    document.createElement("tr");
-
-
-  tr.innerHTML = `
-
-    <td>
-      ${number}
-    </td>
-
-    <td>
-      <input
-        class="team"
-        value="${escapeHTML(team)}"
-        placeholder="Team name"
-      >
-    </td>
-
-    <td>
-      <input
-        class="kills"
-        type="number"
-        min="0"
-        value="${kills}"
-        placeholder="0"
-      >
-    </td>
-
-    <td>
-      <input
-        class="placement"
-        type="number"
-        min="1"
-        max="25"
-        value="${placement}"
-        placeholder="-"
-      >
-    </td>
-
-    <td class="total">
-      0
-    </td>
-
-  `;
-
-
-  tbody.appendChild(tr);
-
-}
-
-
-/* =========================
-   COMPUTE
-========================= */
-
-document
-  .getElementById(
-    "computeButton"
-  )
-  .addEventListener(
-    "click",
-    computeScores
-  );
-
-
-function computeScores(){
-
-  const rows =
-    [...document.querySelectorAll(
-      "#scoreRows tr"
-    )];
-
-
-  const data = [];
-
-
-  rows.forEach(
-    (row,index) => {
-
-      const team =
-        row
-          .querySelector(".team")
-          .value
-          .trim();
-
-
-      const kills =
-        Number(
-          row
-            .querySelector(".kills")
-            .value
-        ) || 0;
-
-
-      const placementValue =
-        row
-          .querySelector(".placement")
-          .value
-          .trim();
-
-
-      const placement =
-        Number(
-          placementValue
-        ) || 0;
-
-
-      if(!team){
-        return;
-      }
-
-
-      let placementPoints =
-        0;
-
-
-      if(placement === 1){
-        placementPoints = 20;
-      }
-
-      else if(placement === 2){
-        placementPoints = 15;
-      }
-
-      else if(placement === 3){
-        placementPoints = 5;
-      }
-
-
-      const total =
-        (kills * 5) +
-        placementPoints;
-
-
-      data.push({
-
-        team:team,
-
-        kills:kills,
-
-        placement:placement,
-
-        total:total
-
-      });
-
-    }
-  );
-
-
-  /*
-   * Sort:
-   * 1. Highest score
-   * 2. Highest kills
-   * 3. Better placement
-   */
-  data.sort(
-    (a,b) => {
-
-      if(
-        b.total !== a.total
-      ){
-        return b.total - a.total;
-      }
-
-
-      if(
-        b.kills !== a.kills
-      ){
-        return b.kills - a.kills;
-      }
-
-
-      return a.placement - b.placement;
-
-    }
-  );
-
-
-  /*
-   * Display calculated totals
-   * beside editable rows.
-   */
-  rows.forEach(row => {
-
-    const team =
-      row
-        .querySelector(".team")
-        .value
-        .trim();
-
-
-    const found =
-      data.find(
-        item =>
-          item.team === team
-      );
-
-
-    row
-      .querySelector(".total")
-      .textContent =
-        found
-          ? found.total
-          : "0";
+    teams[index].placement =
+      item.placement;
 
   });
 
 
-  showResults(data);
-
-}
-
-
-/* =========================
-   SHOW RESULTS
-========================= */
-
-function showResults(data){
-
-  const section =
-    document.getElementById(
-      "resultsSection"
-    );
-
-
-  const tbody =
-    document.getElementById(
-      "resultsRows"
-    );
-
-
-  tbody.innerHTML = "";
-
-
-  data.forEach(
-    (item,index) => {
-
-      const tr =
-        document.createElement("tr");
-
-
-      tr.innerHTML = `
-
-        <td class="rank">
-          #${index + 1}
-        </td>
-
-        <td>
-          ${escapeHTML(item.team)}
-        </td>
-
-        <td>
-          ${item.kills}
-        </td>
-
-        <td>
-          ${item.placement || "-"}
-        </td>
-
-        <td class="total">
-          ${item.total}
-        </td>
-
-      `;
-
-
-      tbody.appendChild(tr);
-
-    }
-  );
-
-
-  section.style.display =
-    "block";
-
-
-  section.scrollIntoView({
-    behavior:"smooth"
-  });
-
-
-  window.latestResults =
-    data;
+  renderTable();
 
 }
 
@@ -1170,80 +1147,43 @@ function showResults(data){
 ========================= */
 
 document
-  .getElementById(
-    "copyButton"
-  )
-  .addEventListener(
-    "click",
-    async() => {
+.getElementById("copyBtn")
+.addEventListener(
+  "click",
+  async()=>{
 
-      if(
-        !window.latestResults ||
-        !window.latestResults.length
-      ){
-        return;
-      }
+    calculateScores();
 
 
-      let text =
-        "NOVEX SCOREBOARD\n\n";
+    let output =
+      "NOVEX SCOREBOARD\n\n";
 
 
-      window.latestResults.forEach(
-        (item,index) => {
+    teams
+      .filter(
+        team =>
+          team.name.trim()
+      )
+      .forEach((team,index)=>{
 
-          text +=
-            `${index+1}. ` +
-            `${item.team} — ` +
-            `${item.total} pts ` +
-            `(${item.kills} kills` +
-            `${
-              item.placement
-              ? `, Top ${item.placement}`
-              : ""
-            })\n`;
+        output +=
+          `${index+1}. ${team.name} — ${team.total} pts `+
+          `(${team.kills} kills)\n`;
 
-        }
-      );
+      });
 
 
-      try{
+    await navigator.clipboard.writeText(
+      output
+    );
 
-        await navigator.clipboard.writeText(
-          text
-        );
 
-        document
-          .getElementById(
-            "copyButton"
-          )
-          .textContent =
-            "✅ COPIED!";
+    alert(
+      "✅ Results copied!"
+    );
 
-        setTimeout(
-          () => {
-
-            document
-              .getElementById(
-                "copyButton"
-              )
-              .textContent =
-                "📋 COPY RESULTS";
-
-          },
-          1500
-        );
-
-      }catch(error){
-
-        alert(
-          "Could not copy results."
-        );
-
-      }
-
-    }
-  );
+  }
+);
 
 
 /* =========================
@@ -1251,78 +1191,166 @@ document
 ========================= */
 
 document
-  .getElementById(
-    "resetButton"
-  )
-  .addEventListener(
-    "click",
-    () => {
+.getElementById("resetBtn")
+.addEventListener(
+  "click",
+  ()=>{
 
-      if(
-        !confirm(
-          "Reset the score manager?"
-        )
-      ){
-        return;
-      }
+    if(
+      !confirm(
+        "Reset the current score table?"
+      )
+    ) return;
 
 
-      imageInput.value = "";
+    createRows();
 
-      selectedImage = null;
+    document
+      .getElementById("matchName")
+      .value="";
 
-      preview.style.display =
-        "none";
-
-      progress.style.display =
-        "none";
-
-      document
-        .getElementById(
-          "ocrSection"
-        )
-        .classList
-        .add("hidden");
-
-
-      document
-        .getElementById(
-          "dataSection"
-        )
-        .classList
-        .add("hidden");
-
-
-      document
-        .getElementById(
-          "resultsSection"
-        )
-        .style
-        .display =
-          "none";
-
-
-      document
-        .getElementById(
-          "ocrText"
-        )
-        .textContent =
-          "";
-
-      readButton.disabled =
-        true;
-
-    }
-  );
+  }
+);
 
 
 /* =========================
-   HTML SECURITY
+   AUTH
+========================= */
+
+onAuthStateChanged(
+  auth,
+  user=>{
+
+    currentUser=user;
+
+    if(
+      user &&
+      user.uid===ADMIN_UID
+    ){
+
+      isAdmin=true;
+
+      document
+        .getElementById("loginScreen")
+        .style.display="none";
+
+      document
+        .getElementById("app")
+        .style.display="block";
+
+      document
+        .getElementById("firebaseStatus")
+        .textContent=
+          "🟢 Firebase: Admin connected";
+
+    }else{
+
+      isAdmin=false;
+
+      document
+        .getElementById("loginScreen")
+        .style.display="block";
+
+      document
+        .getElementById("app")
+        .style.display="none";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document
+.getElementById("loginBtn")
+.addEventListener(
+  "click",
+  async()=>{
+
+    const email =
+      document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const password =
+      document
+        .getElementById("password")
+        .value;
+
+
+    const message =
+      document
+        .getElementById(
+          "loginMessage"
+        );
+
+
+    if(!email || !password){
+
+      message.textContent=
+        "Enter your admin email and password.";
+
+      return;
+
+    }
+
+
+    try{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+      message.textContent=
+        "✅ Login successful.";
+
+    }catch(error){
+
+      console.error(error);
+
+      message.textContent=
+        "❌ Login failed.";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+  "click",
+  async()=>{
+
+    await signOut(auth);
+
+    location.reload();
+
+  }
+);
+
+
+/* =========================
+   SECURITY HELPER
 ========================= */
 
 function escapeHTML(value){
 
-  return String(value || "")
+  return String(value ?? "")
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -1331,7 +1359,12 @@ function escapeHTML(value){
 
 }
 
+
+/* START */
+
+createRows();
+
 </script>
 
 </body>
-  </html>
+</html>
