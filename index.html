@@ -1,1715 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NOVEX CODM</title>
+  <title>NØV3X CODM</title>
 
-<meta name="theme-color" content="#8b2cff">
-<link rel="manifest" href="./manifest.json">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #241044 0%, #0b0612 45%, #030305 100%);
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
 
-body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at top,#3b1264 0%,#14051f 35%,#050208 80%);
-  color:#fff;
-  font-family:Arial,Helvetica,sans-serif;
-  padding:15px;
-}
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
 
-.container{
-  width:100%;
-  max-width:900px;
-  margin:auto;
-}
+    .header {
+      text-align: center;
+      padding: 25px 10px;
+    }
 
-/* HEADER */
+    .logo {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      text-shadow: 0 0 20px #8d38c4;
+    }
 
-header{
-  text-align:center;
-  padding:25px 15px;
-  border:1px solid #8b2cff;
-  border-radius:20px;
-  background:rgba(15,3,25,.9);
-  box-shadow:
-    0 0 25px rgba(139,44,255,.35),
-    inset 0 0 25px rgba(139,44,255,.08);
-}
+    .subtitle {
+      margin-top: 8px;
+      color: #bda6ce;
+      letter-spacing: 3px;
+      font-size: 13px;
+    }
 
-.logo{
-  font-size:45px;
-  font-weight:1000;
-  letter-spacing:8px;
-  color:#d99aff;
-  text-shadow:
-    0 0 10px #8b2cff,
-    0 0 25px #8b2cff,
-    0 0 45px #8b2cff;
-}
+    .welcome {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #54277a;
+      border-radius: 16px;
+      background: rgba(15, 9, 24, 0.9);
+    }
 
-.subtitle{
-  margin-top:6px;
-  color:#c9a7df;
-  font-size:13px;
-  letter-spacing:3px;
-}
+    .welcome h2 {
+      margin-bottom: 8px;
+    }
 
-.status{
-  display:inline-block;
-  margin-top:15px;
-  padding:7px 15px;
-  border-radius:20px;
-  background:#241036;
-  border:1px solid #9b3cff;
-  color:#ddaaff;
-  font-size:11px;
-  font-weight:bold;
-}
+    #username {
+      color: #c56cff;
+    }
 
-/* TIMER */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
 
-.timer-box{
-  margin-top:15px;
-  padding:20px;
-  text-align:center;
-  border-radius:18px;
-  background:rgba(15,3,25,.9);
-  border:1px solid #6323a0;
-}
+    .card {
+      padding: 22px 15px;
+      background: rgba(13, 8, 21, 0.95);
+      border: 1px solid #42205e;
+      border-radius: 15px;
+      color: white;
+      text-decoration: none;
+      transition: 0.2s;
+    }
 
-.timer-label{
-  color:#a982bd;
-  font-size:11px;
-  letter-spacing:2px;
-}
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #9c43d2;
+      box-shadow: 0 0 20px rgba(156, 67, 210, 0.25);
+    }
 
-#timer{
-  margin-top:5px;
-  font-size:38px;
-  font-weight:1000;
-  color:#dca0ff;
-  text-shadow:0 0 15px #8b2cff;
-}
+    .icon {
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
 
-#timerText{
-  margin-top:5px;
-  color:#9674a8;
-  font-size:11px;
-}
+    .card-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
 
-/* ANNOUNCEMENT */
+    .card-text {
+      color: #9d8ba9;
+      font-size: 12px;
+      margin-top: 5px;
+    }
 
-.announcement{
-  margin-top:15px;
-  padding:14px;
-  border-radius:14px;
-  background:rgba(50,12,75,.7);
-  border:1px solid #6323a0;
-  text-align:center;
-  color:#dfb8f5;
-}
+    .download {
+      display: block;
+      margin-top: 18px;
+      padding: 17px;
 
-/* BUTTONS */
+      text-align: center;
+      text-decoration: none;
 
-button{
-  border:none;
-  cursor:pointer;
-  color:white;
-  font-weight:900;
-  border-radius:11px;
-}
+      color: white;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 1px;
 
-.chat-btn,
-.final-btn,
-.install-btn{
-  width:100%;
-  margin-top:12px;
-  padding:14px;
-  background:linear-gradient(135deg,#6d24ad,#b72cff);
-  box-shadow:0 0 15px rgba(160,50,255,.3);
-}
+      background: linear-gradient(90deg, #7025a8, #a43dd8);
 
-.chat-btn:hover,
-.final-btn:hover,
-.install-btn:hover{
-  box-shadow:0 0 25px rgba(180,50,255,.7);
-  transform:translateY(-1px);
-}
+      border: 1px solid #c064ef;
+      border-radius: 13px;
 
-/* REGISTRATION */
+      box-shadow:
+        0 0 20px rgba(153, 55, 215, 0.3);
 
-.card{
-  margin-top:15px;
-  padding:18px;
-  border-radius:18px;
-  background:rgba(12,3,20,.92);
-  border:1px solid #5d2290;
-}
+      transition: 0.2s;
+    }
 
-.card-title{
-  text-align:center;
-  font-size:21px;
-  font-weight:1000;
-  color:#d996ff;
-  margin-bottom:15px;
-}
+    .download:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 30px rgba(153, 55, 215, 0.5);
+    }
 
-label{
-  display:block;
-  margin-top:11px;
-  margin-bottom:5px;
-  color:#b995c7;
-  font-size:12px;
-}
+    .section {
+      margin-top: 25px;
+    }
 
-input,
-select{
-  width:100%;
-  padding:13px;
-  border-radius:10px;
-  border:1px solid #522076;
-  outline:none;
-  background:#100719;
-  color:white;
-}
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
 
-input:focus,
-select:focus{
-  border-color:#a12fff;
-  box-shadow:0 0 10px rgba(161,47,255,.3);
-}
+    .announcement {
+      padding: 18px;
+      background: rgba(13, 8, 21, 0.95);
+      border: 1px solid #42205e;
+      border-radius: 15px;
+      color: #d8c9df;
+    }
 
-.register-btn{
-  width:100%;
-  margin-top:16px;
-  padding:14px;
-  background:linear-gradient(135deg,#7929c7,#c12cff);
-}
+    .logout {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
 
-/* SLOTS */
+      background: transparent;
+      color: #ff7777;
 
-.slot-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
+      border: 1px solid #713535;
+      border-radius: 12px;
 
-.slot{
-  min-height:75px;
-  padding:10px;
-  border-radius:12px;
-  border:1px solid #492061;
-  background:rgba(24,7,34,.9);
-}
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.slot-number{
-  color:#9c6ab5;
-  font-size:10px;
-}
+    .logout:hover {
+      background: rgba(150, 40, 40, 0.15);
+    }
 
-.slot-name{
-  margin-top:5px;
-  font-size:14px;
-  font-weight:900;
-  word-break:break-word;
-}
+    #adminCard {
+      display: none;
+    }
 
-.slot-handler{
-  margin-top:3px;
-  color:#9674a8;
-  font-size:10px;
-}
+    @media (max-width: 500px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
 
-.empty-slot{
-  color:#5e426a;
-  font-size:12px;
-  margin-top:8px;
-}
-
-.slot-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.remove-btn{
-  background:linear-gradient(135deg,#8b1e68,#d8329d);
-  padding:8px 10px;
-  font-size:10px;
-  flex-shrink:0;
-}
-
-.remove-btn:hover{
-  box-shadow:0 0 15px rgba(216,50,157,.5);
-}
-
-/* ACTIVITY */
-
-.activity{
-  max-height:250px;
-  overflow-y:auto;
-}
-
-.activity-item{
-  padding:9px;
-  margin-bottom:6px;
-  border-radius:8px;
-  background:#12071a;
-  border-left:3px solid #8b2cff;
-  font-size:12px;
-}
-
-.activity-time{
-  color:#795e87;
-  font-size:9px;
-  margin-top:3px;
-}
-
-/* ADMIN */
-
-.admin-panel{
-  display:none;
-}
-
-.admin-panel.show{
-  display:block;
-}
-
-.admin-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
-}
-
-.admin-grid button{
-  padding:12px;
-  background:#25102f;
-  border:1px solid #65318b;
-}
-
-.danger{
-  background:#50122d !important;
-  border-color:#b52d69 !important;
-}
-
-.logout{
-  width:100%;
-  margin-top:10px;
-  padding:12px;
-  background:#3b172e;
-}
-
-.login-btn{
-  width:100%;
-  margin-top:10px;
-  padding:12px;
-  background:#5f25a0;
-}
-
-.small{
-  color:#866c91;
-  font-size:10px;
-  margin-top:6px;
-}
-
-footer{
-  text-align:center;
-  padding:20px 0 10px;
-  color:#654e70;
-  font-size:10px;
-}
-
-/* MOBILE */
-
-@media(max-width:500px){
-
-  body{
-    padding:10px;
-  }
-
-  .logo{
-    font-size:35px;
-    letter-spacing:5px;
-  }
-
-  #timer{
-    font-size:32px;
-  }
-
-  .slot-grid{
-    grid-template-columns:1fr;
-  }
-
-  .admin-grid{
-    grid-template-columns:1fr;
-  }
-}
-</style>
+      .logo {
+        font-size: 34px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="container">
 
-<header>
-
-  <div class="logo">NOVEX</div>
-
-  <div class="subtitle">
-    CODM BR SCRIMMAGE
-  </div>
-
-  <div class="status" id="statusBadge">
-    LOADING...
-  </div>
-
-</header>
-
-
-<!-- TIMER -->
-
-<div class="timer-box">
-
-  <div class="timer-label">
-    SCRIM TIMER
-  </div>
-
-  <div id="timer">
-    --:--
-  </div>
-
-  <div id="timerText">
-    SET BY ADMIN
-  </div>
-
-</div>
-
-
-<!-- ANNOUNCEMENT -->
-
-<div class="announcement" id="announcement">
-  NOVEX CODM SCRIMMAGE
-</div>
-
-
-<!-- MAIN BUTTONS -->
-
-<button
-  class="final-btn"
-  onclick="location.href='participants.html'">
-
-  📋 FINAL PARTICIPANTS
-
-</button>
-
-
-<button
-  class="chat-btn"
-  onclick="location.href='chat.html'">
-
-  💬 OPEN NOVEX CHAT
-
-</button>
-
-
-<button
-  id="installBtn"
-  class="install-btn"
-  style="display:none">
-
-  📱 INSTALL NOVEX APP
-
-</button>
-
-
-<!-- REGISTRATION -->
-
-<div class="card">
-
-  <div class="card-title">
-    🎮 REGISTER YOUR TEAM
-  </div>
-
-  <label>Team Name</label>
-
-  <input
-    id="teamName"
-    type="text"
-    maxlength="40"
-    placeholder="Example: NV3 MAIN">
-
-
-  <label>Team Handler</label>
-
-  <input
-    id="teamHandler"
-    type="text"
-    maxlength="40"
-    placeholder="Example: @handler">
-
-
-  <label>Discord / Contact</label>
-
-  <input
-    id="discord"
-    type="text"
-    maxlength="60"
-    placeholder="Discord username">
-
-
-  <label>Team Logo URL</label>
-
-  <input
-    id="logo"
-    type="text"
-    maxlength="500"
-    placeholder="https://...">
-
-
-  <label>Select Slot</label>
-
-  <select id="slotSelect">
-
-    <option value="">
-      Select an available slot
-    </option>
-
-  </select>
-
-
-  <button
-    class="register-btn"
-    id="registerBtn">
-
-    🔥 CLAIM SLOT
-
-  </button>
-
-</div>
-
-
-<!-- SLOTS -->
-
-<div class="card">
-
-  <div class="card-title">
-    📋 NOVEX SCRIM SLOTS
-  </div>
-
-  <div
-    id="slots"
-    class="slot-grid">
-
-  </div>
-
-</div>
-
-
-<!-- ACTIVITY -->
-
-<div class="card">
-
-  <div class="card-title">
-    ⚡ LIVE ACTIVITY
-  </div>
-
-  <div
-    id="activity"
-    class="activity">
-
-    Loading...
-
-  </div>
-
-</div>
-
-
-<!-- ADMIN LOGIN -->
-
-<div class="card">
-
-  <div class="card-title">
-    🔐 ADMIN
-  </div>
-
-  <input
-    id="adminEmail"
-    type="email"
-    placeholder="Admin email">
-
-  <input
-    id="adminPassword"
-    type="password"
-    placeholder="Admin password"
-    style="margin-top:8px">
-
-  <button
-    class="login-btn"
-    id="loginBtn">
-
-    ADMIN LOGIN
-
-  </button>
-
-  <div
-    class="small"
-    id="loginMessage">
-
-  </div>
-
-</div>
-
-
-<!-- ADMIN PANEL -->
-
-<div
-  id="adminPanel"
-  class="card admin-panel">
-
-  <div class="card-title">
-    ⚙️ NOVEX ADMIN PANEL
+  <div class="header">
+    <div class="logo">NØV3X</div>
+    <div class="subtitle">CODM COMMUNITY</div>
   </div>
 
 
-  <div class="admin-grid">
+  <div class="welcome">
+    <h2>
+      Welcome, <span id="username">Player</span>
+    </h2>
 
-    <button id="openMining">
-      🔓 UNLOCK SLOTS
-    </button>
+    <p>
+      ONE SQUAD, ONE FATE.
+    </p>
+  </div>
 
-    <button id="lockMining">
-      🔒 LOCK SLOTS
-    </button>
 
-    <button id="setOpen">
-      🟢 OPEN
-    </button>
+  <!-- DOWNLOAD APK -->
 
-    <button id="setRoom">
-      🟡 ROOM
-    </button>
+  <a
+    class="download"
+    href="YOUR_APK_LINK_HERE"
+    target="_blank"
+    rel="noopener"
+  >
+    ⬇ DOWNLOAD NØV3X APK
+  </a>
 
-    <button id="setLive">
-      🔴 LIVE
-    </button>
 
-    <button id="setEnded">
-      ⚫ ENDED
-    </button>
+  <!-- MAIN MENU -->
+
+  <div class="grid">
+
+    <a class="card" href="scrimmage.html">
+      <div class="icon">🎮</div>
+      <div class="card-title">SCRIMMAGE</div>
+      <div class="card-text">
+        Mine System & Slots
+      </div>
+    </a>
+
+
+    <a class="card" href="leaderboard.html">
+      <div class="icon">🏆</div>
+      <div class="card-title">LEADERBOARD</div>
+      <div class="card-text">
+        Team Rankings
+      </div>
+    </a>
+
+
+    <a class="card" href="teams.html">
+      <div class="icon">👥</div>
+      <div class="card-title">TEAMS</div>
+      <div class="card-text">
+        NØV3X Teams
+      </div>
+    </a>
+
+
+    <a class="card" href="chat.html">
+      <div class="icon">💬</div>
+      <div class="card-title">COMMUNITY CHAT</div>
+      <div class="card-text">
+        Chat with members
+      </div>
+    </a>
+
+
+    <a
+      class="card"
+      id="adminCard"
+      href="admin.html"
+    >
+      <div class="icon">⚙️</div>
+      <div class="card-title">ADMIN PANEL</div>
+      <div class="card-text">
+        Control Center
+      </div>
+    </a>
 
   </div>
 
 
-  <label>
-    Announcement
-  </label>
+  <!-- ANNOUNCEMENTS -->
 
-  <input
-    id="adminAnnouncement"
-    maxlength="500"
-    placeholder="Write announcement...">
+  <div class="section">
 
-  <button
-    id="saveAnnouncement"
-    class="login-btn">
+    <div class="section-title">
+      📢 ANNOUNCEMENTS
+    </div>
 
-    📢 SAVE ANNOUNCEMENT
+    <div
+      class="announcement"
+      id="announcements"
+    >
+      Loading announcements...
+    </div>
 
-  </button>
-
-
-  <label>
-    Timer Seconds
-  </label>
-
-  <input
-    id="timerInput"
-    type="number"
-    placeholder="Example: 600">
+  </div>
 
 
-  <button
-    id="startTimer"
-    class="login-btn">
-
-    ⏱️ START TIMER
-
-  </button>
-
-
-  <button
-    id="stopTimer"
-    class="danger"
-    style="width:100%;padding:12px;margin-top:8px">
-
-    ⏹ STOP TIMER
-
-  </button>
-
-
-  <button
-    onclick="location.href='score-manager.html'"
-    class="login-btn">
-
-    🏆 SCORE MANAGER
-
-  </button>
-
-
-  <button
-    id="clearSlots"
-    class="danger"
-    style="width:100%;padding:12px;margin-top:8px">
-
-    🗑️ CLEAR ALL SLOTS
-
-  </button>
-
-
-  <button
-    id="logoutBtn"
-    class="logout">
-
+  <button class="logout" id="logoutButton">
     LOGOUT
-
   </button>
 
 </div>
 
 
-<footer>
-  NOVEX CODM • ONE SQUAD, ONE FATE
-</footer>
+<!-- FIREBASE -->
 
-</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
-<script type="module">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
-import {
-  getAuth,
-  signInAnonymously,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-import {
-  getDatabase,
-  ref,
-  onValue,
-  set,
-  remove,
-  push
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+<script src="firebase-config.js"></script>
 
 
-/* FIREBASE */
+<script>
 
-const firebaseConfig = {
+const usernameElement =
+  document.getElementById("username");
 
-  apiKey:"AIzaSyD7v0EFMI85NJk8fUCA7BsReGlVoU8WICY",
+const adminCard =
+  document.getElementById("adminCard");
 
-  authDomain:"novex-codm.firebaseapp.com",
-
-  databaseURL:
-  "https://novex-codm-default-rtdb.firebaseio.com",
-
-  projectId:"novex-codm",
-
-  storageBucket:
-  "novex-codm.firebasestorage.app",
-
-  messagingSenderId:
-  "422875706154",
-
-  appId:
-  "1:422875706154:web:3f21e037173f8b51ba2453",
-
-  measurementId:
-  "G-9Z50JE2GFW"
-};
+const announcements =
+  document.getElementById("announcements");
 
 
-const ADMIN_UID =
-"MGHp1mPC8LUAtqM73gw9GBXseyE2";
+// ==========================
+// AUTH
+// ==========================
 
+auth.onAuthStateChanged(async (user) => {
 
-const app =
-initializeApp(firebaseConfig);
+  if (!user) {
 
-const auth =
-getAuth(app);
+    window.location.href = "login.html";
 
-const db =
-getDatabase(app);
-
-
-/* ELEMENTS */
-
-const teamName =
-document.getElementById("teamName");
-
-const teamHandler =
-document.getElementById("teamHandler");
-
-const discord =
-document.getElementById("discord");
-
-const logo =
-document.getElementById("logo");
-
-const slotSelect =
-document.getElementById("slotSelect");
-
-const registerBtn =
-document.getElementById("registerBtn");
-
-const slotsDiv =
-document.getElementById("slots");
-
-const activityDiv =
-document.getElementById("activity");
-
-const statusBadge =
-document.getElementById("statusBadge");
-
-const announcement =
-document.getElementById("announcement");
-
-const adminPanel =
-document.getElementById("adminPanel");
-
-const loginMessage =
-document.getElementById("loginMessage");
-
-const timer =
-document.getElementById("timer");
-
-
-let currentUser = null;
-let isAdmin = false;
-
-
-/* AUTH */
-
-signInAnonymously(auth);
-
-
-/* AUTH STATE */
-
-onAuthStateChanged(auth, user => {
-
-  currentUser = user;
-
-  if(!user){
     return;
   }
 
-  isAdmin =
-    user.uid === ADMIN_UID;
 
-  if(isAdmin){
+  try {
 
-    adminPanel.classList.add("show");
+    const userDoc =
+      await db
+        .collection("users")
+        .doc(user.uid)
+        .get();
 
-  }else{
 
-    adminPanel.classList.remove("show");
+    if (userDoc.exists) {
+
+      const data =
+        userDoc.data();
+
+
+      usernameElement.textContent =
+        data.username || "Player";
+
+
+      if (data.role === "admin") {
+
+        adminCard.style.display =
+          "block";
+      }
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "User profile error:",
+      error
+    );
 
   }
-
-  startListeners();
 
 });
 
 
-/* LISTENERS */
+// ==========================
+// ANNOUNCEMENTS
+// ==========================
 
-function startListeners(){
+db.collection("announcements")
+  .orderBy("createdAt", "desc")
+  .limit(5)
+  .onSnapshot(
 
-  onValue(
-    ref(db,"novex/slots"),
-    snapshot => {
+    (snapshot) => {
 
-      renderSlots(
-        snapshot.val() || {}
-      );
+      if (snapshot.empty) {
 
-    }
-  );
+        announcements.textContent =
+          "No announcements yet.";
 
-
-  onValue(
-    ref(db,"novex/settings/status"),
-    snapshot => {
-
-      const value =
-        snapshot.val() || "open";
-
-      statusBadge.textContent =
-        value.toUpperCase();
-
-    }
-  );
-
-
-  onValue(
-    ref(db,"novex/settings/miningUnlocked"),
-    snapshot => {
-
-      updateSlotSelect(
-        snapshot.val() === true
-      );
-
-    }
-  );
-
-
-  onValue(
-    ref(db,"novex/settings/announcement"),
-    snapshot => {
-
-      announcement.textContent =
-        snapshot.val() ||
-        "NOVEX CODM SCRIMMAGE";
-
-    }
-  );
-
-
-  onValue(
-    ref(db,"novex/settings/scrimTime"),
-    snapshot => {
-
-      const value =
-        snapshot.val();
-
-      if(value){
-
-        startCountdown(value);
-
-      }else{
-
-        timer.textContent =
-          "--:--";
-
-      }
-
-    }
-  );
-
-
-  onValue(
-    ref(db,"novex/activity"),
-    snapshot => {
-
-      renderActivity(
-        snapshot.val() || {}
-      );
-
-    }
-  );
-
-}
-
-
-/* RENDER SLOTS */
-
-function renderSlots(data){
-
-  slotsDiv.innerHTML = "";
-
-  for(let i=1;i<=25;i++){
-
-    const team = data[i];
-
-    const slot =
-      document.createElement("div");
-
-    slot.className = "slot";
-
-
-    if(team){
-
-      const actions =
-        document.createElement("div");
-
-      actions.className =
-        "slot-actions";
-
-
-      const info =
-        document.createElement("div");
-
-      info.style.flex = "1";
-
-
-      const number =
-        document.createElement("div");
-
-      number.className =
-        "slot-number";
-
-      number.textContent =
-        "SLOT " + i;
-
-
-      const name =
-        document.createElement("div");
-
-      name.className =
-        "slot-name";
-
-      /*
-        EXACT TEAM NAME
-        IS DISPLAYED.
-      */
-
-      name.textContent =
-        team.name;
-
-
-      const handler =
-        document.createElement("div");
-
-      handler.className =
-        "slot-handler";
-
-      handler.textContent =
-        team.handler;
-
-
-      info.appendChild(number);
-      info.appendChild(name);
-      info.appendChild(handler);
-
-      actions.appendChild(info);
-
-
-      /* ADMIN REMOVE */
-
-      if(isAdmin){
-
-        const removeBtn =
-          document.createElement("button");
-
-        removeBtn.className =
-          "remove-btn";
-
-        removeBtn.textContent =
-          "REMOVE";
-
-        removeBtn.onclick =
-          async () => {
-
-            const confirmDelete =
-              confirm(
-                "Remove " +
-                team.name +
-                " from Slot " +
-                i +
-                "?"
-              );
-
-            if(!confirmDelete)
-              return;
-
-
-            await remove(
-              ref(
-                db,
-                `novex/slots/${i}`
-              )
-            );
-
-
-            await push(
-              ref(db,"novex/activity"),
-              {
-                message:
-                `${team.name} was removed from Slot ${i}.`,
-                time:Date.now()
-              }
-            );
-
-          };
-
-
-        actions.appendChild(
-          removeBtn
-        );
-
+        return;
       }
 
 
-      slot.appendChild(actions);
-
-    }else{
-
-      slot.innerHTML = `
-
-        <div class="slot-number">
-          SLOT ${i}
-        </div>
-
-        <div class="empty-slot">
-          AVAILABLE
-        </div>
-
-      `;
-
-    }
+      announcements.innerHTML = "";
 
 
-    slotsDiv.appendChild(slot);
+      snapshot.forEach((doc) => {
 
-  }
-
-}
-
-
-/* SLOT SELECT */
-
-function updateSlotSelect(unlocked){
-
-  const current =
-    slotSelect.value;
-
-  slotSelect.innerHTML = `
-
-    <option value="">
-      Select an available slot
-    </option>
-
-  `;
+        const data =
+          doc.data();
 
 
-  onValue(
-    ref(db,"novex/slots"),
-    snapshot => {
-
-      const data =
-        snapshot.val() || {};
+        const item =
+          document.createElement("div");
 
 
-      for(let i=1;i<=25;i++){
-
-        if(!data[i] && unlocked){
-
-          const option =
-            document.createElement("option");
-
-          option.value = i;
-
-          option.textContent =
-            "Slot " + i;
-
-          slotSelect.appendChild(
-            option
-          );
-
-        }
-
-      }
+        item.style.marginBottom =
+          "12px";
 
 
-      if(current){
-        slotSelect.value =
-          current;
-      }
+        item.innerHTML = `
+          <strong>
+            ${data.title || "Announcement"}
+          </strong>
+
+          <br>
+
+          <span style="color:#a994b5;">
+            ${data.message || ""}
+          </span>
+        `;
+
+
+        announcements.appendChild(item);
+
+      });
 
     },
-    {
-      onlyOnce:true
+
+    (error) => {
+
+      console.error(error);
+
+      announcements.textContent =
+        "Unable to load announcements.";
     }
-  );
 
-}
-
-
-/* REGISTER */
-
-registerBtn.onclick =
-async () => {
-
-  if(!currentUser){
-
-    alert(
-      "Please wait for Firebase to connect."
-    );
-
-    return;
-
-  }
-
-
-  const name =
-    teamName.value.trim();
-
-  const handler =
-    teamHandler.value.trim();
-
-  const contact =
-    discord.value.trim();
-
-  const logoUrl =
-    logo.value.trim();
-
-  const slot =
-    slotSelect.value;
-
-
-  if(!name ||
-     !handler ||
-     !contact ||
-     !slot){
-
-    alert(
-      "Please complete all required fields."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    const slotRef =
-      ref(
-        db,
-        `novex/slots/${slot}`
-      );
-
-
-    await set(
-      slotRef,
-      {
-
-        name:name,
-
-        handler:handler,
-
-        discord:contact,
-
-        logo:logoUrl,
-
-        registeredAt:Date.now(),
-
-        registeredBy:currentUser.uid
-
-      }
-    );
-
-
-    await push(
-      ref(db,"novex/activity"),
-      {
-
-        message:
-        `${name} claimed Slot ${slot}.`,
-
-        time:Date.now()
-
-      }
-    );
-
-
-    alert(
-      `Slot ${slot} claimed successfully!`
-    );
-
-
-    teamName.value = "";
-    teamHandler.value = "";
-    discord.value = "";
-    logo.value = "";
-    slotSelect.value = "";
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "Registration failed: " +
-      error.message
-    );
-
-  }
-
-};
-
-
-/* ACTIVITY */
-
-function renderActivity(data){
-
-  activityDiv.innerHTML = "";
-
-  const items =
-    Object.values(data)
-      .sort(
-        (a,b) =>
-        b.time-a.time
-      )
-      .slice(0,30);
-
-
-  if(items.length === 0){
-
-    activityDiv.innerHTML =
-      "<div>No activity yet.</div>";
-
-    return;
-
-  }
-
-
-  items.forEach(item => {
-
-    const div =
-      document.createElement("div");
-
-    div.className =
-      "activity-item";
-
-
-    const message =
-      document.createElement("div");
-
-    message.textContent =
-      item.message;
-
-
-    const time =
-      document.createElement("div");
-
-    time.className =
-      "activity-time";
-
-    time.textContent =
-      new Date(
-        item.time
-      ).toLocaleString();
-
-
-    div.appendChild(message);
-    div.appendChild(time);
-
-    activityDiv.appendChild(div);
-
-  });
-
-}
-
-
-/* ADMIN LOGIN */
-
-document.getElementById("loginBtn")
-.onclick =
-async () => {
-
-  const email =
-    document.getElementById(
-      "adminEmail"
-    ).value.trim();
-
-  const password =
-    document.getElementById(
-      "adminPassword"
-    ).value;
-
-
-  if(!email || !password){
-
-    loginMessage.textContent =
-      "Enter email and password.";
-
-    return;
-
-  }
-
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    loginMessage.textContent =
-      "Admin logged in.";
-
-  }catch(error){
-
-    loginMessage.textContent =
-      error.message;
-
-  }
-
-};
-
-
-/* ADMIN LOGOUT */
-
-document.getElementById("logoutBtn")
-.onclick =
-async () => {
-
-  await signOut(auth);
-
-  await signInAnonymously(auth);
-
-};
-
-
-/* MINING */
-
-document.getElementById("openMining")
-.onclick =
-async () => {
-
-  await set(
-    ref(db,"novex/settings/miningUnlocked"),
-    true
-  );
-
-  await push(
-    ref(db,"novex/activity"),
-    {
-      message:
-      "Admin unlocked slot mining.",
-      time:Date.now()
-    }
-  );
-
-};
-
-
-document.getElementById("lockMining")
-.onclick =
-async () => {
-
-  await set(
-    ref(db,"novex/settings/miningUnlocked"),
-    false
-  );
-
-  await push(
-    ref(db,"novex/activity"),
-    {
-      message:
-      "Admin locked slot mining.",
-      time:Date.now()
-    }
-  );
-
-};
-
-
-/* STATUS */
-
-async function setStatus(value){
-
-  await set(
-    ref(db,"novex/settings/status"),
-    value
-  );
-
-}
-
-
-document.getElementById("setOpen")
-.onclick =
-() => setStatus("open");
-
-document.getElementById("setRoom")
-.onclick =
-() => setStatus("room");
-
-document.getElementById("setLive")
-.onclick =
-() => setStatus("live");
-
-document.getElementById("setEnded")
-.onclick =
-() => setStatus("ended");
-
-
-/* ANNOUNCEMENT */
-
-document.getElementById(
-  "saveAnnouncement"
-).onclick =
-async () => {
-
-  const value =
-    document.getElementById(
-      "adminAnnouncement"
-    ).value.trim();
-
-
-  await set(
-    ref(db,"novex/settings/announcement"),
-    value
-  );
-
-  alert(
-    "Announcement updated!"
-  );
-
-};
-
-
-/* TIMER */
-
-let timerInterval = null;
-
-
-function startCountdown(endTime){
-
-  clearInterval(
-    timerInterval
   );
 
 
-  function update(){
+// ==========================
+// LOGOUT
+// ==========================
 
-    const remaining =
-      Math.max(
-        0,
-        endTime - Date.now()
-      );
+document
+  .getElementById("logoutButton")
+  .onclick = async () => {
 
+    try {
 
-    const seconds =
-      Math.floor(
-        remaining / 1000
-      );
+      await auth.signOut();
 
+      window.location.href =
+        "login.html";
 
-    const minutes =
-      Math.floor(
-        seconds / 60
-      );
+    } catch (error) {
 
-
-    const secs =
-      seconds % 60;
-
-
-    timer.textContent =
-      String(minutes).padStart(2,"0")
-      + ":" +
-      String(secs).padStart(2,"0");
-
-
-    if(remaining <= 0){
-
-      clearInterval(
-        timerInterval
-      );
-
-      timer.textContent =
-        "00:00";
+      console.error(error);
 
     }
 
-  }
-
-
-  update();
-
-  timerInterval =
-    setInterval(
-      update,
-      1000
-    );
-
-}
-
-
-/* START TIMER */
-
-document.getElementById(
-  "startTimer"
-).onclick =
-async () => {
-
-  const seconds =
-    Number(
-      document.getElementById(
-        "timerInput"
-      ).value
-    );
-
-
-  if(!seconds || seconds <= 0){
-
-    alert(
-      "Enter timer seconds."
-    );
-
-    return;
-
-  }
-
-
-  const endTime =
-    Date.now() +
-    seconds * 1000;
-
-
-  await set(
-    ref(db,"novex/settings/scrimTime"),
-    endTime
-  );
-
-
-  await push(
-    ref(db,"novex/activity"),
-    {
-      message:
-      `Admin started a ${seconds}-second timer.`,
-      time:Date.now()
-    }
-  );
-
-};
-
-
-/* STOP TIMER */
-
-document.getElementById(
-  "stopTimer"
-).onclick =
-async () => {
-
-  await set(
-    ref(db,"novex/settings/scrimTime"),
-    0
-  );
-
-  timer.textContent =
-    "--:--";
-
-};
-
-
-/* CLEAR ALL */
-
-document.getElementById(
-  "clearSlots"
-).onclick =
-async () => {
-
-  const confirmClear =
-    confirm(
-      "Are you sure you want to remove ALL teams?"
-    );
-
-
-  if(!confirmClear)
-    return;
-
-
-  await remove(
-    ref(db,"novex/slots")
-  );
-
-
-  await push(
-    ref(db,"novex/activity"),
-    {
-      message:
-      "Admin cleared all slots.",
-      time:Date.now()
-    }
-  );
-
-
-  alert(
-    "All slots cleared."
-  );
-
-};
-
-
-/* PWA INSTALL */
-
-let deferredPrompt = null;
-
-const installBtn =
-document.getElementById(
-  "installBtn"
-);
-
-
-window.addEventListener(
-  "beforeinstallprompt",
-  event => {
-
-    event.preventDefault();
-
-    deferredPrompt = event;
-
-    installBtn.style.display =
-      "block";
-
-  }
-);
-
-
-installBtn.onclick =
-async () => {
-
-  if(!deferredPrompt)
-    return;
-
-  deferredPrompt.prompt();
-
-  await deferredPrompt.userChoice;
-
-  deferredPrompt = null;
-
-  installBtn.style.display =
-    "none";
-
-};
-
-
-/* SERVICE WORKER */
-
-if(
-  "serviceWorker" in navigator
-){
-
-  navigator.serviceWorker.register(
-    "./service-worker.js"
-  ).catch(
-    error =>
-    console.log(
-      "Service worker:",
-      error
-    )
-  );
-
-}
+  };
 
 </script>
 
 </body>
-  </html>
+</html>
